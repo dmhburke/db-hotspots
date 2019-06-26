@@ -1,0 +1,26 @@
+{% extends "home_template.html" %}
+
+{% block contentName %}
+{% load static %}
+
+<a href="">hardcode: {{ hardcode }}</a>
+  {% if single_location %}
+  {% for item in single_location %}
+
+<a href="{{ item.get_absolute_url }}">
+<div> {{ item.name }} ({{  hardcode }})</div>
+</a>
+{% endfor %}
+{% endif %}
+
+
+<form method="post">
+{% csrf_token %}
+
+  {{ form.name }}
+
+  <input style="background-color: blue" type="submit" value="Submit"/>
+
+</form>
+
+{% endblock %}

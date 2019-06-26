@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<title>
+{% block **browserTitle** %}
+
+{% endblock %}
+</title>
+
+<link rel="icon"
+      type="image/png"
+      href="">
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+<link rel="icon"
+    type="image/png"
+    src="{% static 'icons/logoBlue.svg' %}">
+
+<link href="https://fonts.googleapis.com/css?family=Special+Elite&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div id=screenContainer>
+<div id=mobileContainer>
+
+<div id="homeHeader" class="brandBottomBorder">
+  <div id="homeLogo">
+    <a href="{% url 'home' %}">
+    <img id=homeLogoIcon src="{% static 'icons/logoBlue.svg' %}"></a>
+  </div>
+  <div id="homeTitle" class="brandFont brandFontColor titleFont">HotSpots</div>
+  <div id="homeProfileImg" style="background-image: url({{ user.profile.userpic.url }}); background-size: cover">
+    <div id=homeProfileUsername class="brandFont brandFontColor">@{{ user.username }}</div>
+  </div>
+
+</div>
+
+<div id="homeContent">
+  <div id="navBox" class="shadow">
+    <a href="{% url 'userspotlist' %}"><div id="navCircle"><img id=navIcon src="{% static 'icons/yourSpotsBlue.svg'%}"></div><div id=textSeeYours class="brandFont brandFontColor">Your spots</div></a>
+    <a href="{% url 'activitystream' %}"><div id="navCircle"><img id=navIcon src="{% static 'icons/latestBlue.svg'%}"></div><div id=textCheckLatest class="brandFont brandFontColor">Latest activity</div></a>
+    <a href="{% url 'discovernew' %}"><div id="navCircle"><img id=navIcon src="{% static 'icons/discoverBlue.svg'%}"></div><div id=textDiscoverNew class="brandFont brandFontColor">Discover new</div></a>
+  </div>
+
+
+{% block contentName %}
+
+{% endblock %}
+<a href="{% url 'home' %}"><div id=addSpotShortcut class="shadow brandColor"><img id=addSpotShortcutLogo src="{% static 'icons/logoWhite.svg' %}"></div></a>
+<a href="{% url 'login' %}"><div id=logoutButton class="whiteColor brandFontColor shadow brandFont">Back to login</div></a>
+</div>
+
+
+<div id="homeFooter" class="brandTopBorder"></div>
+</div>
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+</body>
+</html>

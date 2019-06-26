@@ -1,0 +1,106 @@
+{% extends "home_template.html" %}
+
+{% block contentName %}
+{% load static %}
+
+<div id=spotDetailCard class=shadow>
+  <div id=spotDetailImgBox>
+    <div id=spotDetailImgCarousel>
+      {% if spot_img %}
+      {% for img in spot_img %}
+      <div id=spotDetailImg style="background-image: url({{ img.spotpic.url }}); background-size: cover; background-position: 50% 30%"></div>
+      {% endfor %}
+      {% else %}
+      <div id=spotDetailImg style="background-image: url({% static 'images/spotpicDefault.jpg'%}); background-size: cover; background-position: 50% 30%"></div>
+      {% endif %}
+  </div></div>
+  <div id=spotDetailTitleBox></div>
+  <div id=spotDetailTitleText class="brandFont brandFontColor">{{ spotname }}</div>
+  {% if spot_averating %}
+  <div id=spotDetailRating class="brandFont whiteFont">{{ spot_averating }}</div>
+  {% else %}
+  <div id=spotDetailRating class="brandFont whiteFont">WL</div>
+  {% endif %}
+  <div id=spotDetailInfoBox>
+    <div id=spotDetailIconBox>
+      {% if spot.category == "FOOD" %}
+      <img id="spotCardIcon" src="{% static 'icons/foodGrey.svg' %}">
+      {% elif spot.category == "COCKTAILS" %}
+      <img id="spotCardIcon" src="{% static 'icons/cocktailGrey.svg' %}">
+      {% elif spot.category == "WINE" %}
+      <img id="spotCardIcon" src="{% static 'icons/wineGrey.svg' %}">
+      {% elif spot.category == "BEER" %}
+      <img id="spotCardIcon" src="{% static 'icons/beerGrey.svg' %}">
+      {% elif spot.category == "COFFEE" %}
+      <img id="spotCardIcon" src="{% static 'icons/coffeeGrey.svg' %}">
+      {% else %}
+      <img id="spotCardIcon" src="{% static 'icons/otherGrey.svg' %}">
+      {% endif %}
+    </div>
+    <div id=spotDetailIn>in </div><div id=spotDetailLocation>{{ spotlocation }}</div>
+  </div>
+  <div id=spotDetailStatsBox>
+    <div id=spotDetailsWishlistBox class="brandFont brandFontColor">
+      <div id=spotDetailsWishlistText>On <b>{{ number_wishlist }}</b>
+        {% if number_wishlist == 1 %}
+        person's
+        {% else %}
+        people's
+        {% endif %}
+        wishlist</div>
+    </div>
+    <div id=spotDetailsHitlistBox class="brandFont brandFontColor">
+      <div id=spotDetailsWishlistText>On <b>{{ number_hitlist }}</b>
+        {% if number_hitlist == 1 %}
+        person's
+        {% else %}
+        people's
+        {% endif %}
+        hitlist</div>
+    </div>
+  </div>
+</div>
+
+<div id=detailScrollContainer>
+  {% if fullspot_rating %}
+
+  {% for spot in fullspot_rating %}
+  <div id=spotRatingCard class=shadow>
+    <div id=spotRatingUserName class="brandFont">{{ spot.user.first_name }}</div>
+    <div id=spotRatingUserBox style="background-image: url({{ user.profile.userpic.url }}); background-size: cover"></div>
+    <div id=spotRatingDate class="brandFont">{{ spot.date|date:'j M Y' }}</div>
+    {% if spot.rating %}
+    <div id=spotRatingRatingBox class="brandColor whiteFont brandFont">{{ spot.rating }}</div>
+    {% else %}
+    <div id=spotRatingRatingBox class="altColor brandFontColor brandFont">WL</div>
+    {% endif %}
+    {% if spot.notes %}
+    <div id=spotRatingComment>"{{ spot.notes }}"</div>
+    {% else %}
+    <div id=spotRatingComment>No notes entered</div>
+    {% endif %}
+    {% if spot.perfect_for %}
+    <div id=spotPerfectForBox>
+
+      {% for entry in spot.perfect_for %}
+      <div id=spotCardPerfectFor class="brandColor whiteFont">{{ entry }}</div>
+      {% endfor %}
+      </div>
+
+      {% else %}
+
+      <div id=spotPerfectForBoxALT>
+      <div id=spotCardPerfectFor class="altColor brandFontColor">No details added</div>
+
+      </div>
+      {% endif %}
+
+
+  </div>
+  {% endfor %}
+  {% endif %}
+
+  </div>
+
+
+{% endblock %}

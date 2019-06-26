@@ -1,0 +1,55 @@
+{% extends "home_template.html" %}
+
+{% block contentName %}
+{% load static %}
+
+<div id=activeNavActivity>
+  <img id=activeNavImg src="{% static 'icons/latestWhite.svg' %}">
+</div>
+
+<div id=activityHeader class="shadow brandFont brandColor whiteFont">All the latest adds...</div>
+<div id=scrollContainer>
+{% if activity_stream %}
+{% for spot in activity_stream %}
+
+<div id=activityCard class="shadow">
+  <div id=activityProfileBox><div id="activityProfileImg" style="background-image: url({{ spot.user.profile.userpic.url }}); background-size: cover"></div></div>
+  <div id=activityContentBox>
+    <div id=activityDate> on {{ spot.date|date:'l, j M Y' }}</div>
+    <div id=activityName class="brandFont brandFontColor">{{ spot.name }}</div>
+    <div id=activityDetails>
+      <div id=activityIconBox>
+        {% if spot.category == "FOOD" %}
+        <img id="spotCardIcon" src="{% static 'icons/foodGrey.svg' %}">
+        {% elif spot.category == "COCKTAILS" %}
+        <img id="spotCardIcon" src="{% static 'icons/cocktailGrey.svg' %}">
+        {% elif spot.category == "WINE" %}
+        <img id="spotCardIcon" src="{% static 'icons/wineGrey.svg' %}">
+        {% elif spot.category == "BEER" %}
+        <img id="spotCardIcon" src="{% static 'icons/beerGrey.svg' %}">
+        {% elif spot.category == "COFFEE" %}
+        <img id="spotCardIcon" src="{% static 'icons/coffeeGrey.svg' %}">
+        {% else %}
+        <img id="spotCardIcon" src="{% static 'icons/otherGrey.svg' %}">
+        {% endif %}
+        </div>
+        <div id=activityLocationBox>in {{ spot.location }}</div>
+    </div>
+  </div>
+  <div id=activityRatingBox>
+    {% if spot.rating %}
+    <div id=activityRatingValue class="brandFont brandColor whiteFont boldFont">
+      {{ spot.rating }}</div>
+    {% else %}
+    <div id=activityRatingValue class="brandFont altColor brandFontColor boldFont">
+      WL</div>
+    {% endif %}
+  </div>
+</div>
+
+{% endfor %}
+{% else %}
+<div id=activityDefaultText>No spots entered yet</div>
+{% endif %}
+</div>
+{% endblock %}
