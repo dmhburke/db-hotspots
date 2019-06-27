@@ -308,6 +308,7 @@ li {
   padding-top: 5px;
   text-align: center;
   line-height: 55px;
+  border: 2px solid white;
 }
 
 #loginSubmitButton {
@@ -691,6 +692,16 @@ li {
 }
 
 /* USER SPOTLIST */
+#mainCard {
+  width: 95%;
+  height: 460px;
+  padding-top: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  margin: 15px auto;
+  position: relative;
+}
+
 #activeNav {
   position: absolute;
   background-color: #1e8eff;
@@ -736,47 +747,51 @@ li {
 
 .selectorButton {
   height: 100%;
-  width: 48%;
+  width: 45%;
   text-align: center;
   line-height: 55px;
   font-size: 1.5rem
 }
 
 #wishlistButton {
-  float: left;
+  display: inline-block;
+  margin-left: 10px;
   border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
   font-weight: bold;
   background-color: #b7b5b5;
   color: #f2f2f2;
 }
 
 #hitlistButton {
-  float: right;
+  display: inline-block;
+  margin-left: 12px;
   border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
   background-color: #f2f2f2;
   color: #1e8eff;
 }
 
 .resultsBox {
-  width: 100%;
-  height: 420px;
+  width: 94.5%;
+  height: 390px;
   margin: 0px auto;
   overflow-y: scroll;
   border-top: 10px solid #f2f2f2;
 }
 
 #wishlistResults {
-  position: absolute;
-  top: 275px;
   background-color: #f2f2f2;
   z-index: 10;
+  position: absolute;
+  left:10px;
 }
 
 #hitlistResults {
-  position: absolute;
-  top: 275px;
   background-color: #f2f2f2;
   z-index: 20;
+  position: absolute;
+  left:10px;
 }
 
 
@@ -812,7 +827,7 @@ li {
 }
 
 #spotCardName {
-  width: 270px;
+  width: 220px;
   position: absolute;
   top: -25px;
   left: 5px;
@@ -828,10 +843,11 @@ li {
   position: absolute;
   top: -16px;
   left: 15px;
-  width: 250px;
+  width: 210px;
   height: 30px;
   color: #1e8eff;
-  font-size: 2rem;
+  font-size: 1.5rem;
+  line-height: 26px;
   font-weight: bold;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -840,7 +856,7 @@ li {
 
 #spotCardDetailsBox {
   position: absolute;
-  top: 19px;
+  top: 15px;
   left: 10px;
   width: 250px;
   height: 20px;
@@ -868,6 +884,7 @@ li {
   font-size: 1rem;
   color: grey;
   padding-right: 5px;
+  float: left;
 }
 
 #spotCardDetailsLocation {
@@ -1215,9 +1232,9 @@ li {
 }
 
 #activityCard {
-  height: 100px;
+  height: 115px;
   width: 95%;
-  margin: 10px auto;
+  margin: 5px auto;
   border-radius: 10px;
   padding: 5px;
   position: relative;
@@ -1229,7 +1246,7 @@ li {
   height: 100%;
   width: 25%;
   float: left;
-  padding-top: 14px;
+  padding-top: 18px;
 
 }
 
@@ -1242,16 +1259,16 @@ li {
 
 #activityDate {
   height: 20px;
-  line-height: 35px;
+  line-height: 20px;
   width: 100%;
   color: grey;
 }
 
 #activityName {
-  height: 40px;
+  height: 25px;
   width: 185px;
-  line-height: 50px;
-  font-size: 1.75rem;
+  line-height: 27px;
+  font-size: 1.5rem;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -1277,7 +1294,26 @@ li {
   display: inline-block;
   color: grey;
   line-height: 20px;
+
+}
+
+#activityNotes {
+  display: table;
+  height: 30px;
+  width: 180px;
+
+  padding: 0px 6px 6px 5px;
+  border-radius: 5px;
+  margin-top: 3px;
+  overflow: scroll;
+
+}
+
+#activityNotesText {
+  display: table-cell;
   vertical-align: middle;
+  color: grey;
+  font-style: italic;
 }
 
 #activityProfileImg {
@@ -1293,7 +1329,8 @@ li {
   height: 100%;
   width: 25%;
   float: right;
-  padding-top: 14px;
+  padding-top: 18px;
+
 
 }
 
@@ -1309,7 +1346,7 @@ li {
 }
 
 #discoveryCard {
-  height: 100px;
+  height: 110px;
   width: 95%;
   margin: 10px auto;
   border-radius: 10px;
@@ -1394,7 +1431,7 @@ li {
 
 #discoveryCount {
   height: 20px;
-  width: 90%;
+  width: 75%;
   text-align: right;
   position: relative;
 }
@@ -1409,12 +1446,12 @@ li {
 }
 
 #discoveryDetailsCountResult {
-  height: 35px;
-  width: 35px;
+  height: 30px;
+  width: 30px;
   border-radius: 100%;
   line-height: 35px;
   background-color: #f2f2f2;
-  top: -5px;
+  top: -3px;
   right: -40px;
   position: absolute;
   text-align: center;
@@ -1440,20 +1477,20 @@ li {
 }
 
 #discoveryListLegalname {
-  height: 30px;
+  height: 20px;
   width: 180px;
   position: absolute;
-  font-size: 2rem;
+  font-size: 1.5rem;
   top: 15px;
   left: 100px;
 
 }
 
 #discoveryListUsername {
-  height: 30px;
+  height: 20px;
   width: 160px;
   position: absolute;
-  top: 42px;
+  top: 35px;
   left: 110px;
   line-height: 20px;
   font-size: 1.25rem;
@@ -1462,16 +1499,15 @@ li {
 
 #discoveryListHighSpot {
   height: 20px;
-  width: 130px;
+  width: 200px;
   position: absolute;
-  top: 65px;
-  left: 95px;
+  top: 55px;
+  left: 100px;
 }
 
 #discoveryListHighSpotIcon {
   height: 25px;
   width: 25px;
-
   border-radius: 100%;
   display: inline-block;
   vertical-align: middle;
@@ -1481,7 +1517,7 @@ li {
 
 #discoveryListHighSpotValue {
   height: 25px;
-  width: 100px;
+  width: 160px;
   display: inline-block;
   vertical-align: middle;
   line-height: 25px;
@@ -1495,10 +1531,10 @@ li {
 
 #discoveryListLastSpot {
   height: 20px;
-  width: 130px;
+  width: 200px;
   position: absolute;
-  top: 65px;
-  left: 225px;
+  top: 80px;
+  left: 100px;
 }
 
 #discoveryListCountRating {
@@ -1722,6 +1758,7 @@ li {
   padding: 5px;
   position: relative;
   background-color: white;
+
 }
 
 #spotImgUserDetail {
@@ -1736,7 +1773,7 @@ li {
   height: 25px;
   width: 180px;
   position: absolute;
-  font-size: 2rem;
+  font-size: 1.5rem;
   top: 13px;
   left: 110px;
   line-height: 25px;
@@ -1751,6 +1788,7 @@ li {
   border-radius: 100%;
   position: absolute;
   right: 10px;
+  top: 20px;
   text-align: center;
   line-height: 65px;
   font-size: 2rem;
@@ -1769,13 +1807,13 @@ li {
 
 #spotNotesUserDetail {
   height: 35px;
-  width: 185px;
+  width: 175px;
   position: absolute;
   top: 58px;
   left: 110px;
   color: grey;
   overflow: scroll;
-
+  font-style: italic;
   border-radius: 10px;
   padding: 3px 6px;
 

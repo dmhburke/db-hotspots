@@ -8,6 +8,9 @@
 </div>
 
 <div id=activityHeader class="shadow brandFont brandColor whiteFont">All the latest adds...</div>
+
+<div id=mainCard class=shadow>
+
 <div id=scrollContainer>
 {% if activity_stream %}
 {% for spot in activity_stream %}
@@ -15,7 +18,7 @@
 <div id=activityCard class="shadow">
   <div id=activityProfileBox><div id="activityProfileImg" style="background-image: url({{ spot.user.profile.userpic.url }}); background-size: cover"></div></div>
   <div id=activityContentBox>
-    <div id=activityDate> on {{ spot.date|date:'l, j M Y' }}</div>
+    <div id=activityDate> on {{ spot.date|date:'l, j M' }}</div>
     <div id=activityName class="brandFont brandFontColor">{{ spot.name }}</div>
     <div id=activityDetails>
       <div id=activityIconBox>
@@ -33,7 +36,16 @@
         <img id="spotCardIcon" src="{% static 'icons/otherGrey.svg' %}">
         {% endif %}
         </div>
-        <div id=activityLocationBox>in {{ spot.location }}</div>
+        <div id=activityLocationBox class=brandFont>in {{ spot.location }}</div>
+        <div id=activityNotes>
+          <div id=activityNotesText>
+          {% if spot.notes %}
+          "{{ spot.notes }}"
+          {% else %}
+          No notes added
+          {% endif %}
+        </div>
+        </div>
     </div>
   </div>
   <div id=activityRatingBox>
@@ -51,5 +63,7 @@
 {% else %}
 <div id=activityDefaultText>No spots entered yet</div>
 {% endif %}
+</div>
+
 </div>
 {% endblock %}
