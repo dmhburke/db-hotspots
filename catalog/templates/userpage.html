@@ -5,7 +5,9 @@
 <div id=activeNav>
   <img id=activeNavImg src="{% static 'icons/yourSpotsWhite.svg' %}">
 </div>
-<!--UserPage success ({{ user.username }}, {{user.profile.location}}-based)-->
+
+<div id=mainCard class=shadow>
+
 <div id=buttonRow>
 <div id=wishlistButton class="selectorButton brandFont brandFontColor ">Wishlist</div>
 <div id=hitlistButton class="selectorButton brandFont brandFontColor ">Hitlist</div>
@@ -44,7 +46,7 @@
              {% endif %}
            </div>
            <div id=spotCardIn>in</div>
-           <div id=spotCardDetailsLocation>{{ spot.location }}</div>
+           <div id=spotCardDetailsLocation class=brandFont>{{ spot.location }}</div>
            <div id=spotCardInfoBox>
              {% if spot.perfect_for %}
              {% for entry in spot.perfect_for %}
@@ -106,8 +108,8 @@
              <img id="spotCardIcon" src="{% static 'icons/otherGrey.svg' %}">
              {% endif %}
            </div>
-           <div id=spotCardIn>in</div>
-           <div id=spotCardDetailsLocation>{{ spot.location }}</div>
+           <div id=spotCardIn class=brandFont>in</div>
+           <div id=spotCardDetailsLocation class=brandFont>{{ spot.location }}</div>
            <div id=spotCardInfoBox>
              {% if spot.perfect_for %}
              {% for entry in spot.perfect_for %}
@@ -139,6 +141,7 @@
 </div>
 
 
+</div>
 
 <!--
 <br><br>
