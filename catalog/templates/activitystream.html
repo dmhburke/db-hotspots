@@ -9,9 +9,9 @@
 
 <div id=activityHeader class="shadow brandFont brandColor whiteFont">All the latest adds...</div>
 
-<div id=mainCard class=shadow>
+<div id=mainCardActivity class=shadow>
 
-<div id=scrollContainer>
+
 {% if activity_stream %}
 {% for spot in activity_stream %}
 
@@ -63,7 +63,7 @@
 {% else %}
 <div id=activityDefaultText>No spots entered yet</div>
 {% endif %}
-</div>
+
 
 </div>
 {% endblock %}

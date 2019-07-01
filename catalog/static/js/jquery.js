@@ -16,8 +16,8 @@ $(document).ready(function() {
       "background-color": "#b7b5b5",
       "color": "#f2f2f2"
     });
-    $("#hitlistResults").css("z-index", "100");
-    $("#wishlistResults").css("z-index", "1");
+    $("#hitlistResultsUserpage").css("width", "340px");
+    $("#wishlistResultsUserpage").css("width", "0px");
   });
 
   $("#wishlistButton").click(function() {
@@ -29,8 +29,8 @@ $(document).ready(function() {
       "background-color": "#b7b5b5",
       "color": "#f2f2f2"
     });
-    $("#wishlistResults").css("z-index", "100");
-    $("#hitlistResults").css("z-index", "1");
+    $("#wishlistResultsUserpage").css("width", "340px");
+    $("#hitlistResultsUserpage").css("width", "0px");
   });
 
   $("#hitlistButtonUser").click(function() {
@@ -42,8 +42,8 @@ $(document).ready(function() {
       "background-color": "#b7b5b5",
       "color": "#f2f2f2"
     });
-    $("#hitlistResultsUser").css("z-index", "100");
-    $("#wishlistResultsUser").css("z-index", "1");
+    $("#hitlistResultsUser").css("width", "340px");
+    $("#wishlistResultsUser").css("width", "0px");
   });
 
   $("#wishlistButtonUser").click(function() {
@@ -55,9 +55,37 @@ $(document).ready(function() {
       "background-color": "#b7b5b5",
       "color": "#f2f2f2"
     });
-    $("#wishlistResultsUser").css("z-index", "100");
-    $("#hitlistResultsUser").css("z-index", "1");
+    $("#wishlistResultsUser").css("width", "340px");
+    $("#hitlistResultsUser").css("width", "0px");
   });
+
+
+  $("#hitlistButtonDiscover").click(function() {
+    $(this).css({
+      "background-color": "#f2f2f2",
+      "color": "#1e8eff"
+    });
+    $("#wishlistButtonDiscover").css({
+      "background-color": "#b7b5b5",
+      "color": "#f2f2f2"
+    });
+    $("#hitlistResultsDiscover").css("width", "340px");
+    $("#wishlistResultsDiscover").css("width", "0px");
+  });
+
+  $("#wishlistButtonDiscover").click(function() {
+    $(this).css({
+      "background-color": "#f2f2f2",
+      "color": "#1e8eff"
+    });
+    $("#hitlistButtonDiscover").css({
+      "background-color": "#b7b5b5",
+      "color": "#f2f2f2"
+    });
+    $("#wishlistResultsDiscover").css("width", "340px");
+    $("#hitlistResultsDiscover").css("width", "0px");
+  });
+
 
 
 

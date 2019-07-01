@@ -181,11 +181,12 @@ li {
 
 #mobileContainer {
   width: 375px;
-  height: 750px;
+  height: 700px;
   position: relative;
   margin: 0 auto;
-  padding-bottom: 100px;
+  padding-bottom: 20px;
   position: relative;
+  overflow: scroll;
 }
 
 #logoStandard {
@@ -700,6 +701,17 @@ li {
   border-top-right-radius: 10px;
   margin: 15px auto;
   position: relative;
+}
+
+#mainCardActivity {
+  width: 95%;
+  min-height: 460px;
+  padding-top: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  margin: 15px auto;
+  position: relative;
+  padding-bottom: 15px;
 }
 
 #activeNav {
@@ -1237,8 +1249,10 @@ li {
   margin: 5px auto;
   border-radius: 10px;
   padding: 5px;
+  padding-bottom: 15px;
   position: relative;
   background-color: white;
+
 }
 
 #activityProfileBox {
@@ -1710,54 +1724,184 @@ li {
 }
 
 #userDetailBuffer {
-  height: 10px;
+  height: 5px;
   width: 10px;
 }
 
-.resultsBoxUser {
-  width: 100%;
-  height: 240px;
-  margin: 0px auto;
-  overflow-y: scroll;
-  border-top: 10px solid #f2f2f2;
+#mainCardUser {
+  width: 95%;
+  min-height: 380px;
+  padding-top: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  margin: 15px auto;
+  position: relative;
+  padding: 2px;
+  padding-bottom: 10px;
+  font-size: 0px;
+}
+
+#mainCardUserPage {
+  width: 95%;
+  min-height: 380px;
+  padding-top: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  margin: 15px auto;
+  position: relative;
+  padding: 2px;
+  padding-bottom: 10px;
+  font-size: 0px;
+}
+
+#testbox {
+  height: 100px;
+  width: 80%;
+  background-color: grey;
+  margin: 10px auto;
 }
 
 #wishlistButtonUser {
-  float: left;
+  display: inline-block;
+  border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+  font-weight: bold;
+  background-color: #b7b5b5;
+  color: #f2f2f2;
+  margin-left: 5px;
+}
+
+#hitlistButtonUser {
+  display: inline-block;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  background-color: #f2f2f2;
+  color: #1e8eff;
+  margin-left: 18px;
+}
+
+#resultsListBox {
+  min-height: 350px;
+  width: 340px;
+  margin-left: 5px;
+  background-color: #f2f2f2;
+  display: flex;
+  align-items: stretch;
+  padding-bottom: 10px;
+}
+
+#resultsListBoxUserpage {
+  min-height: 400px;
+  width: 334px;
+  margin-left: 10px;
+  background-color: #f2f2f2;
+  display: flex;
+  align-items: stretch;
+  padding-bottom: 10px;
+}
+
+#wishlistResultsUser {
+  min-height: 320px;
+  width: 0px;
+  background-color: #f2f2f2;
+  border-top: 10px solid #f2f2f2;
+  overflow: hidden;
+
+}
+
+#hitlistResultsUser {
+  min-height: 320px;
+  width: 340px;
+  background-color: #f2f2f2;
+  border-top: 10px solid #f2f2f2;
+  overflow: hidden;
+
+}
+
+#wishlistResultsUserpage {
+  min-height: 320px;
+  width: 0px;
+  background-color: #f2f2f2;
+  border-top: 10px solid #f2f2f2;
+  overflow: hidden;
+}
+
+#hitlistResultsUserpage {
+  min-height: 320px;
+  width: 340px;
+  background-color: #f2f2f2;
+  border-top: 10px solid #f2f2f2;
+  overflow: hidden;
+}
+
+#mainCardDiscover {
+  width: 95%;
+  min-height: 380px;
+  padding-top: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  margin: 15px auto;
+  position: relative;
+  padding: 2px;
+  padding-bottom: 10px;
+  font-size: 0px;
+}
+
+#wishlistButtonDiscover {
+  display: inline-block;
+  margin-left: 10px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
   font-weight: bold;
   background-color: #b7b5b5;
   color: #f2f2f2;
 }
 
-#hitlistButtonUser {
-  float: right;
+#hitlistButtonDiscover {
+  display: inline-block;
+  margin-left: 10px;
+  border-top-right-radius: 10px;
   border-top-left-radius: 10px;
+  font-weight: bold;
   background-color: #f2f2f2;
   color: #1e8eff;
 }
 
-#wishlistResultsUser {
-  position: absolute;
-  top: 460px;
+#resultsListBoxDiscover {
+  min-height: 400px;
+  width: 334px;
+  margin-left: 10px;
   background-color: #f2f2f2;
-  z-index: 10;
+  display: flex;
+  align-items: stretch;
+  padding-bottom: 10px;
 }
 
-#hitlistResultsUser {
-  position: absolute;
-  top: 460px;
+#hitlistResultsDiscover {
+  min-height: 320px;
+  width: 340px;
   background-color: #f2f2f2;
-  z-index: 20;
+  border-top: 10px solid #f2f2f2;
+  overflow: hidden;
+  margin-left: 0px;
+}
+
+#wishlistResultsDiscover {
+  min-height: 320px;
+  width: 0px;
+  background-color: #f2f2f2;
+  border-top: 10px solid #f2f2f2;
+  overflow: hidden;
+  margin-left: 0px;
 }
 
 #spotCardUserDetail {
   height: 100px;
-  width: 95%;
+  width: 320px;
   margin: 10px auto;
   border-radius: 10px;
   padding: 5px;
-  position: relative;
+  position:relative;
   background-color: white;
 
 }
@@ -1776,7 +1920,7 @@ li {
   position: absolute;
   font-size: 1.5rem;
   top: 13px;
-  left: 110px;
+  left: 90px;
   line-height: 25px;
   overflow: hidden;
   white-space: nowrap;
@@ -1784,14 +1928,14 @@ li {
 }
 
 #spotRatingUserDetail {
-  height: 60px;
-  width: 60px;
+  height: 50px;
+  width: 50px;
   border-radius: 100%;
   position: absolute;
   right: 10px;
   top: 20px;
   text-align: center;
-  line-height: 65px;
+  line-height: 55px;
   font-size: 2rem;
 
 }
@@ -1802,7 +1946,7 @@ li {
   position: absolute;
   line-height: 20px;
   top: 35px;
-  left: 110px;
+  left: 95px;
 
 }
 
@@ -1811,7 +1955,7 @@ li {
   width: 175px;
   position: absolute;
   top: 58px;
-  left: 110px;
+  left: 100px;
   color: grey;
   overflow: scroll;
   font-style: italic;

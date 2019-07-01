@@ -58,64 +58,19 @@
   </div>
   </div>
 
+
   <div id=userDetailBuffer></div>
 
-  <div id=buttonRow>
-  <div id=wishlistButtonUser class="selectorButton brandFont brandFontColor ">Wishlist</div>
-  <div id=hitlistButtonUser class="selectorButton brandFont brandFontColor ">Hitlist</div>
-  </div>
+  <div id=mainCardUser class=shadow>
 
-  <div id=wishlistResultsUser class=resultsBoxUser>
-
-    {% if userdetail_wishlist %}
-    {% for spot in userdetail_wishlist %}
-
-    <div id=spotCardUserDetail class=shadow>
-
-      {% if spot.spotpic %}
-      <div id=spotImgUserDetail style="background: linear-gradient(90deg, rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 1)), url({{ spot.spotpic.url }}); background-size: cover; background-position: 50% 30%"></div>
-      {% else %}
-      <div id=spotImgUserDetail style="background: linear-gradient(90deg, rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 1)), url({% static 'images/spotpicDefault.jpg'%}); background-size: cover; background-position: 50% 30%"></div>
-      {% endif %}
-
-
-      <div id=spotNameUserDetail class="brandFont brandFontColor">{{ spot.name }}</div>
-      <div id=spotRatingUserDetail class="altColor brandFont brandFontColor"> WL </div>
-
-      <div id=spotDetailsUserDetail>
-        <div id=spotCardDetailsIcon>
-          {% if spot.category == "FOOD" %}
-          <img id="spotCardIcon" src="{% static 'icons/foodGrey.svg' %}">
-          {% elif spot.category == "COCKTAILS" %}
-          <img id="spotCardIcon" src="{% static 'icons/cocktailGrey.svg' %}">
-          {% elif spot.category == "WINE" %}
-          <img id="spotCardIcon" src="{% static 'icons/wineGrey.svg' %}">
-          {% elif spot.category == "BEER" %}
-          <img id="spotCardIcon" src="{% static 'icons/beerGrey.svg' %}">
-          {% elif spot.category == "COFFEE" %}
-          <img id="spotCardIcon" src="{% static 'icons/coffeeGrey.svg' %}">
-          {% else %}
-          <img id="spotCardIcon" src="{% static 'icons/otherGrey.svg' %}">
-          {% endif %}
-        </div>
-        <div id=spotCardIn>in</div><div id=spotCardDetailsLocation> {{ spot.location }}</div>
-      </div>
-
-      <div id=spotNotesUserDetail>
-        {% if spot.notes %}
-        "{{spot.notes}}"
-        {% else %}
-        <span id=defaultText>No notes entered</span>
-        {% endif %}
-      </div>
+    <div id=buttonRow>
+    <div id=wishlistButtonUser class="selectorButton brandFont brandFontColor ">Wishlist</div>
+    <div id=hitlistButtonUser class="selectorButton brandFont brandFontColor ">Hitlist</div>
     </div>
 
+  <div id=resultsListBox>
 
-    {% endfor %}
-    {% endif %}
-    </div>
-
-    <div id=wishlistResultsUser class=resultsBoxUser>
+    <div id=hitlistResultsUser>
 
       {% if userdetail_hitlist %}
       {% for spot in userdetail_hitlist %}
@@ -148,7 +103,7 @@
             <img id="spotCardIcon" src="{% static 'icons/otherGrey.svg' %}">
             {% endif %}
           </div>
-          <div id=spotCardIn>in</div><div id=spotCardDetailsLocation>{{ spot.location }}</div>
+          <div id=spotCardIn>in</div><div id=spotCardDetailsLocation> {{ spot.location }}</div>
         </div>
 
         <div id=spotNotesUserDetail>
@@ -158,11 +113,78 @@
           <span id=defaultText>No notes entered</span>
           {% endif %}
         </div>
+
       </div>
+
+
       {% endfor %}
       {% endif %}
       </div>
 
+      <div id=wishlistResultsUser>
+
+        {% if userdetail_wishlist %}
+        {% for spot in userdetail_wishlist %}
+
+        <div id=spotCardUserDetail class=shadow>
+
+          {% if spot.spotpic %}
+          <div id=spotImgUserDetail style="background: linear-gradient(90deg, rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 1)), url({{ spot.spotpic.url }}); background-size: cover; background-position: 50% 30%"></div>
+          {% else %}
+          <div id=spotImgUserDetail style="background: linear-gradient(90deg, rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 1)), url({% static 'images/spotpicDefault.jpg'%}); background-size: cover; background-position: 50% 30%"></div>
+          {% endif %}
 
 
+          <div id=spotNameUserDetail class="brandFont brandFontColor">{{ spot.name }}</div>
+          <div id=spotRatingUserDetail class="altColor brandFont brandFontColor"> WL </div>
+
+          <div id=spotDetailsUserDetail>
+            <div id=spotCardDetailsIcon>
+              {% if spot.category == "FOOD" %}
+              <img id="spotCardIcon" src="{% static 'icons/foodGrey.svg' %}">
+              {% elif spot.category == "COCKTAILS" %}
+              <img id="spotCardIcon" src="{% static 'icons/cocktailGrey.svg' %}">
+              {% elif spot.category == "WINE" %}
+              <img id="spotCardIcon" src="{% static 'icons/wineGrey.svg' %}">
+              {% elif spot.category == "BEER" %}
+              <img id="spotCardIcon" src="{% static 'icons/beerGrey.svg' %}">
+              {% elif spot.category == "COFFEE" %}
+              <img id="spotCardIcon" src="{% static 'icons/coffeeGrey.svg' %}">
+              {% else %}
+              <img id="spotCardIcon" src="{% static 'icons/otherGrey.svg' %}">
+              {% endif %}
+            </div>
+            <div id=spotCardIn>in</div><div id=spotCardDetailsLocation>{{ spot.location }}</div>
+          </div>
+
+          <div id=spotNotesUserDetail>
+            {% if spot.notes %}
+            "{{spot.notes}}"
+            {% else %}
+            <span id=defaultText>No notes entered</span>
+            {% endif %}
+          </div>
+        </div>
+        {% endfor %}
+        {% endif %}
+        </div>
+
+
+      </div>
+
+      </div>
 {% endblock %}
+
+<!--
+
+-->
+
+
+<!--
+
+
+
+
+
+
+-->

@@ -6,106 +6,123 @@
   <img id=activeNavImg src="{% static 'icons/discoverWhite.svg' %}">
 </div>
 
-<div id=mainCard class=shadow>
+<div id=mainCardDiscover class=shadow>
 
 <div id=buttonRow>
-<div id=wishlistButton class="selectorButton brandFont brandFontColor ">By user</div>
-<div id=hitlistButton class="selectorButton brandFont brandFontColor ">By spot</div>
+<div id=wishlistButtonDiscover class="selectorButton brandFont brandFontColor ">By user</div>
+<div id=hitlistButtonDiscover class="selectorButton brandFont brandFontColor ">By spot</div>
 </div>
 
+<div id=resultsListBoxDiscover>
 
-<div id=wishlistResults class=resultsBox>
-{% if user_list %}
-{% for user in user_list %}
-<a href="{{ user.get_user_url }}">
-<div id=discoveryCard class=shadow>
-  <div id=discoveryListUserPic style="background-image: url({{ user.user.profile.userpic.url }}); background-size: cover"></div>
-  <div id=discoveryListLegalname class="brandFont brandFontColor">{{ user.user.first_name }} {{ user.user.last_name }}</div>
-  <div id=discoveryListUsername class="brandFont"> @{{ user.user.username }}</div>
-  <div id=discoveryListCountRating class="brandFont brandColor whiteFont">
-    {% if user.number_rating %}
-    {{ user.number_rating }}
-    <div id=discoveryListCountText>adds</div>
+  <div id=hitlistResultsDiscover>
+
+    {% if single_spot_list %}
+    {% for spot in single_spot_list %}
+    <a href="{{ spot.get_absolute_url }}">
+    <div id=discoveryCard class=shadow>
+
+      {% if spot.load_image %}
+      <div id=discoveryImgBox style="background: linear-gradient(90deg, rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 1)), url({{ spot.load_image.url }}); background-size: cover; background-position: 50% 30%"></div>
+      {% else %}
+      <div id=discoveryImgBox style="background: linear-gradient(90deg, rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 1)), url({% static 'images/spotpicDefault.jpg'%}); background-size: cover; background-position: 50% 30%"></div>
+      {% endif %}
+
+      <div id=discoveryContentBox>
+        <div id=discoveryName class="brandFont brandFontColor">{{ spot.name }}</div>
+        <div id=discoveryDetails>
+          <div id=discoveryDetailsIcon>
+            {% if spot.category == "FOOD" %}
+            <img id="spotCardIcon" src="{% static 'icons/foodGrey.svg' %}">
+            {% elif spot.category == "COCKTAILS" %}
+            <img id="spotCardIcon" src="{% static 'icons/cocktailGrey.svg' %}">
+            {% elif spot.category == "WINE" %}
+            <img id="spotCardIcon" src="{% static 'icons/wineGrey.svg' %}">
+            {% elif spot.category == "BEER" %}
+            <img id="spotCardIcon" src="{% static 'icons/beerGrey.svg' %}">
+            {% elif spot.category == "COFFEE" %}
+            <img id="spotCardIcon" src="{% static 'icons/coffeeGrey.svg' %}">
+            {% else %}
+            <img id="spotCardIcon" src="{% static 'icons/otherGrey.svg' %}">
+            {% endif %}
+          </div>
+          <div id=discoveryDetailsIn>in</div>
+          <div id=discoveryDetailsLocation class="boldFont"> {{ spot.location }}</div>
+        </div>
+        <div id=discoveryCount>
+          <div id=discoveryDetailsCountText># ratings: </div>
+          <div id=discoveryDetailsCountResult class="brandFont"> {{ spot.countrating }} </div>
+        </div>
+      </div>
+      {% if spot.countrating == 0 %}
+      <div id=discoveryRatingBox class="altColor brandFont brandFontColor">WL</div>
+      {% else %}
+      <div id=discoveryRatingBox class="brandColor brandFont whiteFont">{{ spot.averating }}</div>
+      {% endif %}
+
+    </div></a>
+    {% endfor %}
     {% else %}
-    -
+    <div id=discoverDefaultText>No spots entered yet</div>
+
     {% endif %}
 
   </div>
-  <div id=discoveryListHighSpot><img id=discoveryListHighSpotIcon src="{% static 'icons/logoBlue.svg' %}"><div id=discoveryListHighSpotValue>
-      {% if user.high_rating %}
-      {{ user.high_rating }}
-      {% else %}
-      No ratings yet
-      {% endif %}
-    </div></div>
-    <div id=discoveryListLastSpot><img id=discoveryListHighSpotIcon src="{% static 'icons/latestBlue.svg' %}"><div id=discoveryListHighSpotValue>
-        {% if user.last_rating %}
-        {{ user.last_rating }}
+
+
+  <div id=wishlistResultsDiscover>
+
+    {% if user_list %}
+    {% for user in user_list %}
+    <a href="{{ user.get_user_url }}">
+    <div id=discoveryCard class=shadow>
+      <div id=discoveryListUserPic style="background-image: url({{ user.user.profile.userpic.url }}); background-size: cover"></div>
+      <div id=discoveryListLegalname class="brandFont brandFontColor">{{ user.user.first_name }} {{ user.user.last_name }}</div>
+      <div id=discoveryListUsername class="brandFont"> @{{ user.user.username }}</div>
+      <div id=discoveryListCountRating class="brandFont brandColor whiteFont">
+        {% if user.number_rating %}
+        {{ user.number_rating }}
+        <div id=discoveryListCountText>adds</div>
         {% else %}
-        No ratings yet
+        -
         {% endif %}
-      </div></div>
 
-  </div></a>
-{% endfor %}
-{% else %}
-<div id=discoverDefaultText>No spots entered yet</div>
-{% endif %}
-</div>
-
-<div id=hitlistResults class=resultsBox>
-
-{% if single_spot_list %}
-{% for spot in single_spot_list %}
-<a href="{{ spot.get_absolute_url }}">
-<div id=discoveryCard class=shadow>
-
-  {% if spot.load_image %}
-  <div id=discoveryImgBox style="background: linear-gradient(90deg, rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 1)), url({{ spot.load_image.url }}); background-size: cover; background-position: 50% 30%"></div>
-  {% else %}
-  <div id=discoveryImgBox style="background: linear-gradient(90deg, rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 1)), url({% static 'images/spotpicDefault.jpg'%}); background-size: cover; background-position: 50% 30%"></div>
-  {% endif %}
-
-  <div id=discoveryContentBox>
-    <div id=discoveryName class="brandFont brandFontColor">{{ spot.name }}</div>
-    <div id=discoveryDetails>
-      <div id=discoveryDetailsIcon>
-        {% if spot.category == "FOOD" %}
-        <img id="spotCardIcon" src="{% static 'icons/foodGrey.svg' %}">
-        {% elif spot.category == "COCKTAILS" %}
-        <img id="spotCardIcon" src="{% static 'icons/cocktailGrey.svg' %}">
-        {% elif spot.category == "WINE" %}
-        <img id="spotCardIcon" src="{% static 'icons/wineGrey.svg' %}">
-        {% elif spot.category == "BEER" %}
-        <img id="spotCardIcon" src="{% static 'icons/beerGrey.svg' %}">
-        {% elif spot.category == "COFFEE" %}
-        <img id="spotCardIcon" src="{% static 'icons/coffeeGrey.svg' %}">
-        {% else %}
-        <img id="spotCardIcon" src="{% static 'icons/otherGrey.svg' %}">
-        {% endif %}
       </div>
-      <div id=discoveryDetailsIn>in</div>
-      <div id=discoveryDetailsLocation class="boldFont"> {{ spot.location }}</div>
-    </div>
-    <div id=discoveryCount>
-      <div id=discoveryDetailsCountText># ratings: </div>
-      <div id=discoveryDetailsCountResult class="brandFont"> {{ spot.countrating }} </div>
-    </div>
+      <div id=discoveryListHighSpot><img id=discoveryListHighSpotIcon src="{% static 'icons/logoBlue.svg' %}"><div id=discoveryListHighSpotValue>
+          {% if user.high_rating %}
+          {{ user.high_rating }}
+          {% else %}
+          No ratings yet
+          {% endif %}
+        </div></div>
+        <div id=discoveryListLastSpot><img id=discoveryListHighSpotIcon src="{% static 'icons/latestBlue.svg' %}"><div id=discoveryListHighSpotValue>
+            {% if user.last_rating %}
+            {{ user.last_rating }}
+            {% else %}
+            No ratings yet
+            {% endif %}
+          </div></div>
+
+      </div></a>
+    {% endfor %}
+    {% else %}
+    <div id=discoverDefaultText>No spots entered yet</div>
+    {% endif %}
+
   </div>
-  {% if spot.countrating == 0 %}
-  <div id=discoveryRatingBox class="altColor brandFont brandFontColor">WL</div>
-  {% else %}
-  <div id=discoveryRatingBox class="brandColor brandFont whiteFont">{{ spot.averating }}</div>
-  {% endif %}
 
-</div></a>
-{% endfor %}
-{% else %}
-<div id=discoverDefaultText>No spots entered yet</div>
-
-{% endif %}
-
-</div>
 </div>
 
 {% endblock %}
+
+
+<!--
+
+ADD WISHLIST RESULTS
+
+
+
+
+ADD HITLIST RESULTS
+
+-->

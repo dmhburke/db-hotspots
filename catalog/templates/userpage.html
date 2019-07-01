@@ -6,14 +6,88 @@
   <img id=activeNavImg src="{% static 'icons/yourSpotsWhite.svg' %}">
 </div>
 
-<div id=mainCard class=shadow>
+<div id=mainCardUserPage class=shadow>
 
 <div id=buttonRow>
 <div id=wishlistButton class="selectorButton brandFont brandFontColor ">Wishlist</div>
 <div id=hitlistButton class="selectorButton brandFont brandFontColor ">Hitlist</div>
 </div>
 
-<div id=wishlistResults class=resultsBox>
+<div id=resultsListBoxUserpage>
+
+  <div id=hitlistResultsUserpage>
+    {% if user_hitlist %}
+    {% for spot in user_hitlist %}
+    <a href="{{ spot.name.get_absolute_url }}">
+
+     <div id=spotCard class="shadow">
+       {% if spot.spotpic %}
+      <div id=spotCardImgContainer style="background-image: url({{ spot.spotpic.url }}); background-size: cover; background-position: 50% 30%">
+         {% else %}
+      <div id=spotCardImgContainer style="background-image: url({% static 'images/spotpicDefault.jpg'%}); background-size: cover; background-position: 50% 30%">
+         {% endif %}
+
+       </div>
+       <div id=spotCardContentBox>
+         <div id=spotCardName></div>
+           <div id=spotCardNameText class="brandFont">{{ spot.name }}</div>
+           <div id=spotCardDetailsBox>
+             <div id=spotCardDetailsIcon>
+               {% if spot.category == "FOOD" %}
+               <img id="spotCardIcon" src="{% static 'icons/foodGrey.svg' %}">
+               {% elif spot.category == "COCKTAILS" %}
+               <img id="spotCardIcon" src="{% static 'icons/cocktailGrey.svg' %}">
+               {% elif spot.category == "WINE" %}
+               <img id="spotCardIcon" src="{% static 'icons/wineGrey.svg' %}">
+               {% elif spot.category == "BEER" %}
+               <img id="spotCardIcon" src="{% static 'icons/beerGrey.svg' %}">
+               {% elif spot.category == "COFFEE" %}
+               <img id="spotCardIcon" src="{% static 'icons/coffeeGrey.svg' %}">
+               {% else %}
+               <img id="spotCardIcon" src="{% static 'icons/otherGrey.svg' %}">
+               {% endif %}
+             </div>
+             <div id=spotCardIn class=brandFont>in</div>
+             <div id=spotCardDetailsLocation class=brandFont>{{ spot.location }}</div>
+             <div id=spotCardInfoBox>
+               {% if spot.perfect_for %}
+               {% for entry in spot.perfect_for %}
+               <div id=spotCardPerfectFor class="brandColor whiteFont">{{ entry }}</div>
+               {% endfor %}
+               {% else %}
+               <div id=spotCardPerfectFor class="altColor brandFontColor">No details added</div>
+               {% endif %}
+             </div>
+           </div>
+         <div id=spotCardRating class="brandFont whiteFont boldFont">
+           {% if spot.rating == None %}
+              WL
+            {% else %}
+              {{ spot.rating }}
+            {% endif %}
+
+         </div>
+       </div>
+     </div>
+   </a>
+
+    {% endfor %}
+    {% else %}
+    <div id="noSpots">You haven't added any reviews yet</div>
+    <a href="{% url 'home' %}"><div id="getStarted" class="brandFont whiteFont shadow">Add reviews here!</div></a>
+    {% endif %}
+
+  </div>
+
+</div>
+
+
+
+
+</div>
+<!--
+
+<div id=wishlistResultsUserpage>
   {% if user_wishlist %}
   {% for spot in user_wishlist %}
   <a href="{{ spot.name.get_absolute_url }}">
@@ -76,86 +150,7 @@
   {% endif %}
 </div>
 
-<div id=hitlistResults class=resultsBox>
-  {% if user_hitlist %}
-  {% for spot in user_hitlist %}
-  <a href="{{ spot.name.get_absolute_url }}">
 
-   <div id=spotCard class="shadow">
-     {% if spot.spotpic %}
-    <div id=spotCardImgContainer style="background-image: url({{ spot.spotpic.url }}); background-size: cover; background-position: 50% 30%">
-       {% else %}
-    <div id=spotCardImgContainer style="background-image: url({% static 'images/spotpicDefault.jpg'%}); background-size: cover; background-position: 50% 30%">
-       {% endif %}
-
-     </div>
-     <div id=spotCardContentBox>
-       <div id=spotCardName></div>
-         <div id=spotCardNameText class="brandFont">{{ spot.name }}</div>
-         <div id=spotCardDetailsBox>
-           <div id=spotCardDetailsIcon>
-             {% if spot.category == "FOOD" %}
-             <img id="spotCardIcon" src="{% static 'icons/foodGrey.svg' %}">
-             {% elif spot.category == "COCKTAILS" %}
-             <img id="spotCardIcon" src="{% static 'icons/cocktailGrey.svg' %}">
-             {% elif spot.category == "WINE" %}
-             <img id="spotCardIcon" src="{% static 'icons/wineGrey.svg' %}">
-             {% elif spot.category == "BEER" %}
-             <img id="spotCardIcon" src="{% static 'icons/beerGrey.svg' %}">
-             {% elif spot.category == "COFFEE" %}
-             <img id="spotCardIcon" src="{% static 'icons/coffeeGrey.svg' %}">
-             {% else %}
-             <img id="spotCardIcon" src="{% static 'icons/otherGrey.svg' %}">
-             {% endif %}
-           </div>
-           <div id=spotCardIn class=brandFont>in</div>
-           <div id=spotCardDetailsLocation class=brandFont>{{ spot.location }}</div>
-           <div id=spotCardInfoBox>
-             {% if spot.perfect_for %}
-             {% for entry in spot.perfect_for %}
-             <div id=spotCardPerfectFor class="brandColor whiteFont">{{ entry }}</div>
-             {% endfor %}
-             {% else %}
-             <div id=spotCardPerfectFor class="altColor brandFontColor">No details added</div>
-             {% endif %}
-           </div>
-         </div>
-       <div id=spotCardRating class="brandFont whiteFont boldFont">
-         {% if spot.rating == None %}
-            WL
-          {% else %}
-            {{ spot.rating }}
-          {% endif %}
-
-       </div>
-     </div>
-   </div>
- </a>
-
-  {% endfor %}
-  {% else %}
-  <div id="noSpots">You haven't added any reviews yet</div>
-  <a href="{% url 'home' %}"><div id="getStarted" class="brandFont whiteFont shadow">Add reviews here!</div></a>
-  {% endif %}
-
-</div>
-
-
-</div>
-
-<!--
-<br><br>
-WISHLIST
-<br>
-{% if user_wishlist %}
-{% for spot in user_wishlist %}
-<a href="{{ spot.get_absolute_url }}">
-  {{ spot.name }}
-  </a>
-{% endfor %}
-{% else %}
-  No wishlists entered
-{% endif %}
 -->
 
 
