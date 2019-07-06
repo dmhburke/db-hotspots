@@ -2,25 +2,35 @@
 
 {% block contentName %}
 {% load static %}
-
-<a href="">hardcode: {{ hardcode }}</a>
-  {% if single_location %}
-  {% for item in single_location %}
-
-<a href="{{ item.get_absolute_url }}">
-<div> {{ item.name }} ({{  hardcode }})</div>
-</a>
-{% endfor %}
-{% endif %}
-
+TEST PAGES RULE!
+<br>
 
 <form method="post">
-{% csrf_token %}
-
-  {{ form.name }}
-
-  <input style="background-color: blue" type="submit" value="Submit"/>
-
+  {% csrf_token %}
+  <div style="margin: 5px 0px; float: right;"> {{ form.city }} </div>
+  <div> {{ form.name }} </div>
+<button id=addSpotSubmitButton class="brandColor shadow" type="submit"></button>
 </form>
 
+<br>
+Suggested: <br>
+{% if search_result %}
+{% for spot in search_result.response.minivenues %}
+
+{% if '/' in spot.name %}
+<div class=shadow style="background-color: #f2f2f2;height: 40px; width: 90%; margin: 5px 10px;padding: 6px; overflow: hidden;">{{ spot.name }} ({{ spot.location.distance }}m)<br>{{ spot.location.address }}</div>
+{% else %}
+<a href="{% url 'testpagedetail' spot.name spot.id %}">
+<div class=shadow style="height: 40px; width: 90%; margin: 5px 10px;padding: 6px; overflow: hidden;">{{ spot.name }} ({{ spot.location.distance }}m)<br>{{ spot.location.address }}</div></a>
+{% endif %}
+
+{% endfor %}
+{% else %}
+Start typing
+{% endif %}
+
+<br>
+<br>
+Complete JSON: {{completeData}}
+<br>
 {% endblock %}

@@ -4,6 +4,9 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.db.models import Sum, Count, Q, Max
+import json, requests
+from django.contrib.gis.geoip2 import GeoIP2
+from django.urls import reverse
 
 #Import User model here
 from django.contrib.auth.models import User
@@ -203,31 +206,72 @@ def discovernew (request):
 
 
 ##### TEST PAGE ####
-
+#FourSquare Developer API: https://foursquare.com/developers/apps/0PR1PTLMSLBM0ORYW5U2YGL43IOZXFVKWFIC2DHHXOP30Z35/settings
 def testpage (request):
     """use for any testing needed"""
 
-    if request.method == 'POST':
-        form = TestEntryForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect('testpage')
+    search_result = {}
+    if 'name' in request.POST:
+          form = TestEntryForm(request.POST)
+          if form.is_valid():
+              search_result = form.search(request)
     else:
-        form = TestEntryForm()
+          form = TestEntryForm()
 
-
-    #target_location = SingleLocation.objects.get(name=record_name).name
-
-    cleaned_records = ReviewRecord.objects.all()
-    single_location = SingleLocation.objects.all()
-
-    hardcode = SingleLocation.objects.get(name="new record 1").name
+    #CODE TO SHOW FULL JSON (not linked to search)
+    completeURL = 'https://api.foursquare.com/v2/venues/suggestcompletion'
+    completeParams = dict(
+        client_id='0PR1PTLMSLBM0ORYW5U2YGL43IOZXFVKWFIC2DHHXOP30Z35',
+         client_secret='SJDG5K1D5NARSRZYAAYPJMTJBPIGW4ONUTQBT4HTDNUGSLQQ',
+         v='20180323',
+         ll='40.734581,-74.003860',
+         query=search_result,
+         limit=1,)
+    completeResponse = requests.get(url=completeURL, params=completeParams)
+    completeStatus = completeResponse.status_code
+    completeDetails = completeResponse.content
+    completeData = completeResponse.json()
 
     context={
     'form': form,
-    'single_location': single_location,
-    'cleaned_records': cleaned_records,
-    'hardcode': hardcode,
+    'search_result': search_result,
+    'completeData': completeData,
+    # 'searchQuery': searchQuery,
+    # 'searchStatus': searchStatus,
+    # 'searchDetails': searchDetails,
+    # 'searchData': searchData,
+    # 'completeStatus': completeStatus,
+    # 'completeQuery': completeQuery,
+    # 'completeData': completeData,
+
     }
 
     return render(request, 'testpage.html', context=context)
+
+def testpagedetail (request, name, id):
+    """use for any testing links needed"""
+
+    completeURL = 'https://api.foursquare.com/v2/venues/suggestcompletion'
+    completeParams = dict(
+        client_id='0PR1PTLMSLBM0ORYW5U2YGL43IOZXFVKWFIC2DHHXOP30Z35',
+         client_secret='SJDG5K1D5NARSRZYAAYPJMTJBPIGW4ONUTQBT4HTDNUGSLQQ',
+         v='20180323',
+         ll='40.734581,-74.003860',
+         query=name,
+         limit=10,)
+    completeResponse = requests.get(url=completeURL, params=completeParams)
+    completeStatus = completeResponse.status_code
+    completeDetails = completeResponse.content
+    completeData = completeResponse.json()
+
+    categoryData = completeData['response']['minivenues']
+
+    context = {
+    'name': name,
+    'id': id,
+    'completeData': completeData,
+    'categoryData': categoryData,
+
+    }
+
+    return render(request, 'testpagedetail.html', context=context)

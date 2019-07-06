@@ -1,0 +1,43 @@
+{% extends "home_template.html" %}
+
+{% block contentName %}
+{% load static %}
+
+<br><div style="font-size: 15px; text-align: center">This page auto-imports
+  <br><span style="font-size: 20px; font-weight: bold">{{ name }}</span><br>
+  details </div>
+  <br><br>
+
+  {% if completeData %}
+    {% for spot in completeData.response.minivenues %}
+    {% if spot.id == id %}
+  <div class=shadow style="height: 80px; width: 90%; margin: 5px 10px;padding: 6px; overflow: hidden;">
+    {{ spot.name }} ({{ spot.location.distance }}m)<br>
+    {{ spot.location.address }}<br>
+      {% for x in spot.categories %}
+      {% if forloop.counter <= 3 %}
+        <div> {{ x.name }} </div>
+      {% endif %}
+      {% endfor %}
+    {% endif %}
+    {% endfor %}
+    {% else %}
+    No category
+    {% endif %}
+
+
+  </div>
+
+  <a href="{% url 'testpage' %}"
+  <div style="display: block; height: 30px; width: 100px; margin: 20px auto; border-radius: 10px; text-align: center;" class="shadow">Return</div></a>
+
+
+  <br>
+
+  <br><br>
+  <br><br>
+  {{ completeData }}
+
+
+
+{% endblock %}

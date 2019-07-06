@@ -130,6 +130,7 @@ LOGIN_REDIRECT_URL = '/'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'catalog/static/media')
+GEOIP_PATH = os.path.join(BASE_DIR, 'catalog/static/geoip')
 
 AWS_LOCATION = 'static'
 AWS_ACCESS_KEY_ID = CONFIG['AWS_ACCESS_KEY_ID']

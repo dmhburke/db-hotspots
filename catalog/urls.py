@@ -11,5 +11,6 @@ urlpatterns = [
     path('activitystream', views.activitystream, name='activitystream'),
     path('discovernew', views.discovernew, name='discovernew'),
     path('user/<str:pk>', views.userdetail, name='userdetail'),
-    path('testpage', views.testpage, name="testpage"),
+    path('testpage', views.testpage, name='testpage'),
+    path('testpage/<name>/<id>', views.testpagedetail, name='testpagedetail')
 ]
