@@ -20,7 +20,7 @@ Suggested: <br>
 {% if '/' in spot.name %}
 <div class=shadow style="background-color: #f2f2f2;height: 40px; width: 90%; margin: 5px 10px;padding: 6px; overflow: hidden;">{{ spot.name }} ({{ spot.location.distance }}m)<br>{{ spot.location.address }}</div>
 {% else %}
-<a href="{% url 'testpagedetail' spot.name spot.id %}">
+<a href="{% url 'testpagedetail' spot.name spot.location.lat spot.location.lng %}">
 <div class=shadow style="height: 40px; width: 90%; margin: 5px 10px;padding: 6px; overflow: hidden;">{{ spot.name }} ({{ spot.location.distance }}m)<br>{{ spot.location.address }}</div></a>
 {% endif %}
 

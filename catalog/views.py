@@ -231,6 +231,7 @@ def testpage (request):
     completeStatus = completeResponse.status_code
     completeDetails = completeResponse.content
     completeData = completeResponse.json()
+    #NONE OF ABOVE REFRENCES SEARCH
 
     context={
     'form': form,
@@ -248,30 +249,92 @@ def testpage (request):
 
     return render(request, 'testpage.html', context=context)
 
-def testpagedetail (request, name, id):
+def testpagedetail (request, name, lat, lng):
     """use for any testing links needed"""
 
-    completeURL = 'https://api.foursquare.com/v2/venues/suggestcompletion'
-    completeParams = dict(
-        client_id='0PR1PTLMSLBM0ORYW5U2YGL43IOZXFVKWFIC2DHHXOP30Z35',
-         client_secret='SJDG5K1D5NARSRZYAAYPJMTJBPIGW4ONUTQBT4HTDNUGSLQQ',
-         v='20180323',
-         ll='40.734581,-74.003860',
-         query=name,
-         limit=10,)
-    completeResponse = requests.get(url=completeURL, params=completeParams)
-    completeStatus = completeResponse.status_code
-    completeDetails = completeResponse.content
-    completeData = completeResponse.json()
+    name=name
+    lat = lat
+    long = lng
+    targetLocation = str(lat) + ', ' + str(long)
 
-    categoryData = completeData['response']['minivenues']
+    detailsURL = 'https://api.foursquare.com/v2/venues/suggestcompletion'
+    detailsParams = dict(
+        client_id='0PR1PTLMSLBM0ORYW5U2YGL43IOZXFVKWFIC2DHHXOP30Z35',
+        client_secret='SJDG5K1D5NARSRZYAAYPJMTJBPIGW4ONUTQBT4HTDNUGSLQQ',
+         v='20180323',
+         ll=targetLocation,
+         query=name,
+         limit=10,
+         )
+    detailsResponse = requests.get(url=detailsURL, params=detailsParams)
+    detailsData = detailsResponse.json()
+    detailsStatus = detailsResponse.status_code
+    detailsInfo = json.loads(detailsResponse.text)
+
+    detailsResult = detailsInfo['response']['minivenues'][0]
+    resultName = detailsResult['name']
+    resultAddress = detailsResult['location']['address']
+    resultCity = detailsResult['location']['city']
+    resultCountry = detailsResult['location']['country']
+    try:
+        resultCategory1 = detailsResult['categories'][0]['name']
+    except:
+        resultCategory1 = ""
+    try:
+        resultCategory2 = detailsResult['categories'][1]['name']
+    except:
+        resultCategory2 = ""
+    try:
+        resultCategory3 = detailsResult['categories'][2]['name']
+    except:
+        resultCategory3 = ""
+
+    #ADD GOOGLE IMAGES SEARCH
+    googleDevAPIKey = 'AIzaSyArd-i81wSGtCnJxDCFdBD0jrvX8AXOsCc'
+    googleProjectCX = '000959550691752782256:tckrhqdefn8'
+
+    imageQuery = resultName + " " + resultAddress
+
+    searchURL = 'https://www.googleapis.com/customsearch/v1'
+    searchParams = dict(
+        cx=googleProjectCX,
+        key=googleDevAPIKey,
+        q=imageQuery,
+        searchType='image',
+        fileType='.jpg',
+        num=6,
+    )
+
+    searchResponse = requests.get(url=searchURL, params=searchParams)
+    searchStatus = searchResponse.status_code
+    searchData = searchResponse.json()
+    searchInfo = json.loads(searchResponse.text)
+
+    # try:
+    #     imageResult1 = searchInfo['items'][0]['link']
+    # except:
+    #     imageResult1 = "None"
+
+    imageResult = searchInfo['items']
+
+    jsonExplore = "None"
+
 
     context = {
     'name': name,
-    'id': id,
-    'completeData': completeData,
-    'categoryData': categoryData,
-
+    'targetLocation': targetLocation,
+    'detailsData': detailsData,
+    'resultName': resultName,
+    'resultCity': resultCity,
+    'resultCountry': resultCountry,
+    'resultAddress': resultAddress,
+    'resultCategory1': resultCategory1,
+    'resultCategory2': resultCategory2,
+    'resultCategory3': resultCategory3,
+    'searchStatus': searchStatus,
+    'imageResult': imageResult,
+    'searchData': searchData,
+    'jsonExplore': jsonExplore,
     }
 
     return render(request, 'testpagedetail.html', context=context)
