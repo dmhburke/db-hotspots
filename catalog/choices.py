@@ -3,6 +3,17 @@ from django.http import HttpResponseRedirect
 from django.db.models import Sum, Count
 from django.views import generic
 
+CITIES = (
+    ("New York City, NY", "New York City"),
+    ("Los Angeles, CA", "Los Angeles"),
+    ("Boston, MA", "Boston"),
+    ("Seattle, WA", "Seattle"),
+    ("Sydney, Australia", "Sydney"),
+    ("Stockholm, Sweden", "Stockholm"),
+    ("Paris, France", "Paris"),
+)
+
+
 LOCATION = (
     ("", "----"),
     ("Alphabet City", "Alphabet City"),
