@@ -4,10 +4,11 @@
 {% load static %}
 
   <div class="brandFontColor brandFont"style="margin: 0px auto; margin-top: 20px; text-align: center; font-size: 20px; font-weight: bold">{{ resultName }}</div>
-  <div style = "border-radius: 10px; width: 350px; height: 160px; overflow-x: scroll; white-space: nowrap; margin: 0 auto;">
+  <div style = "font-size: 0.75rem; color: grey; text-align: center;">{{resultAddress}}, {{resultCity}}</div>
+  <div style = "border-radius: 10px; width: 350px; height: 120px; overflow-x: scroll; white-space: nowrap; margin: 0 auto;">
   {% if imageResult %}
     {% for image in imageResult %}
-    <div style="display: inline-block; margin: 5px auto; height: 90%; width: 250px; border-radius: 10px;background-image: url({{image.link}}); background-size: cover; background-position: 50% 80%"></div>
+    <div style="display: inline-block; margin: 5px auto; height: 100px; width: 120px; border-radius: 10px;background-image: url({{image.image.thumbnailLink}}); background-size: cover; background-position: 50% 80%"></div>
     {% endfor %}
   {% else %}
   No images
@@ -16,14 +17,14 @@
   <div class=shadow style="margin: 0px auto; min-height: 190px; border-radius: 10px;width: 350px; padding: 6px;">
     <form method="post">
       {% csrf_token %}
-    <button class="altColor brandFontColor shadow" style="display: block; height: 30px; width: 300px; margin: 0px auto; margin-bottom: 5px; border-radius: 10px;" type="submit">Add to wishlist</button>
+    <button class="altColor brandFontColor shadow" style="border: none; display: block; height: 30px; width: 300px; margin: 0px auto; margin-bottom: 5px; border-radius: 10px;" type="submit">Add to wishlist</button>
       {{form.rating}}
       <div style = "display: flex; justify-content: center;">
       {{form.perfect_for}}
       </div>
       <div style="width: 320px; margin: 5px auto;">{{form.notes}}</div>
 
-    <button class="brandColor whiteFont shadow" style="display: block; height: 30px; width: 300px; margin: 0px auto; border-radius: 10px;" type="submit">Add to your model</button>
+    <button class="brandColor whiteFont shadow" style="border: none; display: block; height: 30px; width: 300px; margin: 0px auto; border-radius: 10px;" type="submit">Add to your model</button>
     </form>
 
 

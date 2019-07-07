@@ -30,7 +30,7 @@ class ReviewRecordAdmin(admin.ModelAdmin):
 admin.site.register(ReviewRecord, ReviewRecordAdmin)
 
 class MasterAddModelAdmin(admin.ModelAdmin):
-    list_display = ('user', 'name', 'rating', 'perfect_for', 'city', 'category1', 'category2', 'category3', 'notes', 'date',)
+    list_display = ('user', 'name', 'rating', 'perfect_for', 'city', 'category1', 'category2', 'category3', 'notes', 'postcode', 'suburb', 'date',)
 
 #Register the admin class with the associated model
 admin.site.register(MasterAddModel, MasterAddModelAdmin)

@@ -174,6 +174,7 @@ class MasterAddModel(models.Model):
     category2 = models.CharField(max_length=30,blank=True, null=True)
     category3 = models.CharField(max_length=30,blank=True, null=True)
     postcode = models.CharField(max_length=30,blank=True, null=True)
+    suburb = models.CharField(max_length=30,blank=True, null=True)
     date = models.DateTimeField(auto_now=True, null=True)
     temperature = models.DecimalField(max_digits=10, decimal_places=8, blank=True, null=True)
 

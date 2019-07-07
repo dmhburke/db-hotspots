@@ -8,6 +8,8 @@ import json, requests
 from django.contrib.gis.geoip2 import GeoIP2
 from django.urls import reverse
 from hotSpotsApp.settings import *
+from opencage.geocoder import OpenCageGeocode
+from pprint import pprint
 
 #Import User model here
 from django.contrib.auth.models import User
@@ -324,6 +326,20 @@ def testpagedetail (request, name, lat, lng):
 
     jsonExplore = "None"
 
+    ###OpenCageLatLong2SmartLocation###
+
+    # locationURL =
+    # locationParams = dict (
+    #
+    # )
+
+    key = 'a98d10680c0c41d082d9de1c23dcec22'
+    geocoder = OpenCageGeocode(key)
+
+    locationResponse = geocoder.reverse_geocode(lat, long)
+    resultSuburb = locationResponse[0]['components']['suburb']
+
+
 
     ####FORM FOR USERS INPUTS ####
     if request.method == 'POST':
@@ -337,6 +353,7 @@ def testpagedetail (request, name, lat, lng):
             post.category2 = resultCategory2
             post.category3 = resultCategory3
             post.postcode = resultPostcode
+            post.suburb = resultSuburb
             post.save()
             return redirect('testpage') #or whatever the url
     else:
@@ -361,6 +378,7 @@ def testpagedetail (request, name, lat, lng):
     'imageResult': imageResult,
     'searchData': searchData,
     'jsonExplore': jsonExplore,
+    'resultSuburb': resultSuburb,
     }
 
     return render(request, 'testpagedetail.html', context=context)
