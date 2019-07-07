@@ -7,15 +7,16 @@ from django.db.models import Sum, Count, Q, Max
 import json, requests
 from django.contrib.gis.geoip2 import GeoIP2
 from django.urls import reverse
+from hotSpotsApp.settings import *
 
 #Import User model here
 from django.contrib.auth.models import User
 
 #Import Custom models here
-from catalog.models import Profile, AddReview, SingleLocation, ReviewRecord, TestEntryModel, TestStoreModel
+from catalog.models import Profile, AddReview, SingleLocation, ReviewRecord, MasterAddModel, TestEntryModel, TestStoreModel
 
 #Import forms here
-from catalog.forms import ProfileForm, AddReviewForm, TestEntryForm
+from catalog.forms import ProfileForm, AddReviewForm, MasterAddForm, TestEntryForm
 
 #DEFINE VIEWS HERE
 def createaccount (request):
@@ -288,17 +289,21 @@ def testpagedetail (request, name, lat, lng):
         resultCategory3 = detailsResult['categories'][2]['name']
     except:
         resultCategory3 = ""
+    try:
+        resultPostcode = detailsResult['location']['postalCode']
+    except:
+        resultPostcode = ""
 
     #ADD GOOGLE IMAGES SEARCH
-    googleDevAPIKey = 'AIzaSyArd-i81wSGtCnJxDCFdBD0jrvX8AXOsCc'
-    googleProjectCX = '000959550691752782256:tckrhqdefn8'
+    #googleDevAPIKey = 'AIzaSyArd-i81wSGtCnJxDCFdBD0jrvX8AXOsCc'
+    #googleProjectCX = '000959550691752782256:tckrhqdefn8'
 
     imageQuery = resultName + " " + resultAddress
 
     searchURL = 'https://www.googleapis.com/customsearch/v1'
     searchParams = dict(
-        cx=googleProjectCX,
-        key=googleDevAPIKey,
+        cx=google_project_cx,
+        key=google_dev_api_key,
         q=imageQuery,
         searchType='image',
         fileType='.jpg',
@@ -320,7 +325,27 @@ def testpagedetail (request, name, lat, lng):
     jsonExplore = "None"
 
 
+    ####FORM FOR USERS INPUTS ####
+    if request.method == 'POST':
+        form = MasterAddForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.user = request.user
+            post.name = resultName
+            post.city = resultCity
+            post.category1 = resultCategory1
+            post.category2 = resultCategory2
+            post.category3 = resultCategory3
+            post.postcode = resultPostcode
+            post.save()
+            return redirect('testpage') #or whatever the url
+    else:
+        form = MasterAddForm()
+
+
+
     context = {
+    'form': form,
     'name': name,
     'targetLocation': targetLocation,
     'detailsData': detailsData,
@@ -331,6 +356,7 @@ def testpagedetail (request, name, lat, lng):
     'resultCategory1': resultCategory1,
     'resultCategory2': resultCategory2,
     'resultCategory3': resultCategory3,
+    'resultPostcode': resultPostcode,
     'searchStatus': searchStatus,
     'imageResult': imageResult,
     'searchData': searchData,

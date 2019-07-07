@@ -160,3 +160,22 @@ class TestStoreModel(models.Model):
 @receiver(post_save, sender=TestEntryModel)
 def single_save(sender, instance, **kwargs):
     TestStoreModel.objects.update_or_create(name=instance.name)
+
+class MasterAddModel(models.Model):
+    user = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE)
+    name = models.CharField(max_length=30) # blank=True, null=True
+    rating = models.DecimalField(max_digits=3, decimal_places=1, validators=[MaxValueValidator(10), MinValueValidator(0)], blank=True, null=True)
+    perfect_for = MultiSelectField(choices=PERFECT_FOR, blank=True, null=True)
+    notes = models.TextField(blank=True, null=True)
+    city = models.CharField(max_length=30,blank=True, null=True)
+    country = models.CharField(max_length=30,blank=True, null=True)
+    address = models.CharField(max_length=50,blank=True, null=True)
+    category1 = models.CharField(max_length=30,blank=True, null=True)
+    category2 = models.CharField(max_length=30,blank=True, null=True)
+    category3 = models.CharField(max_length=30,blank=True, null=True)
+    postcode = models.CharField(max_length=30,blank=True, null=True)
+    date = models.DateTimeField(auto_now=True, null=True)
+    temperature = models.DecimalField(max_digits=10, decimal_places=8, blank=True, null=True)
+
+    def __str__(self):
+        return '%s' % self.name

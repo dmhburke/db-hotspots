@@ -59,6 +59,7 @@ CATEGORY = (
 PERFECT_FOR = (
     ("Something quick", "Something quick"),
     ("Last-min plans", "Last-min plans"),
+    ("Breakfast", "Breakfast"),
     ("Impressing guests", "Impressing guests"),
     ("Date night", "Date night"),
     ("Big group", "Big group"),

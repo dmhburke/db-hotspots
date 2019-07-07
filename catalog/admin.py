@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Add models
-from catalog.models import Profile, AddReview, SingleLocation, ReviewRecord, TestEntryModel, TestStoreModel
+from catalog.models import Profile, AddReview, SingleLocation, ReviewRecord, MasterAddModel, TestEntryModel, TestStoreModel
 
 # Register your models here.
 class ProfileAdmin(admin.ModelAdmin):
@@ -29,8 +29,11 @@ class ReviewRecordAdmin(admin.ModelAdmin):
 #Register the admin class with the associated model
 admin.site.register(ReviewRecord, ReviewRecordAdmin)
 
+class MasterAddModelAdmin(admin.ModelAdmin):
+    list_display = ('user', 'name', 'rating', 'perfect_for', 'city', 'category1', 'category2', 'category3', 'notes', 'date',)
 
-
+#Register the admin class with the associated model
+admin.site.register(MasterAddModel, MasterAddModelAdmin)
 
 ###TEST PAGE
 class TestEntryModelAdmin(admin.ModelAdmin):

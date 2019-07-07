@@ -132,6 +132,10 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'catalog/static/media')
 GEOIP_PATH = os.path.join(BASE_DIR, 'catalog/static/geoip')
 
+#Google API Secret Keys
+google_dev_api_key = CONFIG['google_dev_api_key']
+google_project_cx = CONFIG['google_project_cx']
+
 AWS_LOCATION = 'static'
 AWS_ACCESS_KEY_ID = CONFIG['AWS_ACCESS_KEY_ID']
 AWS_SECRET_ACCESS_KEY = CONFIG['AWS_SECRET_ACCESS_KEY']

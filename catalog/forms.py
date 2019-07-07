@@ -6,7 +6,7 @@ from catalog.choices import *
 import json, requests
 from django.contrib.gis.geoip2 import GeoIP2
 
-from catalog.models import Profile, AddReview, TestEntryModel
+from catalog.models import Profile, AddReview, MasterAddModel, TestEntryModel
 
 class ProfileForm(UserCreationForm):
     userpic = forms.FileField(required=False)
@@ -88,4 +88,13 @@ class TestEntryForm(forms.Form):
 
         def get_apiresult_url(self):
              """Returns the url to access a particular instance of the search result"""
-             return reverse('testpagedetail', args=[str(self.name), int(self.id)])
+             return reverse('testpagedetail', args=[str(self.name)])
+
+class MasterAddForm(ModelForm):
+    rating = forms.DecimalField(max_digits=10,decimal_places=8,required=False)
+    perfect_for = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(attrs={'onclick': 'myFunction();'}),choices=PERFECT_FOR, label='', required=False)
+    notes = forms.CharField(widget=forms.Textarea(attrs={"rows":2, "cols":30}), required=False)
+
+    class Meta:
+        model = MasterAddModel
+        fields = ('rating', 'perfect_for', 'notes',)
