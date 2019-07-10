@@ -61,6 +61,7 @@ select:-webkit-autofill:focus {
 }
 
 select {
+  -webkit-appearance: none;
   text-align-last: center;
   background-color: #F2f2f2;
   border: none;
@@ -182,12 +183,13 @@ li {
 
 #mobileContainer {
   width: 375px;
-  height: 700px;
+  height: 600px;
   position: relative;
   margin: 0 auto;
   padding-bottom: 20px;
   position: relative;
   overflow: scroll;
+  border-bottom: 3px solid #1e8eff;
 }
 
 #logoStandard {
@@ -425,16 +427,17 @@ li {
 /* HOME PAGE */
 
 #homeHeader {
-  height: 120px;
+  height: 95px;
   width: 100%;
   display: flex;
   justify-content: space-between;
-  padding-top: 15px;
+  padding-top: 5px;
 }
 
 #homeLogo {
-  height: 90px;
-  width: 90px;
+  height: 80px;
+  width: 85px;
+  margin-top: 5px;
 
 }
 
@@ -444,7 +447,7 @@ li {
 }
 
 #homeTitle {
-  height: 90px;
+  height: 80px;
   width: 190px;
   line-height: 100px;
   padding-left: 2px;
@@ -483,7 +486,7 @@ li {
 }
 
 #navBox {
-  height: 80px;
+  height: 70px;
   width: 95%;
   border-radius: 20px;
   margin: 5px auto;
@@ -495,8 +498,8 @@ li {
 }
 
 #navCircle {
-  height: 57px;
-  width: 57px;
+  height: 45px;
+  width: 45px;
   border: 3px solid #1e8eff;
   border-radius: 100%;
   margin-top: 5px;
@@ -509,20 +512,20 @@ li {
 
 #textSeeYours, #textCheckLatest, #textDiscoverNew {
   position: absolute;
-  bottom: 2px;
+  bottom: 4px;
   font-size: 1rem;
 }
 
 #textSeeYours {
-  left: 29px;
+  left: 27px;
 }
 
 #textCheckLatest {
-  left: 130px;
+  left: 137px;
 }
 
 #textDiscoverNew {
-  left: 256px;
+  left: 258px;
 }
 
 #homeContent {
@@ -718,10 +721,10 @@ li {
 #activeNav {
   position: absolute;
   background-color: #1e8eff;
-  top: 141px;
-  left: 40px;
-  height: 57px;
-  width: 57px;
+  top: 117px;
+  left: 47px;
+  height: 43px;
+  width: 43px;
   border: 3px solid #1e8eff;
   border-radius: 100%;
 }
@@ -729,10 +732,10 @@ li {
 #activeNavActivity {
   position: absolute;
   background-color: #1e8eff;
-  top: 141px;
-  left: 160px;
-  height: 57px;
-  width: 57px;
+  top: 117px;
+  left: 166px;
+  height: 43px;
+  width: 43px;
   border: 3px solid #1e8eff;
   border-radius: 100%;
 }
@@ -740,12 +743,16 @@ li {
 #activeNavDiscover {
   position: absolute;
   background-color: #1e8eff;
-  top: 141px;
-  left: 278px;
-  height: 57px;
-  width: 57px;
+  top: 117px;
+  left: 285px;
+  height: 43px;
+  width: 43px;
   border: 3px solid #1e8eff;
   border-radius: 100%;
+}
+
+#activeNavImg {
+  width: 100%;
 }
 
 #buttonRow {
@@ -1225,10 +1232,6 @@ li {
   text-align: center;
   font-size: 2rem;
   padding-top: 23px;
-}
-
-#activeNavImg {
-  width: 50px;
 }
 
 #activityHeader {
@@ -1989,5 +1992,75 @@ li {
   font-size: 1.25rem;
 }
 
+/*** LANDING ADD PAGE ***/
+
+#landingAdd {
+  position: relative;
+  height: 385px;
+  width: 95%;
+  border-radius: 20px;
+  margin: 0px auto;
+  margin-top: 15px;
+  padding: 20px;
+}
+
+#landingSpotLocation {
+  position: absolute;
+  top: 15px;
+  right: 13px;
+  height: 30px;
+  width: 150px;
+}
+
+#id_city {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+}
+
+#id_name {
+  border-radius: 10px;
+}
+
+#landingSpotInput {
+  position: absolute;
+  top: 50px;
+  right: 13px;
+  height: 45px;
+  width: 330px;
+  margin: 0 auto;
+  border-radius: 10px;
+  background-color: lightgrey;
+}
+
+#landingSpotSubmit {
+  position: absolute;
+  top: 100px;
+  right: 13px;
+  height: 35px;
+  width: 330px;
+  margin: 0 auto;
+  border-radius: 10px;
+  font-size: 1.5rem;
+  border: 1px solid white;
+}
+
+#landingSpotResultContainer {
+  position: absolute;
+  top: 140px;
+  height: 220px;
+  width: 320px;
+  overflow: scroll;
+
+}
+
+#landingSpotResult {
+  height: 40px;
+  width: 310px;
+  margin: 5px auto;
+  border-radius: 10px;
+  margin-bottom: 5px;
+  padding: 5px 10px;
+}
 
 /**/

@@ -1,0 +1,38 @@
+{% extends "home_template.html" %}
+
+{% block contentName %}
+{% load static %}
+
+<div id="landingAdd" class=shadow>
+
+<form method="post">
+  {% csrf_token %}
+
+  <div id="landingSpotLocation">{{ form.city }}</div>
+  <div id="landingSpotInput">{{ form.name }}</div>
+  <button id="landingSpotSubmit" class="brandFont brandColor whiteFont" type="submit">Search</button>
+
+</form>
+
+<div id="landingSpotResultContainer">
+
+  {% if search_result %}
+  {% if search_result.meta.code == 200 %}
+  {% for spot in search_result.response.minivenues %}
+  {% if '/' in spot.name %}
+  <div id="landingSpotResult" class="shadow">{{ spot.name }}<br>{{ spot.location.address }}</div>
+  {% else %}
+  <a href="{% url 'testpagedetail' spot.name spot.location.lat spot.location.lng %}">
+  <div id="landingSpotResult" class="shadow">{{ spot.name }}<br>{{ spot.location.address }}</div></a>
+  {% endif %}
+  {% endfor %}
+  <a href="{% url 'home' %}">
+  <div id="landingSpotResult" class="shadow brandFont">Not here? Click to add new</div></a>
+  {% endif %}
+  {% endif %}
+
+</div>
+
+</div>
+
+{% endblock %}

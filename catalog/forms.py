@@ -9,8 +9,8 @@ from django.contrib.gis.geoip2 import GeoIP2
 from catalog.models import Profile, AddReview, MasterAddModel, TestEntryModel
 
 class ProfileForm(UserCreationForm):
-    userpic = forms.FileField(required=False)
-    location = forms.CharField(required=False)
+    userpic = forms.FileField(required=True)
+    location = forms.ChoiceField(choices=CITIES, required=True)
 
     class Meta:
         model = User
@@ -44,28 +44,6 @@ class TestEntryForm(forms.Form):
     name = forms.CharField()
 
     def search(self, request):
-    #Ability to get user current IP (doesn't seem very accurate)
-        # def get_client_ip(request):
-        #     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
-        #     if x_forwarded_for:
-        #         ip = x_forwarded_for.split(',')[0]
-        #     else:
-        #         ip = request.META.get('REMOTE_ADDR')
-        #     return ip
-        # currentIP = '158.222.246.25' #currentIP = get_client_ip(request)
-        # geo = GeoIP2()
-        # #IP based location details - CITY
-        # # currentLocationDetails = geo.city(currentIP)
-        # # currentCity = currentLocationDetails['city']
-        # # currentState = currentLocationDetails['region']
-        # # currentLocation = str(currentState) + ', ' + str(currentState)
-        # #IP-based location detail - LAT/LONG
-        # #homeLatLong = '40.734580, -74.003860'
-        # # userIPTuple = geo.lat_lon(currentIP)
-        # # userLat = userIPTuple[0]
-        # # userLong = userIPTuple[1]
-        # # userLatLong = str(userLat) + ", " + str(userLong)
-
         completeQuery = self.cleaned_data['name']
         selectedLocation = self.cleaned_data['city']
 

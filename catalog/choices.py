@@ -13,7 +13,6 @@ CITIES = (
     ("Paris, France", "Paris"),
 )
 
-
 LOCATION = (
     ("", "----"),
     ("Alphabet City", "Alphabet City"),

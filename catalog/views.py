@@ -10,6 +10,7 @@ from django.urls import reverse
 from hotSpotsApp.settings import *
 from opencage.geocoder import OpenCageGeocode
 from pprint import pprint
+from catalog.choices import *
 
 #Import User model here
 from django.contrib.auth.models import User
@@ -34,8 +35,8 @@ def createaccount (request):
             user.profile.save()
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=user.username, password=raw_password)
-            login(request,  user)
-            return redirect('userspotlist')
+            login(request, user)
+            return redirect('landingadd')
     else:
         form = ProfileForm()
 
@@ -59,6 +60,28 @@ def home (request):
         'form': form,
     }
     return render(request, 'home.html', context=context)
+
+@login_required
+def landingadd(request):
+
+    logged_in_user = request.user
+    user_city = logged_in_user.profile.location
+
+    search_result = {}
+    if 'name' in request.POST:
+          form = TestEntryForm(request.POST)
+          if form.is_valid():
+              search_result = form.search(request)
+    else:
+          form = TestEntryForm(initial={'city': user_city})
+
+    context={
+    'form': form,
+    'search_result': search_result,
+    }
+
+    return render(request, 'landingadd.html', context=context)
+
 
 @login_required
 def userspotlist(request):
@@ -213,13 +236,16 @@ def discovernew (request):
 def testpage (request):
     """use for any testing needed"""
 
+    logged_in_user = request.user
+    user_city = logged_in_user.profile.location
+
     search_result = {}
     if 'name' in request.POST:
           form = TestEntryForm(request.POST)
           if form.is_valid():
               search_result = form.search(request)
     else:
-          form = TestEntryForm()
+          form = TestEntryForm(initial={'city': user_city})
 
     #CODE TO SHOW FULL JSON (not linked to search)
     completeURL = 'https://api.foursquare.com/v2/venues/suggestcompletion'

@@ -5,6 +5,7 @@ from . import views
 urlpatterns = [
     path('createaccount', views.createaccount, name='createaccount'),
     path('login', views.login, name='login'),
+    path('landingadd', views.landingadd, name='landingadd'),
     path('', views.home, name='home'),
     path('userpage', views.userspotlist, name='userspotlist'),
     path('detail/<str:pk>', views.userspotdetail, name='userspotdetail'),
@@ -14,3 +15,7 @@ urlpatterns = [
     path('testpage', views.testpage, name='testpage'),
     path('testpage/<name>/<lat>/<lng>', views.testpagedetail, name='testpagedetail')
 ]
+
+
+# path('testpage', views.testpage, name='testpage'),
+# path('testpage/<name>/<lat>/<lng>', views.testpagedetail, name='testpagedetail')
