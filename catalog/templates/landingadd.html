@@ -15,7 +15,6 @@
 </form>
 
 <div id="landingSpotResultContainer">
-
   {% if search_result %}
   {% if search_result.meta.code == 200 %}
   {% for spot in search_result.response.minivenues %}
@@ -29,6 +28,9 @@
   <a href="{% url 'home' %}">
   <div id="landingSpotResult" class="shadow brandFont">Not here? Click to add new</div></a>
   {% endif %}
+  {% elif search_result.meta.code == 400 %}
+  <a href="{% url 'home' %}">
+  <div id="landingSpotResult" class="shadow brandFont">Not here? Click to add new</div></a>No 
   {% endif %}
 
 </div>

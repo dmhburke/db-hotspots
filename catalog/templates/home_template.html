@@ -25,17 +25,17 @@
 </head>
 <body>
 
-<div id=screenContainer>
-<div id=mobileContainer>
+<div id=screenContainer> <!-- adjusts to screen size -->
+<div id=mobileContainer> <!-- sets mobile scroll container -->
 
 <div id="homeHeader" class="brandBottomBorder">
   <div id="homeLogo">
-    <a href="{% url 'home' %}">
+    <a href="{% url 'landingadd' %}">
     <img id=homeLogoIcon src="{% static 'icons/logoBlue.svg' %}"></a>
   </div>
   <div id="homeTitle" class="brandFont brandFontColor titleFont">HotSpots</div>
   <div id="homeProfileImg" style="background-image: url({{ user.profile.userpic.url }}); background-size: cover">
-    <div id=homeProfileUsername class="brandFont brandFontColor">@{{ user.username }}</div>
+    <!--<div id=homeProfileUsername class="brandFont brandFontColor">@{{ user.username }}</div>-->
   </div>
 
 </div>
