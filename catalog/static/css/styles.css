@@ -23,7 +23,7 @@ input[type="text"], input[type="password"], input[type="number"] {
   shadow: none;
   padding: 5px;
   color: #1e8eff;
-  font-size: 1.25rem;
+  font-size: 16px;
 }
 
 /* Change focus to blue background */
@@ -2013,13 +2013,19 @@ li {
 }
 
 #id_city {
-  width: 100%;
-  height: 100%;
+  display: block;
   border-radius: 10px;
+  text-align: center;
+  padding: 5px 10px;
+  margin: 0 auto;
+  font-size: 16px;
+  font-family: 'Special Elite', verdana;
 }
 
 #id_name {
   border-radius: 10px;
+  font-size: 16px;
+  font-family: 'Special Elite', verdana;
 }
 
 #landingSpotInput {
@@ -2041,7 +2047,7 @@ li {
   width: 330px;
   margin: 0 auto;
   border-radius: 10px;
-  font-size: 1.5rem;
+  font-size: 16px;
   border: 1px solid white;
 }
 
