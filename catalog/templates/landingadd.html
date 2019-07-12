@@ -21,7 +21,7 @@
   {% if '/' in spot.name %}
   <div id="landingSpotResult" class="shadow">{{ spot.name }}<br>{{ spot.location.address }}</div>
   {% else %}
-  <a href="{% url 'testpagedetail' spot.name spot.location.lat spot.location.lng %}">
+  <a href="{% url 'adddetail' spot.name spot.location.lat spot.location.lng %}">
   <div id="landingSpotResult" class="shadow">{{ spot.name }}<br>{{ spot.location.address }}</div></a>
   {% endif %}
   {% endfor %}
