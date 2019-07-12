@@ -1,0 +1,105 @@
+{% extends "home_template.html" %}
+
+{% block contentName %}
+{% load static %}
+
+<div id="addDetailResult" class=shadow>
+  <div id="detailTitleBox" class="brandFont brandFontColor">
+    <div id="detailTitleSpan" class="brandFont brandFontColor">{{resultName}}</div>
+    </div>
+  <div id="detailAddressBox" class="brandFont">{{resultAddress}}, {{resultCity}}</div>
+  <div id="detailImageCarousel">
+    {% if imageResult %}
+      {% for image in imageResult %}
+      <div id=detailImage style="background-image: url({{image.image.thumbnailLink}}); background-size: cover; background-position: 50% 80%"></div>
+      {% endfor %}
+    {% else %}
+    <img id=detailImageError src= "{% static 'icons/noPictureGrey.svg' %}">
+    {% endif %}
+  </div>
+  <div id=detailResultSummary class="brandFont">
+
+    <div id=detailResultSummaryText class="brandFont brandFontColor">First of your friends to get here!</div>
+
+  </div>
+  <div id=detailWishlistButton class="brandFont brandFontColor">Save for later</div>
+  <div id=detailHitlistButton class="brandFont brandColor whiteFont">Add review</div>
+
+  <div id=detailsAbsBuffer></div>
+
+  <div id=detailsFormContainer>
+    <div id=detailsPerfectForBox></div>
+    <div id=detailsNotesBox></div>
+    <div id=detailsRatingBox></div>
+
+  </div>
+
+
+  </div>
+
+
+</div>
+<!--
+<div class="brandFontColor brandFont"style="margin: 0px auto; margin-top: 20px; text-align: center; font-size: 20px; font-weight: bold">{{ resultName }}</div>
+<div style = "font-size: 0.75rem; color: grey; text-align: center;">{{resultAddress}}, {{resultCity}}</div>
+<div style = "border-radius: 10px; width: 350px; height: 120px; overflow-x: scroll; white-space: nowrap; margin: 0 auto;">
+{% if imageResult %}
+  {% for image in imageResult %}
+  <div style="display: inline-block; margin: 5px auto; height: 100px; width: 120px; border-radius: 10px;background-image: url({{image.image.thumbnailLink}}); background-size: cover; background-position: 50% 80%"></div>
+  {% endfor %}
+{% else %}
+No images
+{% endif %}
+</div>
+<div class=shadow style="margin: 0px auto; min-height: 190px; border-radius: 10px;width: 350px; padding: 6px;">
+  <form method="post">
+    {% csrf_token %}
+  <button class="altColor brandFontColor shadow" style="border: none; display: block; height: 30px; width: 300px; margin: 0px auto; margin-bottom: 5px; border-radius: 10px;" type="submit">Add to wishlist</button>
+    {{form.rating}}
+    <div style = "display: flex; justify-content: center;">
+    {{form.perfect_for}}
+    </div>
+    <div style="width: 320px; margin: 5px auto;">{{form.notes}}</div>
+
+  <button class="brandColor whiteFont shadow" style="border: none; display: block; height: 30px; width: 300px; margin: 0px auto; border-radius: 10px;" type="submit">Add to your model</button>
+  </form>
+
+
+</div>
+
+##### DUMP AREA ######
+
+<a href="{% url 'testpage' %}"
+<div style="display: block; width: 300px; padding: 5px; margin: 10px auto; border-radius: 10px; text-align: center;" class="shadow">Not what you were looking for?</div></a>
+
+<div class=shadow style="margin: 10px auto; min-height: 90px; border-radius: 10px;width: 350px; padding: 6px;">
+  Name: {{ resultName }} <br>
+  Address: {{ resultAddress }}<br>
+  City: {{ resultCity }} <br>
+  Country: {{ resultCountry }} <br>
+  Category 1: {{resultCategory1}}<br>
+  Category 2: {{resultCategory2}}<br>
+  Category 3: {{resultCategory3}}<br>
+  Postcode: {{resultPostcode}}<br>
+</div>
+
+
+<br><br>
+Status: {{searchStatus }}
+<br><br>
+Explorer: {{jsonExplore}}
+<br><br>
+FullJSON
+{{ searchData }}
+
+
+<br><br>
+View details<br>
+{{ resultName }}
+{{ resultAddress }}
+<br><br>
+FULLJSON<br>
+{{ detailsData }}
+
+-->
+{% endblock %}

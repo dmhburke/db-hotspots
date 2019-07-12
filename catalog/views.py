@@ -82,6 +82,134 @@ def landingadd(request):
 
     return render(request, 'landingadd.html', context=context)
 
+@login_required
+def adddetail(request, name, lat, lng):
+
+####FOURSQUARE API####
+    lat = lat
+    long = lng
+    targetLocation = str(lat) + ', ' + str(long)
+
+    detailsURL = 'https://api.foursquare.com/v2/venues/suggestcompletion'
+    detailsParams = dict(
+        client_id='0PR1PTLMSLBM0ORYW5U2YGL43IOZXFVKWFIC2DHHXOP30Z35',
+        client_secret='SJDG5K1D5NARSRZYAAYPJMTJBPIGW4ONUTQBT4HTDNUGSLQQ',
+         v='20180323',
+         ll=targetLocation,
+         query=name,
+         limit=10,
+         )
+    detailsResponse = requests.get(url=detailsURL, params=detailsParams)
+    detailsData = detailsResponse.json()
+    detailsStatus = detailsResponse.status_code
+    detailsInfo = json.loads(detailsResponse.text)
+
+    detailsResult = detailsInfo['response']['minivenues'][0]
+    resultName = detailsResult['name']
+    try:
+        resultAddress = detailsResult['location']['address']
+    except:
+        resultAddress = ''
+    try:
+        resultCity = detailsResult['location']['city']
+    except:
+        resultCity = ''
+    try:
+        resultCountry = detailsResult['location']['country']
+    except:
+        resultCountry = ''
+    try:
+        resultCategory1 = detailsResult['categories'][0]['name']
+    except:
+        resultCategory1 = ""
+    try:
+        resultCategory2 = detailsResult['categories'][1]['name']
+    except:
+        resultCategory2 = ""
+    try:
+        resultCategory3 = detailsResult['categories'][2]['name']
+    except:
+        resultCategory3 = ""
+    try:
+        resultPostcode = detailsResult['location']['postalCode']
+    except:
+        resultPostcode = ""
+
+    imageQuery = resultName + " " + resultAddress
+
+####GOOGLE IMAGE API ######
+    searchURL = 'https://www.googleapis.com/customsearch/v1'
+    searchParams = dict(
+        cx=google_project_cx,
+        key=google_dev_api_key,
+        q=imageQuery,
+        searchType='image',
+        fileType='.jpg',
+        num=6,
+    )
+
+    searchResponse = requests.get(url=searchURL, params=searchParams)
+    searchStatus = searchResponse.status_code
+    searchData = searchResponse.json()
+    searchInfo = json.loads(searchResponse.text)
+
+    try:
+        imageResult = searchInfo['items']
+    except:
+        imageResult = None
+
+###ADD ADDITIONAL LOCATION DETAILS####
+    key = 'a98d10680c0c41d082d9de1c23dcec22'
+    geocoder = OpenCageGeocode(key)
+
+    locationResponse = geocoder.reverse_geocode(lat, long)
+
+    try:
+        resultSuburb = locationResponse[0]['components']['suburb']
+    except:
+        resultSuburb = ''
+
+
+
+####FORM FOR USERS INPUTS ####
+    if request.method == 'POST':
+        form = MasterAddForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.user = request.user
+            post.name = resultName
+            post.city = resultCity
+            post.category1 = resultCategory1
+            post.category2 = resultCategory2
+            post.category3 = resultCategory3
+            post.postcode = resultPostcode
+            post.suburb = resultSuburb
+            post.save()
+            return redirect('testpage') #or whatever the url
+    else:
+        form = MasterAddForm()
+
+    context = {
+    'form': form,
+    'name': name,
+    'targetLocation': targetLocation,
+    'detailsData': detailsData,
+    'resultName': resultName,
+    'resultCity': resultCity,
+    'resultCountry': resultCountry,
+    'resultAddress': resultAddress,
+    'resultCategory1': resultCategory1,
+    'resultCategory2': resultCategory2,
+    'resultCategory3': resultCategory3,
+    'resultPostcode': resultPostcode,
+    'searchStatus': searchStatus,
+    'imageResult': imageResult,
+    'searchData': searchData,
+    'resultSuburb': resultSuburb,
+    }
+
+    return render(request, 'adddetail.html', context=context)
+
 
 @login_required
 def userspotlist(request):

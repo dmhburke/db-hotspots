@@ -11,6 +11,7 @@ CITIES = (
     ("Sydney, Australia", "Sydney"),
     ("Stockholm, Sweden", "Stockholm"),
     ("Paris, France", "Paris"),
+    ("London, UK", "London"),
 )
 
 LOCATION = (

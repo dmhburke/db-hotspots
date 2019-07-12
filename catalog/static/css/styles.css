@@ -2069,4 +2069,141 @@ li {
   padding: 5px 10px;
 }
 
+#addDetailResult {
+  min-height: 370px;
+  width: 350px;
+  padding: 5px;
+  margin: 20px auto;
+  border-radius: 20px;
+  position: relative;
+}
+
+#detailTitleBox {
+  width: 320px;
+  height: 53px;
+  padding: 5px 0px 0px 0px;
+  margin: 2px auto;
+  margin-top: 5px;
+  text-align: center;
+  font-size: 2rem;
+  vertical-align: bottom;
+  overflow-y: hidden;
+  text-overflow: ellipsis;
+  display: flex;
+
+}
+
+#detailTitleSpan {
+  margin: 0 auto;
+  width: 100%;
+  align-self: flex-end;
+  font-size: 2rem;
+  text-align: center;
+}
+
+#detailAddressBox {
+  width: 320px;
+  margin: 0 auto;
+  margin-bottom: 5px;
+  text-align: center;
+  color: lightgrey;
+  font-size: 1rem;
+}
+
+#detailImageCarousel {
+  width: 340px;
+  height: 120px;
+  position: absolute;
+  top: 80px;
+  overflow-x: scroll;
+  white-space: nowrap;
+}
+
+#detailImage {
+  display: inline-block;
+  margin: 5px auto;
+  height: 100px;
+  width: 120px;
+  border-radius: 10px;
+
+}
+
+#detailImageError {
+  display: block;
+  height: 100px;
+  width: 100px;
+  margin: 5px auto;
+}
+
+#detailResultSummary {
+  height: 40px;
+  width: 330px;
+  margin: 0px auto;
+  position: absolute;
+  top: 195px;
+  left: 10px;
+  border: 2px solid #f2f2f2;
+
+}
+
+#detailResultSummaryText {
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin: 0 auto;
+  line-height: 40px;
+  font-size: 1rem
+}
+
+#detailWishlistButton {
+  height: 50px;
+  width: 160px;
+  background: #f2f2f2;
+  position: absolute;
+  top: 250px;
+  left: 10px;
+  text-align: center;
+  line-height: 50px;
+  border-radius: 10px;
+}
+
+#detailHitlistButton {
+  height: 50px;
+  width: 160px;
+  position: absolute;
+  top: 250px;
+  right: 10px;
+  text-align: center;
+  line-height: 50px;
+  border-radius: 10px;
+}
+
+#detailsAbsBuffer {
+  height: 220px;
+}
+#detailsFormContainer {
+  height: 200px;
+  width: 330px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+#detailsPerfectForBox {
+  height: 75px;
+  width: 330px;
+  background-color: lightgrey;
+}
+
+#detailsNotesBox {
+  height: 60px;
+  width: 330px;
+  background-color: grey;
+}
+
+#detailsRatingBox {
+  height: 60px;
+  width: 330px;
+  background-color: lightgrey;
+}
+
 /**/
