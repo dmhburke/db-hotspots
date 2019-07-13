@@ -71,7 +71,7 @@ class TestEntryForm(forms.Form):
 class MasterAddForm(ModelForm):
     rating = forms.DecimalField(max_digits=10,decimal_places=8,required=False)
     perfect_for = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(attrs={'onclick': 'myFunction();'}),choices=PERFECT_FOR, label='', required=False)
-    notes = forms.CharField(widget=forms.Textarea(attrs={"rows":2, "cols":30}), required=False)
+    notes = forms.CharField(widget=forms.Textarea(attrs={"rows":3, "cols":30}), required=False)
 
     class Meta:
         model = MasterAddModel
