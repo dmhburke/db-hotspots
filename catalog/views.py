@@ -185,7 +185,7 @@ def adddetail(request, name, lat, lng):
             post.postcode = resultPostcode
             post.suburb = resultSuburb
             post.save()
-            return redirect('testpage') #or whatever the url
+            return redirect('landingadd') #or whatever the url
     else:
         form = MasterAddForm()
 

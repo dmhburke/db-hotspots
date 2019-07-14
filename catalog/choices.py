@@ -14,6 +14,28 @@ CITIES = (
     ("London, UK", "London"),
 )
 
+RATING = (
+    ("--", "Rating"),
+    ("5", "All-time"),
+    ("4", "Love it"),
+    ("3", "Like it"),
+    ("2", "Meh..."),
+    ("0", "Skip it!"),
+)
+
+PERFECT_FOR = (
+    ("Something quick", "Something quick"),
+    ("Last-min plans", "Last-min plans"),
+    ("Breakfast", "Breakfast"),
+    ("Impressing guests", "Impressing guests"),
+    ("Date night", "Date night"),
+    ("Big group", "Big group"),
+    ("Peace & quiet", "Peace & quiet"),
+    ("Living large", "Living large"),
+    ("Sunny days", "Sunny days"),
+    )
+
+
 LOCATION = (
     ("", "----"),
     ("Alphabet City", "Alphabet City"),
@@ -55,15 +77,3 @@ CATEGORY = (
     ("COFFEE", "Coffee"),
     ("OTHER", "Other"),
 )
-
-PERFECT_FOR = (
-    ("Something quick", "Something quick"),
-    ("Last-min plans", "Last-min plans"),
-    ("Breakfast", "Breakfast"),
-    ("Impressing guests", "Impressing guests"),
-    ("Date night", "Date night"),
-    ("Big group", "Big group"),
-    ("Peace & quiet", "Peace & quiet"),
-    ("Living large", "Living large"),
-    ("Sunny days", "Sunny days"),
-    )

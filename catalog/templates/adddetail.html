@@ -19,10 +19,13 @@
   </div>
   <div id=detailResultSummary class="brandFont">
 
-    <div id=detailResultSummaryText class="brandFont brandFontColor">First of your friends to get here!</div>
+    <div id=detailResultSummaryText class="brandFont brandFontColor">First of your friends here!</div>
 
   </div>
-  <div id=detailWishlistButton class="brandFont brandFontColor">Save for later</div>
+  <form method="post">
+    {% csrf_token %}
+
+  <button id=detailWishlistButton class="brandFont brandFontColor" type="submit">Save for later</button>
   <div id=detailHitlistButton class="brandFont brandColor whiteFont">Add review</div>
 
   <div id=detailsAbsBuffer></div>
@@ -30,8 +33,6 @@
   <div id=detailsNotesBox>
     <img id=detailsNotesIcon src= "{% static 'icons/notesBlue.svg' %}">
     <div>{{form.notes}}</div>
-
-
   </div>
 
   <div id=detailsFormContainer class="detailsFormContainerClose">
@@ -42,10 +43,18 @@
       {% endfor %}
     </div>
 
-    <div id=detailsRatingBox></div>
+    <div id=detailRatingBox>
+      <div id=detailSpotPicBox>
+        <img id=spotPicIcon src="{% static 'icons/spotPicIcon.svg' %}">
+      </div>
+      <div id=detailAddScore class="brandFont brandFontColor">
+        {{form.rating}}
+      </div>
+      <button id=detailSubmitButton class="brandFont whiteFont" type="submit">Submit</button>
+    </div>
 
   </div>
-
+  </form>
 
   </div>
 

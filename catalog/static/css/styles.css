@@ -2035,6 +2035,8 @@ li {
   height: 220px;
   width: 320px;
   overflow: scroll;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 
 }
 
@@ -2045,6 +2047,17 @@ li {
   border-radius: 10px;
   margin-bottom: 5px;
   padding: 5px 10px;
+}
+
+#landingSpotResultNew {
+  height: 40px;
+  width: 310px;
+  line-height: 40px;
+  margin: 5px auto;
+  border-radius: 10px;
+  padding-left: 10px;
+  margin-bottom: 5px;
+  color: grey;
 }
 
 #addDetailResult {
@@ -2143,6 +2156,9 @@ li {
   text-align: center;
   line-height: 50px;
   border-radius: 10px;
+  box-shadow: none;
+  border: none;
+  font-size: 16px;
 }
 
 #detailHitlistButton {
@@ -2154,6 +2170,13 @@ li {
   text-align: center;
   line-height: 50px;
   border-radius: 10px;
+  font-size: 16px;
+}
+
+.detailButtonActive {
+  background-color: #f2f2f2;
+  color: #1e8eff;
+  border: 1px solid #1e8eff;
 }
 
 #detailsAbsBuffer {
@@ -2210,7 +2233,6 @@ li {
   font-family: 'Special Elite', verdana;
   font-size: 16px;
   border-radius: 5px;
-  padding: 5px 7px;
   margin: auto;
 }
 
@@ -2220,14 +2242,13 @@ li {
 
 }
 
-.perfectActive {
-  background-color: #1e8eff;
-  color: white;
-}
-
 
 label {
   font-family: 'Special Elite', verdana;
+  background-color: white;
+  color: #1e8eff;
+  padding: 5px 7px;
+  border-radius: 5px;
 }
 
 label.add {
@@ -2237,11 +2258,66 @@ label.add {
 
 
 
-#detailsRatingBox {
+#detailRatingBox {
   height: 60px;
   width: 330px;
-  background-color: #f2f2f2;
   border-radius: 10px;
+  background-color: #F2F2F2;
+  position: relative;
+}
+
+#detailSpotPicBox {
+  height: 50px;
+  width: 50px;
+  border-radius: 100%;
+  position: absolute;
+  top: 5px;
+  left: 10px;
+  background-color: white;
+  padding: 5px;
+}
+
+#spotPicIcon {
+  height: 100%;
+  width: 100%;
+}
+
+#detailAddScore {
+  height: 50px;
+  width: 95px;
+  border-radius: 10px;
+  position: absolute;
+  top: 5px;
+  left: 67px;
+  line-height: 50px;
+  text-align: center;
+  background-color: white;
+}
+
+#id_rating {
+  display: block;
+  border-radius: 10px;
+  text-align: center;
+  padding: 5px 10px;
+  margin: 0 auto;
+  font-size: 16px;
+  font-family: 'Special Elite', verdana;
+  padding-top: 5px;
+  border: 1px solid #1e8eff;
+}
+
+#detailSubmitButton {
+  height: 50px;
+  width: 160px;
+  background-color: #1e8eff;
+  position: absolute;
+  top: 5px;
+  right: 0px;
+  text-align: center;
+  line-height: 50px;
+  border-radius: 10px;
+  font-size: 16px;
+  border: none;
 }
 
 

@@ -2,6 +2,7 @@ $(document).ready(function() {
 
   $("#detailHitlistButton").click(function() {
     $("#detailsFormContainer").toggleClass("detailsFormContainerOpen");
+    $("#detailHitlistButton").toggleClass("detailButtonActive");
   });
 
   $("label").click(function() {
@@ -12,10 +13,16 @@ $(document).ready(function() {
   });
 
 
-
 });
 
 /*
+
+$("label").click(function() {
+  $(this).css({
+    "background-color": "#1e8eff",
+    "color": "white"
+  });
+});
 
 .toggleClass("perfectActive");
 
