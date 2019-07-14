@@ -7,6 +7,7 @@ urlpatterns = [
     path('login', views.login, name='login'),
     path('landingadd', views.landingadd, name='landingadd'),
     path('adddetail/<name>/<lat>/<lng>', views.adddetail, name='adddetail'),
+    path('findspots', views.findspot, name='findspot'),
     path('', views.home, name='home'),
     path('userpage', views.userspotlist, name='userspotlist'),
     path('detail/<str:pk>', views.userspotdetail, name='userspotdetail'),

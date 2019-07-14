@@ -185,7 +185,7 @@ def adddetail(request, name, lat, lng):
             post.postcode = resultPostcode
             post.suburb = resultSuburb
             post.save()
-            return redirect('landingadd') #or whatever the url
+            return redirect('findspot') #or whatever the url
     else:
         form = MasterAddForm()
 
@@ -209,6 +209,25 @@ def adddetail(request, name, lat, lng):
     }
 
     return render(request, 'adddetail.html', context=context)
+
+@login_required
+def findspot (request):
+
+    query = request.GET.get('q')
+
+    try:
+        spot_finder = MasterAddModel.objects.filter(perfect_for__icontains=query).order_by("-rating")
+    except:
+        spot_finder = MasterAddModel.objects.all().order_by("-date")
+
+    form = MasterAddForm()
+
+    context = {
+    'form': form,
+    'spot_finder': spot_finder,
+    }
+
+    return render(request, 'findspots.html', context=context)
 
 
 @login_required

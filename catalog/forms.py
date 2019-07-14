@@ -76,3 +76,5 @@ class MasterAddForm(ModelForm):
     class Meta:
         model = MasterAddModel
         fields = ('rating', 'perfect_for', 'notes',)
+
+#class SpotFinderForm(forms.Form):

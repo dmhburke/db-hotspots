@@ -1,0 +1,24 @@
+{% extends "home_template.html" %}
+
+{% block contentName %}
+{% load static %}
+
+<div id=spotFinderBox class="shadow">
+  <form method="get">
+    <input name="q" type="text" placeholder="Search here..."></input>
+    <!--<button id=spotFinderButton class="brandColor whiteFont" type=submit>Submit</button>-->
+  </form>
+</div>
+
+{% if spot_finder %}
+{% for spot in spot_finder %}
+
+<div id=spotFinderResult class="shadow">
+  {{ spot.name }}
+  <span style="color: lightgrey;">({{ spot.category1 }})</span>
+</div>
+
+{% endfor %}
+{% endif %}
+
+{% endblock %}
