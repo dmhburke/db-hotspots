@@ -2157,7 +2157,7 @@ li {
   line-height: 50px;
   border-radius: 10px;
   box-shadow: none;
-  border: none;
+  border: 1px solid #F2F2F2;
   font-size: 16px;
 }
 
@@ -2171,6 +2171,7 @@ li {
   line-height: 50px;
   border-radius: 10px;
   font-size: 16px;
+  border: 1px solid #1e8eff;
 }
 
 .detailButtonActive {
