@@ -1,20 +1,31 @@
 $(document).ready(function() {
+
   $("#detailHitlistButton").click(function() {
-    $("#detailsFormContainer").css({
-      "height": "200px"
+    $("#detailsFormContainer").toggleClass("detailsFormContainerOpen");
+  });
+
+  $("label").click(function() {
+    $(this).css({
+      "background-color": "#1e8eff",
+      "color": "white"
     });
   });
+
 
 
 });
 
 /*
-$("label").click(function() {
-  $(this).css({
+
+.toggleClass("perfectActive");
+
+
+
+  .css({
     "background-color": "#1e8eff",
     "color": "white"
   });
-});
+
 
 $("#hitlistButton").click(function() {
   $(this).css({

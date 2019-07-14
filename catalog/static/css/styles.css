@@ -89,29 +89,6 @@ textarea {
   border-radius: 10px;
 }
 
-label {
-  font-family: 'Special Elite', verdana;
-  color: #1e8eff;
-  font-size: 1rem;
-  height: 20px;
-  line-height: 20px;
-  display: inline-block;
-  background-color: white;
-  padding: 0 5px;
-  margin: 5px 1px;
-  border-radius: 5px;
-
-}
-
-label.add {
-  background-color: blue;
-  padding: 10px;
-  margin: 5px 1px;
-  border-radius: 5px;
-  font-size: 1rem;
-  font-family: 'Special Elite', cursive;
-}
-
 /* ADVANCED FORM FORMATTING -
 CUSTOM CHECKBOX https://www.w3schools.com/howto/howto_css_custom_checkbox.asp
 ON CLICK EVENT here: https://www.w3schools.com/tags/ev_onclick.asp
@@ -2202,19 +2179,63 @@ li {
 }
 
 #detailsFormContainer {
-  height: 0px;
   width: 330px;
   margin: 0 auto;
   overflow: hidden;
 }
 
+.detailsFormContainerClose {
+  height: 0px;
+}
+
+.detailsFormContainerOpen {
+  height: 180px;
+}
+
+
 #detailsPerfectForBox {
-  height: 75px;
+  height: 100px;
   width: 330px;
   background-color: #f2f2f2;
   margin: 5px auto;
   border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 5px;
 }
+
+
+#detailsPerfectForItem {
+  font-family: 'Special Elite', verdana;
+  font-size: 16px;
+  border-radius: 5px;
+  padding: 5px 7px;
+  margin: auto;
+}
+
+.perfectInactive {
+  background-color: white;
+  color: #1e8eff;
+
+}
+
+.perfectActive {
+  background-color: #1e8eff;
+  color: white;
+}
+
+
+label {
+  font-family: 'Special Elite', verdana;
+}
+
+label.add {
+  /*background-color: #1e8eff;
+  color: white;*/
+}
+
+
 
 #detailsRatingBox {
   height: 60px;
@@ -2222,5 +2243,6 @@ li {
   background-color: #f2f2f2;
   border-radius: 10px;
 }
+
 
 /**/
