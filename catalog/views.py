@@ -19,7 +19,7 @@ from django.contrib.auth.models import User
 from catalog.models import Profile, AddReview, SingleLocation, ReviewRecord, MasterAddModel, TestEntryModel, TestStoreModel
 
 #Import forms here
-from catalog.forms import ProfileForm, AddReviewForm, MasterAddForm, TestEntryForm
+from catalog.forms import ProfileForm, AddReviewForm, MasterAddForm, SpotFinderForm, TestEntryForm
 
 #DEFINE VIEWS HERE
 def createaccount (request):
@@ -213,18 +213,44 @@ def adddetail(request, name, lat, lng):
 @login_required
 def findspot (request):
 
-    query = request.GET.get('q')
+    logged_in_user = request.user
+    user_city = logged_in_user.profile.location
+
+    situation_result = {}
+    category_result = {}
+    location_result = {}
+
+    if request.method =='POST':
+         form = SpotFinderForm(request.POST)
+         if form.is_valid():
+             situation_result = form.situation_query(request)
+             category_result = form.category_query(request)
+             location_result = form.location_query(request)
+    else:
+          form = SpotFinderForm(initial={'location': user_city})
+
+    postcode_result = {}
+    if location_result == "Los Angeles, CA":
+        postcode_result = 9
+    elif location_result == "New York City, NY":
+        postcode_result = 1
+    else:
+        postcode_result = ""
 
     try:
-        spot_finder = MasterAddModel.objects.filter(perfect_for__icontains=query).order_by("-rating")
+        spot_finder = MasterAddModel.objects.filter(
+        perfect_for__icontains=situation_result,
+        postcode__startswith=postcode_result
+        ).order_by("-rating")
     except:
         spot_finder = MasterAddModel.objects.all().order_by("-date")
-
-    form = MasterAddForm()
 
     context = {
     'form': form,
     'spot_finder': spot_finder,
+    'location_result': location_result,
+    'situation_result': situation_result,
+    'postcode_result': postcode_result,
     }
 
     return render(request, 'findspots.html', context=context)

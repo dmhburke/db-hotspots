@@ -77,4 +77,19 @@ class MasterAddForm(ModelForm):
         model = MasterAddModel
         fields = ('rating', 'perfect_for', 'notes',)
 
-#class SpotFinderForm(forms.Form):
+class SpotFinderForm(forms.Form):
+    category = forms.ChoiceField(choices=CATEGORY, required=False)
+    situation = forms.ChoiceField(choices=SITUATION, required=False)
+    location = forms.ChoiceField(choices=CITY, required=False)
+
+    def situation_query(self,request):
+        situationQuery = self.cleaned_data['situation']
+        return situationQuery
+
+    def category_query(self,request):
+        categoryQuery = self.cleaned_data['category']
+        return categoryQuery
+
+    def location_query(self,request):
+        locationQuery = self.cleaned_data['location']
+        return locationQuery

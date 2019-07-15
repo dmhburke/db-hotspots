@@ -21,13 +21,13 @@
   {% if '/' in spot.name %}
   <div id="landingSpotResult" class="shadow">
     <span class="brandFont brandFontColor" style="text-overflow: ellipsis; white-space: nowrap;">{{ spot.name }}</span><br>
-    <span style="color: grey;">{{ spot.location.address }}</span>
+    <span style="color: grey; line-height: 10px">{{ spot.location.address }}</span>
   </div>
   {% else %}
   <a href="{% url 'adddetail' spot.name spot.location.lat spot.location.lng %}">
   <div id="landingSpotResult" class="shadow">
     <span class="brandFont brandFontColor" style="text-overflow: ellipsis; white-space: nowrap;">{{ spot.name }}</span><br>
-    <span style="color: grey;">{{ spot.location.address }}</span>
+    <span style="color: grey; line-height: 10px">{{ spot.location.address }}</span>
   </div></a>
   {% endif %}
   {% endfor %}

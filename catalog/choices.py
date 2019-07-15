@@ -35,6 +35,19 @@ PERFECT_FOR = (
     ("Sunny days", "Sunny days"),
     )
 
+SITUATION = (
+    ("", "Situation"),
+    ("Something quick", "Something quick"),
+    ("Last-min plans", "Last-min plans"),
+    ("Breakfast", "Breakfast"),
+    ("Impressing guests", "Impressing guests"),
+    ("Date night", "Date night"),
+    ("Big group", "Big group"),
+    ("Peace & quiet", "Peace & quiet"),
+    ("Living large", "Living large"),
+    ("Sunny days", "Sunny days"),
+    )
+
 
 LOCATION = (
     ("", "----"),
@@ -69,11 +82,23 @@ LOCATION = (
 )
 
 CATEGORY = (
-    ("", "----"),
+    ("", "Type"),
     ("FOOD", "Food"),
     ("COCKTAILS", "Cocktails"),
     ("WINE", "Wine"),
     ("BEER", "Beer"),
     ("COFFEE", "Coffee"),
     ("OTHER", "Other"),
+)
+
+CITY = (
+    ("", "City"),
+    ("New York City, NY", "NYC"),
+    ("Los Angeles, CA", "LA"),
+    ("Boston, MA", "Boston"),
+    ("Seattle, WA", "Seattle"),
+    ("Sydney, Australia", "Sydney"),
+    ("Stockholm, Sweden", "Stockholm"),
+    ("Paris, France", "Paris"),
+    ("London, UK", "London"),
 )

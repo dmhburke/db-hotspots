@@ -2321,5 +2321,74 @@ label.add {
   border: none;
 }
 
+#spotFinderBox {
+  height: 100px;
+  width: 356px;
+  margin: 10px auto;
+  border-radius: 20px;
+  position: relative;
+}
 
+#id_situation {
+  position: absolute;
+  display: block;
+  width: 150px;
+  top: 15px;
+  left: 10px;
+  padding: 5px;
+  font-family: 'Special Elite', cursive;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 16px;
+}
+
+#id_category {
+  position: absolute;
+  display: block;
+  width: 80px;
+  height: 25px;
+  font-size: 16px;
+  top: 15px;
+  left: 170px;
+  padding: 5px;
+  font-family: 'Special Elite', cursive;
+  border-radius: 10px;
+  text-align: center;
+}
+
+#id_location {
+  position: absolute;
+  display: block;
+  width: 80px;
+  height: 25px;
+  font-size: 16px;
+  top: 15px;
+  left: 257px;
+  padding: 5px;
+  font-family: 'Special Elite', cursive;
+  border-radius: 10px;
+  text-align: center;
+}
+
+#spotFinderButton {
+  display: block;
+  height: 30px;
+  width: 200px;
+  border-radius: 10px;
+  border: none;
+  box-shadow: none;
+  position: absolute;
+  left: 85px;
+  bottom: 10px;
+  font-size: 16px;
+  line-height: 35px;
+}
+
+
+#spotFinderResult {
+  height: 60px;
+  width: 340px;
+  margin: 10px auto;
+  padding: 5px;
+}
 /**/

@@ -4,9 +4,15 @@
 {% load static %}
 
 <div id=spotFinderBox class="shadow">
-  <form method="get">
-    <input name="q" type="text" placeholder="Search here..."></input>
-    <!--<button id=spotFinderButton class="brandColor whiteFont" type=submit>Submit</button>-->
+  <form method="post">
+    {% csrf_token %}
+
+    <div>{{ form.category }}</div>
+    <div>{{ form.situation }}</div>
+    <div>{{ form.location }}</div>
+
+
+    <button id=spotFinderButton class="brandColor brandFont whiteFont" type=submit>Find spots</button>
   </form>
 </div>
 
@@ -19,6 +25,12 @@
 </div>
 
 {% endfor %}
+{% else %}
+{{ query_result }}
 {% endif %}
+
+<!--
+{{situation_result}}
+{{postcode_result}}-->
 
 {% endblock %}
