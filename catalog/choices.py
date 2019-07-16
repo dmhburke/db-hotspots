@@ -15,7 +15,7 @@ CITIES = (
 )
 
 RATING = (
-    ("--", "Rating"),
+    ("", "Rating"),
     ("5", "All-time"),
     ("4", "Love it"),
     ("3", "Like it"),
