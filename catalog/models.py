@@ -163,7 +163,7 @@ def single_save(sender, instance, **kwargs):
 
 class MasterAddModel(models.Model):
     user = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE)
-    name = models.CharField(max_length=30) # blank=True, null=True
+    name = models.CharField(max_length=60) # blank=True, null=True
     rating = models.CharField(max_length=30,blank=True, null=True) #DecimalField(max_digits=3, decimal_places=1, validators=[MaxValueValidator(10), MinValueValidator(0)], blank=True, null=True)
     perfect_for = MultiSelectField(choices=PERFECT_FOR, blank=True, null=True)
     notes = models.TextField(blank=True, null=True)
