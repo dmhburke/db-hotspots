@@ -229,7 +229,10 @@ def findspot (request):
              location_result = form.location_query(request)
              source_result = form.source_query(request)
     else:
-          form = SpotFinderForm(initial={'location': user_city})
+          form = SpotFinderForm(initial={
+          'location': user_city,
+          'source': "MINE",
+          })
 
     postcode_result1 = {}
     postcode_result2 = {}
@@ -257,7 +260,10 @@ def findspot (request):
         postcode_result3 = 98
         postcode_result4 = 98
     else:
-        postcode_result = ""
+        postcode_result1 = ""
+        postcode_result2 = ""
+        postcode_result3 = ""
+        postcode_result4 = ""
 
     optioncategory1_result = {}
     optioncategory2_result = {}
@@ -346,30 +352,6 @@ def findspot (request):
            (Q(category1__contains=optioncategory1_result) | Q(category1__contains=optioncategory2_result) | Q(category1__contains=optioncategory3_result)
            )).order_by('-rating')
 
-    # if name_output == "No selection" and rating_output == "Anything":
-    #     spot_finder = MasterAddModel.objects.filter(
-    #     Q(postcode__startswith=postcode_result) &
-    #     Q(perfect_for__contains=situation_result) &
-    #     (Q(category1__contains=optioncategory1_result) | Q(category1__contains=optioncategory2_result) | Q(category1__contains=optioncategory3_result))
-    #     ).order_by('-rating')
-    # elif name_output == "Everyone else" and rating_output == "Anything":
-    #     spot_finder = MasterAddModel.objects.filter(
-    #     Q(postcode__startswith=postcode_result) &
-    #     Q(perfect_for__contains=situation_result) &
-    #     Q(rating=rating_output) &
-    #     (Q(category1__contains=optioncategory1_result) | Q(category1__contains=optioncategory2_result) | Q(category1__contains=optioncategory3_result))
-    #     ).exclude(user__username=logged_in_user)
-    # else:
-    #     spot_finder = MasterAddModel.objects.filter(
-    #     Q(user__username__contains=name_output) &
-    #     Q(postcode__startswith=postcode_result) &
-    #     Q(perfect_for__contains=situation_result) &
-    #     Q(rating=rating_output) &
-    #     (Q(category1__contains=optioncategory1_result) | Q(category1__contains=optioncategory2_result) | Q(category1__contains=optioncategory3_result))
-    #     ).order_by('-rating')
-
-    #     spot_finder = "fail"#MasterAddModel.objects.all().order_by('-rating')
-
     context = {
     'form': form,
     'spot_finder': spot_finder,
@@ -377,6 +359,7 @@ def findspot (request):
     'postcode_result': postcode_result1,
     'optioncategory1_result': optioncategory1_result,
     'situation_result': situation_result,
+    'logged_in_user': logged_in_user,
     }
 
     return render(request, 'findspots.html', context=context)

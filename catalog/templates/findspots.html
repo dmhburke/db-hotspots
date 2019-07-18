@@ -21,18 +21,64 @@
 {% if spot_finder %}
 {% for spot in spot_finder %}
 
-<div id=spotFinderResult class="shadow brandFont brandFontColor">
-  {{ spot.name }}
-  <span style="color: lightgrey;">({{ spot.category1 }})</span>
+<div id=spotFinderResult class="shadow">
+  <div class="brandFont brandFontColor" id=spotFinderResultName>{{ spot.name }}</div>
+    <div id =spotFinderResultAddress>{{spot.category1}}, {{spot.suburb}}</div>
+    <div id =spotFinderResultIndivScore>
+
+      <span class="brandFontColor" style="display: block; font-size: 10px; line-height: 12px; margin-top: 2px;">
+      {% if spot.user == logged_in_user %}
+        {% if spot.rating == "5" %}
+        You rated<br>
+        ALL-TIME
+        {% elif spot.rating == "4" %}
+        You rated<br>
+        LOVE IT
+        {% elif spot.rating == "3" %}
+        You rated<br>
+        LIKE IT
+        {% elif spot.rating == "2" %}
+        You rated<br>
+        MEH...
+        {% elif spot.rating == "0" %}
+        You rated<br>
+        SKIP IT!
+        {% else %}
+        <span style="line-height: 25px; color: grey;" >WL</span>
+        {% endif %}
+      {% else %}
+      HotSpot<br>
+      suggestion
+      {% endif %}
+
+        </span>
+    </div>
+    <div id =spotFinderResultAveScore>
+      <span style="display: block; font-size: 10px; line-height: 12px; margin-top: 2px; color: grey">
+        Ave rated<br>
+        LOVE IT
+      </span>
+    </div>
+    <div id=spotFinderResultBeenHereBox>
+      <div id=spotFinderResultBeenHereImageBox>
+        <div id=spotFinderResultBeenHereImage></div>
+        <div id=spotFinderResultBeenHereImage></div>
+        <div id=spotFinderResultBeenHereImage></div>
+        <div id=spotFinderResultBeenHereImage></div>
+        <div id=spotFinderResultBeenHereImage></div>
+
+      </div>
+      <div id=spotFinderResultBeenHereText>friends have been here</div>
+      </div>
+
+
+  <!-- {{ spot.name }}
+  <span style="color: lightgrey;">({{ spot.category1 }})</span>-->
 </div>
 
 {% endfor %}
 {% else %}
-{{ query_result }}
-{% endif %}
 
-<!--
-{{situation_result}}
-{{postcode_result}}-->
+{% endif %}
 
 {% endblock %}
