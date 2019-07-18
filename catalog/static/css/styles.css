@@ -161,7 +161,7 @@ li {
 
 #mobileContainer {
   width: 375px;
-  height: 600px;
+  height: 625px;
   position: relative;
   margin: 0 auto;
   padding-bottom: 20px;
@@ -2400,9 +2400,120 @@ label.add {
 
 
 #spotFinderResult {
-  height: 60px;
+  height: 70px;
   width: 340px;
   margin: 10px auto;
-  padding: 5px;
+  padding: 5px 10px;
+  position: relative;
 }
+
+#spotFinderResultTopBox {
+  height: 30px;
+  width: 100%;
+  position: relative;
+}
+
+#spotFinderResultBottomBox {
+  height: 25px;
+  width: 100%;
+  background-color: lightgrey;
+  position: relative;
+}
+
+#spotFinderResultName {
+  height: 16px;
+  width: 240px;
+  line-height: 20px;
+  font-size: 16px;
+  position: absolute;
+  top: 5px;
+  left: 10px;
+}
+
+#spotFinderResultAddress {
+  height: 14px;
+  width: 240px;
+  color: lightgrey;
+  padding-top: 0px;
+  position: absolute;
+  top: 20px;
+  left: 10px;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#spotFinderResultIndivScore {
+  height: 28px;
+  width: 80px;
+  background-color: lightgrey;
+  line-height: 20px;
+  font-size: 16px;
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  font-size: 10px;
+  text-align: center;
+  padding: 0px;
+  line-height: 12px;
+  border-radius: 5px;
+  color: grey;
+}
+
+#spotFinderResultAveScore {
+  height: 28px;
+  width: 80px;
+  background-color: #f2f2f2;
+  line-height: 20px;
+  font-size: 16px;
+  position: absolute;
+  top: 37px;
+  right: 10px;
+  font-size: 10px;
+  text-align: center;
+  line-height: 12px;
+  border-radius: 5px;
+}
+
+#spotFinderResultBeenHereBox {
+  height: 30px;
+  width: 230px;
+  position: absolute;
+  top: 37px;
+  left: 8px;
+
+}
+
+#spotFinderResultBeenHereImageBox {
+  display: inline-block;
+  height: 100%;
+  width: 105px; /*changetomaxWidth*/
+  vertical-align: middle;
+  padding-top: 2px;
+  padding-left: 12px;
+
+}
+
+#spotFinderResultBeenHereImage {
+  display: inline-block;
+  height: 25px;
+  width: 25px;
+  border-radius: 100%;
+  background-color: white;
+  margin-left: -10px;
+  border: 1px solid lightgrey;
+}
+
+#spotFinderResultBeenHereText {
+  display: inline-block;
+  height: 100%;
+  width: 120px;
+  line-height: 30px;
+  vertical-align: middle;
+  font-size: 10px;
+  color: grey;
+}
+
+
+
 /**/
