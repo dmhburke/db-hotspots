@@ -102,3 +102,10 @@ CITY = (
     ("Paris, France", "Paris"),
     ("London, UK", "London"),
 )
+
+SOURCE = (
+    ("", "Source"),
+    ("MINE", "My spots"),
+    ("WISHLIST", "My wishlist"),
+    ("SUGGESTED", "Suggested (beta)"),
+)

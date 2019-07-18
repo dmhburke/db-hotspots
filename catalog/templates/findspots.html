@@ -10,16 +10,18 @@
     <div>{{ form.category }}</div>
     <div>{{ form.situation }}</div>
     <div>{{ form.location }}</div>
+    <div>{{ form.source }}</div>
 
 
     <button id=spotFinderButton class="brandColor brandFont whiteFont" type=submit>Find spots</button>
   </form>
+
 </div>
 
 {% if spot_finder %}
 {% for spot in spot_finder %}
 
-<div id=spotFinderResult class="shadow">
+<div id=spotFinderResult class="shadow brandFont brandFontColor">
   {{ spot.name }}
   <span style="color: lightgrey;">({{ spot.category1 }})</span>
 </div>

@@ -219,38 +219,164 @@ def findspot (request):
     situation_result = {}
     category_result = {}
     location_result = {}
+    source_result = {}
 
     if request.method =='POST':
          form = SpotFinderForm(request.POST)
          if form.is_valid():
-             situation_result = form.situation_query(request)
              category_result = form.category_query(request)
+             situation_result = form.situation_query(request)
              location_result = form.location_query(request)
+             source_result = form.source_query(request)
     else:
           form = SpotFinderForm(initial={'location': user_city})
 
-    postcode_result = {}
+    postcode_result1 = {}
+    postcode_result2 = {}
+    postcode_result3 = {}
+    postcode_result4 = {}
+
     if location_result == "Los Angeles, CA":
-        postcode_result = 9
+        postcode_result1 = 90
+        postcode_result2 = 90
+        postcode_result3 = 90
+        postcode_result4 = 90
     elif location_result == "New York City, NY":
-        postcode_result = 1
+        postcode_result1 = 1
+        postcode_result2 = 1
+        postcode_result3 = 1
+        postcode_result4 = 1
+    elif location_result == "London, UK":
+        postcode_result1 = "N"
+        postcode_result2 = "E"
+        postcode_result3 = "W"
+        postcode_result4 = "S"
+    elif location_result == "Seattle, WA":
+        postcode_result1 = 98
+        postcode_result2 = 98
+        postcode_result3 = 98
+        postcode_result4 = 98
     else:
         postcode_result = ""
 
-    try:
+    optioncategory1_result = {}
+    optioncategory2_result = {}
+    optioncategory3_result = {}
+
+    if category_result == "FOOD":
+        optioncategory1_result = "Restaurant"
+        optioncategory2_result = "Food"
+        optioncategory3_result = "Café"
+    elif category_result == "COFFEE":
+        optioncategory1_result = "Café"
+        optioncategory2_result = "Coffee shop"
+        optioncategory3_result = "Coffee shop"
+    elif category_result == "WINE":
+        optioncategory1_result = "Wine"
+        optioncategory2_result = "Wine"
+        optioncategory3_result = "Wine"
+    elif category_result == "BEER":
+        optioncategory1_result = "Beer"
+        optioncategory2_result = "Pub"
+        optioncategory3_result = "Gastropub"
+    elif category_result == "COCKTAILS":
+        optioncategory1_result = "Cocktail"
+        optioncategory2_result = "Bar"
+        optioncategory3_result = "Nightlife"
+    else:
+        optioncategory1_result = ""
+        optioncategory2_result = ""
+        optioncategory3_result = ""
+
+    # name_output = logged_in_user
+
+    name_output = {}
+    rating_output ={}
+
+    if source_result == "MINE":
+        name_output = logged_in_user
+        rating_output = "Anything"
+    elif source_result == "WISHLIST":
+        name_output = logged_in_user
+        rating_output = ""
+    # elif source_result == "EVERYTHING":
+    #     name_output = "Everyone else"
+    #     rating_output = "Anything"
+    elif source_result == "SUGGESTED":
+        name_output = "Everyone else"
+        rating_output = 4
+    else:
+        name_output = "No selection"
+        rating_output = "Anything"
+
+    if source_result == "MINE":
+         spot_finder = MasterAddModel.objects.filter(
+            (Q(postcode__startswith=postcode_result1) | Q(postcode__startswith=postcode_result2) | Q(postcode__startswith=postcode_result3) | Q(postcode__startswith=postcode_result4)) &
+            Q(perfect_for__contains=situation_result) &
+            (Q(category1__contains=optioncategory1_result) | Q(category1__contains=optioncategory2_result) | Q(category1__contains=optioncategory3_result)) &
+            Q(user__username__contains=name_output)
+            ).order_by('-rating')
+    elif source_result == "WISHLIST":
+         spot_finder = MasterAddModel.objects.filter(
+            (Q(postcode__startswith=postcode_result1) | Q(postcode__startswith=postcode_result2) | Q(postcode__startswith=postcode_result3) | Q(postcode__startswith=postcode_result4)) &
+            Q(perfect_for__contains=situation_result) &
+            (Q(category1__contains=optioncategory1_result) | Q(category1__contains=optioncategory2_result) | Q(category1__contains=optioncategory3_result)) &
+            Q(user__username__contains=name_output) &
+            Q(rating=rating_output)
+            ).order_by('-date')
+    # elif source_result == "EVERYTHING":
+    #      spot_finder = MasterAddModel.objects.filter(
+    #         (Q(postcode__startswith=postcode_result1) | Q(postcode__startswith=postcode_result2) | Q(postcode__startswith=postcode_result3) | Q(postcode__startswith=postcode_result4)) &
+    #         Q(perfect_for__contains=situation_result) &
+    #         (Q(category1__contains=optioncategory1_result) | Q(category1__contains=optioncategory2_result) | Q(category1__contains=optioncategory3_result)
+    #         )).exclude(user__username=logged_in_user
+    #         ).order_by('-rating')
+    elif source_result == "SUGGESTED":
+         spot_finder = MasterAddModel.objects.filter(
+            (Q(postcode__startswith=postcode_result1) | Q(postcode__startswith=postcode_result2) | Q(postcode__startswith=postcode_result3) | Q(postcode__startswith=postcode_result4)) &
+            Q(perfect_for__contains=situation_result) &
+            (Q(category1__contains=optioncategory1_result) | Q(category1__contains=optioncategory2_result) | Q(category1__contains=optioncategory3_result)) &
+            Q(rating__gte=rating_output)
+            ).exclude(user__username=logged_in_user
+            ).order_by('-rating')
+    else:
         spot_finder = MasterAddModel.objects.filter(
-        perfect_for__icontains=situation_result,
-        postcode__startswith=postcode_result
-        ).order_by("-rating")
-    except:
-        spot_finder = MasterAddModel.objects.all().order_by("-date")
+           (Q(postcode__startswith=postcode_result1) | Q(postcode__startswith=postcode_result2) | Q(postcode__startswith=postcode_result3) | Q(postcode__startswith=postcode_result4)) &
+           Q(perfect_for__contains=situation_result) &
+           (Q(category1__contains=optioncategory1_result) | Q(category1__contains=optioncategory2_result) | Q(category1__contains=optioncategory3_result)
+           )).order_by('-rating')
+
+    # if name_output == "No selection" and rating_output == "Anything":
+    #     spot_finder = MasterAddModel.objects.filter(
+    #     Q(postcode__startswith=postcode_result) &
+    #     Q(perfect_for__contains=situation_result) &
+    #     (Q(category1__contains=optioncategory1_result) | Q(category1__contains=optioncategory2_result) | Q(category1__contains=optioncategory3_result))
+    #     ).order_by('-rating')
+    # elif name_output == "Everyone else" and rating_output == "Anything":
+    #     spot_finder = MasterAddModel.objects.filter(
+    #     Q(postcode__startswith=postcode_result) &
+    #     Q(perfect_for__contains=situation_result) &
+    #     Q(rating=rating_output) &
+    #     (Q(category1__contains=optioncategory1_result) | Q(category1__contains=optioncategory2_result) | Q(category1__contains=optioncategory3_result))
+    #     ).exclude(user__username=logged_in_user)
+    # else:
+    #     spot_finder = MasterAddModel.objects.filter(
+    #     Q(user__username__contains=name_output) &
+    #     Q(postcode__startswith=postcode_result) &
+    #     Q(perfect_for__contains=situation_result) &
+    #     Q(rating=rating_output) &
+    #     (Q(category1__contains=optioncategory1_result) | Q(category1__contains=optioncategory2_result) | Q(category1__contains=optioncategory3_result))
+    #     ).order_by('-rating')
+
+    #     spot_finder = "fail"#MasterAddModel.objects.all().order_by('-rating')
 
     context = {
     'form': form,
     'spot_finder': spot_finder,
-    'location_result': location_result,
+    'name_output': name_output,
+    'postcode_result': postcode_result1,
+    'optioncategory1_result': optioncategory1_result,
     'situation_result': situation_result,
-    'postcode_result': postcode_result,
     }
 
     return render(request, 'findspots.html', context=context)

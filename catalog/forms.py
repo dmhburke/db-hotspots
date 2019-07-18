@@ -81,15 +81,20 @@ class SpotFinderForm(forms.Form):
     category = forms.ChoiceField(choices=CATEGORY, required=False)
     situation = forms.ChoiceField(choices=SITUATION, required=False)
     location = forms.ChoiceField(choices=CITY, required=False)
-
-    def situation_query(self,request):
-        situationQuery = self.cleaned_data['situation']
-        return situationQuery
+    source = forms.ChoiceField(choices=SOURCE, required=False)
 
     def category_query(self,request):
         categoryQuery = self.cleaned_data['category']
         return categoryQuery
 
+    def situation_query(self,request):
+        situationQuery = self.cleaned_data['situation']
+        return situationQuery
+
     def location_query(self,request):
         locationQuery = self.cleaned_data['location']
         return locationQuery
+
+    def source_query(self,request):
+        sourceQuery = self.cleaned_data['source']
+        return sourceQuery

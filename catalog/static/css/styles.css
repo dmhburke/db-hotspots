@@ -2333,8 +2333,8 @@ label.add {
   position: absolute;
   display: block;
   width: 150px;
-  top: 15px;
-  left: 10px;
+  top: 17px;
+  left: 100px;
   padding: 5px;
   font-family: 'Special Elite', cursive;
   border-radius: 10px;
@@ -2348,8 +2348,8 @@ label.add {
   width: 80px;
   height: 25px;
   font-size: 16px;
-  top: 15px;
-  left: 170px;
+  top: 17px;
+  left: 10px;
   padding: 5px;
   font-family: 'Special Elite', cursive;
   border-radius: 10px;
@@ -2362,8 +2362,22 @@ label.add {
   width: 80px;
   height: 25px;
   font-size: 16px;
-  top: 15px;
+  top: 17px;
   left: 257px;
+  padding: 5px;
+  font-family: 'Special Elite', cursive;
+  border-radius: 10px;
+  text-align: center;
+}
+
+#id_source {
+  position: absolute;
+  display: block;
+  width: 150px;
+  height: 25px;
+  font-size: 16px;
+  bottom: 15px;
+  left: 10px;
   padding: 5px;
   font-family: 'Special Elite', cursive;
   border-radius: 10px;
@@ -2372,13 +2386,13 @@ label.add {
 
 #spotFinderButton {
   display: block;
-  height: 30px;
-  width: 200px;
+  height: 35px;
+  width: 160px;
   border-radius: 10px;
   border: none;
   box-shadow: none;
   position: absolute;
-  left: 85px;
+  left: 180px;
   bottom: 10px;
   font-size: 16px;
   line-height: 35px;
