@@ -2428,6 +2428,9 @@ label.add {
   position: absolute;
   top: 5px;
   left: 10px;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 #spotFinderResultAddress {
