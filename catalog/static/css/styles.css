@@ -354,6 +354,24 @@ li {
   line-height: 40px;
   text-align: center;
   position: relative;
+  background-color: #f2f2f2;
+}
+
+#id_home_city {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  padding: 10px 21px;
+}
+
+#createAcct {
+  display: block;
+  width: 60%;
+  line-height: 40px;
+  text-align: center;
+  position: relative;
+  padding: 5px 20px
+
 }
 
 #id_first_name, #id_last_name, #id_username, #id_password1, #id_password2, #id_location {

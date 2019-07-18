@@ -81,4 +81,10 @@
 
 {% endif %}
 
+{% for spot in spot_finder %}
+{% if spot.name == "Bar Jamon" %}
+{{ spot.name }}
+{% else %}
+{% endif %}
+{% endfor %}
 {% endblock %}

@@ -325,7 +325,6 @@ def findspot (request):
     elif source_result == "WISHLIST":
          spot_finder = MasterAddModel.objects.filter(
             (Q(postcode__startswith=postcode_result1) | Q(postcode__startswith=postcode_result2) | Q(postcode__startswith=postcode_result3) | Q(postcode__startswith=postcode_result4)) &
-            Q(perfect_for__contains=situation_result) &
             (Q(category1__contains=optioncategory1_result) | Q(category1__contains=optioncategory2_result) | Q(category1__contains=optioncategory3_result)) &
             Q(user__username__contains=name_output) &
             Q(rating=rating_output)

@@ -10,11 +10,11 @@ from catalog.models import Profile, AddReview, MasterAddModel, TestEntryModel
 
 class ProfileForm(UserCreationForm):
     userpic = forms.FileField(required=True)
-    location = forms.ChoiceField(choices=CITIES, required=True)
+    home_city = forms.ChoiceField(choices=CITIES, required=True)
 
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'username', 'password1', 'password2', 'userpic', 'location',)
+        fields = ('first_name', 'last_name', 'username', 'password1', 'password2', 'userpic', 'home_city',)
 
     def __init__(self, *args, **kwargs):
         super(ProfileForm, self).__init__(*args, **kwargs)
