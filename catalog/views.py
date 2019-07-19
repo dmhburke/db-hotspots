@@ -304,7 +304,7 @@ def findspot (request):
         rating_output = "Anything"
     elif source_result == "WISHLIST":
         name_output = logged_in_user
-        rating_output = ""
+        rating_output = None
     # elif source_result == "EVERYTHING":
     #     name_output = "Everyone else"
     #     rating_output = "Anything"

@@ -58,7 +58,7 @@ class MasterAddModel(models.Model):
 class CleanReviewModel(models.Model):
     user = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE)
     name = models.CharField(max_length=60) # blank=True, null=True
-    rating = models.CharField(max_length=30,blank=True, null=True) #DecimalField(max_digits=3, decimal_places=1, validators=[MaxValueValidator(10), MinValueValidator(0)], blank=True, null=True)
+    rating = models.IntegerField(blank=True, null=True)
     perfect_for = MultiSelectField(choices=PERFECT_FOR, blank=True, null=True)
     notes = models.TextField(blank=True, null=True)
     city = models.CharField(max_length=30,blank=True, null=True)
@@ -76,16 +76,17 @@ class CleanReviewModel(models.Model):
 @receiver(post_save, sender=MasterAddModel)
 def build_clean(sender, instance, **kwargs):
 
-    count_rating = MasterAddModel.objects.filter(name=instance.name, rating__isnull=False).count()
-    try:
-        sum_rating = list(MasterAddModel.objects.filter(name=instance.name).aggregate(Sum('rating')).values())[0]
-    except:
-        sum_rating = 0
+    newcount_rating = MasterAddModel.objects.filter(name=instance.name, rating__isnull=False).count()
 
-    if count_rating == 0:
-        ave_rating = 0
+    try:
+        newsum_rating = list(MasterAddModel.objects.filter(name=instance.name).aggregate(Sum('rating')).values())[0]
+    except:
+        newsum_rating = ""
+
+    if newcount_rating == 0:
+        newave_rating = ""
     else:
-        ave_rating = sum_rating / count_rating
+        newave_rating = newsum_rating / newcount_rating
 
     CleanReviewModel.objects.update_or_create(
     name=instance.name,
@@ -104,7 +105,7 @@ def build_clean(sender, instance, **kwargs):
     'suburb': instance.suburb,
     'date': instance.date,
     'temperature': instance.temperature,
-    'ave_rating': ave_rating,
+    'ave_rating': newave_rating,
     })
 
 class SingleLocationRecord(models.Model):
