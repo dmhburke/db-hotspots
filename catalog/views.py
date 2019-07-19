@@ -16,7 +16,7 @@ from catalog.choices import *
 from django.contrib.auth.models import User
 
 #Import Custom models here
-from catalog.models import Profile, AddReview, SingleLocation, ReviewRecord, MasterAddModel, TestEntryModel, TestStoreModel
+from catalog.models import Profile, AddReview, SingleLocation, ReviewRecord, MasterAddModel, CleanReviewModel, SingleLocationRecord, TestEntryModel, TestStoreModel
 
 #Import forms here
 from catalog.forms import ProfileForm, AddReviewForm, MasterAddForm, SpotFinderForm, TestEntryForm
@@ -316,14 +316,14 @@ def findspot (request):
         rating_output = "Anything"
 
     if source_result == "MINE":
-         spot_finder = MasterAddModel.objects.filter(
+         spot_finder = CleanReviewModel.objects.filter(
             (Q(postcode__startswith=postcode_result1) | Q(postcode__startswith=postcode_result2) | Q(postcode__startswith=postcode_result3) | Q(postcode__startswith=postcode_result4)) &
             Q(perfect_for__contains=situation_result) &
             (Q(category1__contains=optioncategory1_result) | Q(category1__contains=optioncategory2_result) | Q(category1__contains=optioncategory3_result)) &
             Q(user__username__contains=name_output)
             ).order_by('-rating')
     elif source_result == "WISHLIST":
-         spot_finder = MasterAddModel.objects.filter(
+         spot_finder = CleanReviewModel.objects.filter(
             (Q(postcode__startswith=postcode_result1) | Q(postcode__startswith=postcode_result2) | Q(postcode__startswith=postcode_result3) | Q(postcode__startswith=postcode_result4)) &
             (Q(category1__contains=optioncategory1_result) | Q(category1__contains=optioncategory2_result) | Q(category1__contains=optioncategory3_result)) &
             Q(user__username__contains=name_output) &
@@ -336,20 +336,26 @@ def findspot (request):
     #         (Q(category1__contains=optioncategory1_result) | Q(category1__contains=optioncategory2_result) | Q(category1__contains=optioncategory3_result)
     #         )).exclude(user__username=logged_in_user
     #         ).order_by('-rating')
+
+    #####NEED TO BUILD FOR LOOP TO FIND RIGHT ENTRIES ######
     elif source_result == "SUGGESTED":
-         spot_finder = MasterAddModel.objects.filter(
-            (Q(postcode__startswith=postcode_result1) | Q(postcode__startswith=postcode_result2) | Q(postcode__startswith=postcode_result3) | Q(postcode__startswith=postcode_result4)) &
-            Q(perfect_for__contains=situation_result) &
-            (Q(category1__contains=optioncategory1_result) | Q(category1__contains=optioncategory2_result) | Q(category1__contains=optioncategory3_result)) &
-            Q(rating__gte=rating_output)
-            ).exclude(user__username=logged_in_user
-            ).order_by('-rating')
+        spot_finder = SingleLocationRecord.objects.filter(
+        (Q(postcode__startswith=postcode_result1) | Q(postcode__startswith=postcode_result2) | Q(postcode__startswith=postcode_result3) | Q(postcode__startswith=postcode_result4)) &
+        Q(perfect_for__contains=situation_result) &
+        (Q(category1__contains=optioncategory1_result) | Q(category1__contains=optioncategory2_result) | Q(category1__contains=optioncategory3_result)) &
+        Q(ave_rating__gte=rating_output)
+        #).exclude(user__username=logged_in_user
+        #).distinct('name'
+        ).order_by('-ave_rating')
+
+        # user_been = CleanReviewModel.objects.filter(user=request.user)
+
     else:
-        spot_finder = MasterAddModel.objects.filter(
-           (Q(postcode__startswith=postcode_result1) | Q(postcode__startswith=postcode_result2) | Q(postcode__startswith=postcode_result3) | Q(postcode__startswith=postcode_result4)) &
-           Q(perfect_for__contains=situation_result) &
-           (Q(category1__contains=optioncategory1_result) | Q(category1__contains=optioncategory2_result) | Q(category1__contains=optioncategory3_result)
-           )).order_by('-rating')
+        spot_finder = SingleLocationRecord.objects.filter(
+               (Q(postcode__startswith=postcode_result1) | Q(postcode__startswith=postcode_result2) | Q(postcode__startswith=postcode_result3) | Q(postcode__startswith=postcode_result4)) &
+               Q(perfect_for__contains=situation_result) &
+               (Q(category1__contains=optioncategory1_result) | Q(category1__contains=optioncategory2_result) | Q(category1__contains=optioncategory3_result)
+               )).order_by('-ave_rating')
 
     context = {
     'form': form,

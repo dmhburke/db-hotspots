@@ -55,8 +55,24 @@
     </div>
     <div id =spotFinderResultAveScore>
       <span style="display: block; font-size: 10px; line-height: 12px; margin-top: 2px; color: grey">
+        {% if spot.ave_rating == 5 %}
+        Ave rated<br>
+        ALL-TIME
+        {% elif spot.ave_rating == 4 %}
         Ave rated<br>
         LOVE IT
+        {% elif spot.ave_rating == 3 %}
+        Ave rated<br>
+        LIKE IT
+        {% elif spot.ave_rating == 2 %}
+        Ave rated<br>
+        MEH...
+        {% elif spot.ave_rating == 0 %}
+        Ave rated<br>
+        SKIP IT!
+        {% else %}
+        <span style="line-height: 25px; color: grey;" >WL</span>
+        {% endif %}
       </span>
     </div>
     <div id=spotFinderResultBeenHereBox>
