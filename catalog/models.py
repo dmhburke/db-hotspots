@@ -77,7 +77,10 @@ class CleanReviewModel(models.Model):
 def build_clean(sender, instance, **kwargs):
 
     count_rating = MasterAddModel.objects.filter(name=instance.name, rating__isnull=False).count()
-    sum_rating = list(MasterAddModel.objects.filter(name=instance.name).aggregate(Sum('rating')).values())[0]
+    try:
+        sum_rating = list(MasterAddModel.objects.filter(name=instance.name).aggregate(Sum('rating')).values())[0]
+    except:
+        sum_rating = 0
 
     if count_rating == 0:
         ave_rating = 0
