@@ -28,19 +28,19 @@
 
       <span class="brandFontColor" style="display: block; font-size: 10px; line-height: 12px; margin-top: 2px;">
       {% if spot.user == logged_in_user %}
-        {% if spot.rating == "5" %}
+        {% if spot.rating == 5 %}
         You rated<br>
         ALL-TIME
-        {% elif spot.rating == "4" %}
+        {% elif spot.rating == 4 %}
         You rated<br>
         LOVE IT
-        {% elif spot.rating == "3" %}
+        {% elif spot.rating == 3 %}
         You rated<br>
         LIKE IT
-        {% elif spot.rating == "2" %}
+        {% elif spot.rating == 2 %}
         You rated<br>
         MEH...
-        {% elif spot.rating == "0" %}
+        {% elif spot.rating == 0 %}
         You rated<br>
         SKIP IT!
         {% else %}
