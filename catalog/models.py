@@ -38,7 +38,7 @@ def save_user_profile(sender, instance, **kwargs):
 class MasterAddModel(models.Model):
     user = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE)
     name = models.CharField(max_length=60) # blank=True, null=True
-    rating = models.CharField(max_length=30,blank=True, null=True) #DecimalField(max_digits=3, decimal_places=1, validators=[MaxValueValidator(10), MinValueValidator(0)], blank=True, null=True)
+    rating = models.IntegerField(blank=True, null=True)
     perfect_for = MultiSelectField(choices=PERFECT_FOR, blank=True, null=True)
     notes = models.TextField(blank=True, null=True)
     city = models.CharField(max_length=30,blank=True, null=True)
@@ -76,17 +76,26 @@ class CleanReviewModel(models.Model):
 @receiver(post_save, sender=MasterAddModel)
 def build_clean(sender, instance, **kwargs):
 
-    newcount_rating = MasterAddModel.objects.filter(name=instance.name, rating__isnull=False).count()
+    count_ratings = MasterAddModel.objects.filter(name=instance.name, rating__isnull=False).count()
 
-    try:
-        newsum_rating = list(MasterAddModel.objects.filter(name=instance.name).aggregate(Sum('rating')).values())[0]
-    except:
-        newsum_rating = ""
+    amounts = MasterAddModel.objects.values_list('rating', flat=True)
+    sum_rating = sum(amounts)
 
-    if newcount_rating == 0:
-        newave_rating = ""
-    else:
-        newave_rating = newsum_rating / newcount_rating
+
+
+    newave_rating = sum_ratings / count_ratings
+
+    # newcount_rating = MasterAddModel.objects.filter(name=instance.name, rating__isnull=False).count()
+    #
+    # try:
+    #     newsum_rating = list(MasterAddModel.objects.filter(name=instance.name).aggregate(Sum('rating')).values())[0]
+    # except:
+    #     newsum_rating = ""
+    #
+    # if newcount_rating == 0:
+    #     newave_rating = ""
+    # else:
+    #     newave_rating = newsum_rating / newcount_rating
 
     CleanReviewModel.objects.update_or_create(
     name=instance.name,
