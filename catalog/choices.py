@@ -16,11 +16,11 @@ CITIES = (
 
 RATING = (
     ("", "Rating"),
-    (5, "All-time"),
-    (4, "Love it"),
-    (3, "Like it"),
-    (2, "Meh..."),
-    (0, "Skip it!"),
+    ("5", "All-time"),
+    ("4", "Love it"),
+    ("3", "Like it"),
+    ("2", "Meh..."),
+    ("0", "Skip it!"),
 )
 
 PERFECT_FOR = (

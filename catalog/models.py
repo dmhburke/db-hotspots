@@ -38,7 +38,7 @@ def save_user_profile(sender, instance, **kwargs):
 class MasterAddModel(models.Model):
     user = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE)
     name = models.CharField(max_length=60) # blank=True, null=True
-    rating = models.IntegerField(blank=True, null=True)
+    rating = models.CharField(max_length=30,blank=True, null=True)
     perfect_for = MultiSelectField(choices=PERFECT_FOR, blank=True, null=True)
     notes = models.TextField(blank=True, null=True)
     city = models.CharField(max_length=30,blank=True, null=True)
@@ -58,7 +58,7 @@ class MasterAddModel(models.Model):
 class CleanReviewModel(models.Model):
     user = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE)
     name = models.CharField(max_length=60) # blank=True, null=True
-    rating = models.IntegerField(blank=True, null=True)
+    rating = models.CharField(max_length=30,blank=True, null=True)
     perfect_for = MultiSelectField(choices=PERFECT_FOR, blank=True, null=True)
     notes = models.TextField(blank=True, null=True)
     city = models.CharField(max_length=30,blank=True, null=True)
@@ -71,31 +71,29 @@ class CleanReviewModel(models.Model):
     suburb = models.CharField(max_length=30,blank=True, null=True)
     date = models.DateTimeField(auto_now=True, null=True)
     temperature = models.DecimalField(max_digits=10, decimal_places=8, blank=True, null=True)
-    ave_rating = models.DecimalField(max_digits=1, decimal_places=0, blank=True, null=True)
+    ave_ratings = models.DecimalField(max_digits=1, decimal_places=0, blank=True, null=True)
 
 @receiver(post_save, sender=MasterAddModel)
 def build_clean(sender, instance, **kwargs):
 
     count_ratings = MasterAddModel.objects.filter(name=instance.name, rating__isnull=False).count()
 
-    amounts = MasterAddModel.objects.values_list('rating', flat=True)
-    sum_rating = sum(amounts)
+    sum_alltime = MasterAddModel.objects.filter(name=instance.name, rating="5").count() * 5
+    sum_love = MasterAddModel.objects.filter(name=instance.name, rating="4").count() * 4
+    sum_like = MasterAddModel.objects.filter(name=instance.name, rating="4").count() * 3
+    sum_meh = MasterAddModel.objects.filter(name=instance.name, rating="2").count() * 4
+    count_wish = MasterAddModel.objects.filter(name=instance.name, rating="").count()
 
+    if (count_ratings - count_wish) > 0:
+        sum_ratings = sum_alltime + sum_love + sum_like + sum_meh
+    else:
+        sum_ratings = None
 
+    try:
+        ave_ratings = sum_ratings / count_ratings
+    except:
+        ave_ratings = None
 
-    newave_rating = sum_ratings / count_ratings
-
-    # newcount_rating = MasterAddModel.objects.filter(name=instance.name, rating__isnull=False).count()
-    #
-    # try:
-    #     newsum_rating = list(MasterAddModel.objects.filter(name=instance.name).aggregate(Sum('rating')).values())[0]
-    # except:
-    #     newsum_rating = ""
-    #
-    # if newcount_rating == 0:
-    #     newave_rating = ""
-    # else:
-    #     newave_rating = newsum_rating / newcount_rating
 
     CleanReviewModel.objects.update_or_create(
     name=instance.name,
@@ -114,7 +112,7 @@ def build_clean(sender, instance, **kwargs):
     'suburb': instance.suburb,
     'date': instance.date,
     'temperature': instance.temperature,
-    'ave_rating': newave_rating,
+    'ave_ratings': ave_ratings,
     })
 
 class SingleLocationRecord(models.Model):
@@ -131,13 +129,13 @@ class SingleLocationRecord(models.Model):
     suburb = models.CharField(max_length=30,blank=True, null=True)
     date = models.DateTimeField(auto_now=True, null=True)
     temperature = models.DecimalField(max_digits=10, decimal_places=8, blank=True, null=True)
-    count_rating = models.IntegerField(blank=True, null=True)
-    ave_rating = models.DecimalField(max_digits=1, decimal_places=0, blank=True, null=True)
+    count_ratings = models.IntegerField(blank=True, null=True)
+    ave_ratings = models.DecimalField(max_digits=1, decimal_places=0, blank=True, null=True)
 
 @receiver(post_save, sender=CleanReviewModel)
 def build_single(sender, instance, **kwargs):
 
-    count_rating = CleanReviewModel.objects.filter(name=instance.name, rating__isnull=False).count()
+    count_ratings = CleanReviewModel.objects.filter(name=instance.name, rating__isnull=False).count()
 
     SingleLocationRecord.objects.update_or_create(
     name=instance.name,
@@ -154,27 +152,9 @@ def build_single(sender, instance, **kwargs):
     'suburb': instance.suburb,
     'date': instance.date,
     'temperature': instance.temperature,
-    'count_rating': count_rating,
-    'ave_rating': instance.ave_rating,
+    'count_ratings': count_ratings,
+    'ave_ratings': instance.ave_ratings,
     })
-
-
-
-
-
-
-    # new_user = instance.user
-    # add_user = SingleLocation.users.set(new_user)
-    #
-    # SingleLocationRecord.objects.update_or_create(
-    # name=instance.name,
-    # defaults = {
-    # 'users': add_user,
-    # 'ave_rating': instance.ave_rating,
-    # })
-
-
-
 
 
 

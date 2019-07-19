@@ -304,7 +304,7 @@ def findspot (request):
         rating_output = "Anything"
     elif source_result == "WISHLIST":
         name_output = logged_in_user
-        rating_output = None
+        rating_output = ""
     # elif source_result == "EVERYTHING":
     #     name_output = "Everyone else"
     #     rating_output = "Anything"
@@ -343,10 +343,10 @@ def findspot (request):
         (Q(postcode__startswith=postcode_result1) | Q(postcode__startswith=postcode_result2) | Q(postcode__startswith=postcode_result3) | Q(postcode__startswith=postcode_result4)) &
         Q(perfect_for__contains=situation_result) &
         (Q(category1__contains=optioncategory1_result) | Q(category1__contains=optioncategory2_result) | Q(category1__contains=optioncategory3_result)) &
-        Q(ave_rating__gte=rating_output)
+        Q(ave_ratings__gte=rating_output)
         #).exclude(user__username=logged_in_user
         #).distinct('name'
-        ).order_by('-ave_rating')
+        ).order_by('-ave_ratings')
 
         # user_been = CleanReviewModel.objects.filter(user=request.user)
 
@@ -355,7 +355,7 @@ def findspot (request):
                (Q(postcode__startswith=postcode_result1) | Q(postcode__startswith=postcode_result2) | Q(postcode__startswith=postcode_result3) | Q(postcode__startswith=postcode_result4)) &
                Q(perfect_for__contains=situation_result) &
                (Q(category1__contains=optioncategory1_result) | Q(category1__contains=optioncategory2_result) | Q(category1__contains=optioncategory3_result)
-               )).order_by('-ave_rating')
+               )).order_by('-ave_ratings')
 
     context = {
     'form': form,
