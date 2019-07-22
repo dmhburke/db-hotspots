@@ -170,6 +170,17 @@ li {
   border-bottom: 3px solid #1e8eff;
 }
 
+#returnToLogin {
+  height: 30px;
+  width: 130px;
+  border-radius: 10px;
+  margin: 10px;
+  float: right;
+  text-align: center;
+  line-height: 30px;
+
+}
+
 #logoStandard {
   height: 100%;
   width: 100%;
