@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Add models
-from catalog.models import Profile, AddReview, SingleLocation, ReviewRecord, MasterAddModel, CleanReviewModel, SingleLocationRecord, TestEntryModel, TestStoreModel
+from catalog.models import Profile, AddReview, SingleLocation, ReviewRecord, MasterAddModel, TestEntryModel, TestStoreModel # CleanReviewModel, SingleLocationRecord,
 
 # Register your models here.
 class ProfileAdmin(admin.ModelAdmin):
@@ -29,26 +29,29 @@ class ReviewRecordAdmin(admin.ModelAdmin):
 #Register the admin class with the associated model
 admin.site.register(ReviewRecord, ReviewRecordAdmin)
 
+
 class MasterAddModelAdmin(admin.ModelAdmin):
     list_display = ('user', 'name', 'rating', 'perfect_for', 'city', 'category1', 'category2', 'category3', 'notes', 'postcode', 'suburb', 'date',)
 
 #Register the admin class with the associated model
 admin.site.register(MasterAddModel, MasterAddModelAdmin)
 
-class CleanReviewModelAdmin(admin.ModelAdmin):
-    list_display = ('user', 'name', 'rating', 'perfect_for', 'city', 'category1', 'category2', 'category3', 'notes', 'postcode', 'suburb', 'date', 'ave_ratings',)
+##### ADD REVIEW MODEL SET ####
 
-#Register the admin class with the associated model
-admin.site.register(CleanReviewModel, CleanReviewModelAdmin)
+# class CleanReviewModelAdmin(admin.ModelAdmin):
+#     list_display = ('user', 'name', 'rating', 'perfect_for', 'city', 'category1', 'category2', 'category3', 'notes', 'postcode', 'suburb', 'date', 'ave_ratings',)
+#
+# #Register the admin class with the associated model
+# admin.site.register(CleanReviewModel, CleanReviewModelAdmin)
+#
+# class SingleLocationRecordAdmin(admin.ModelAdmin):
+#     list_display = ('name', 'perfect_for', 'city', 'category1', 'category2', 'category3', 'notes', 'postcode', 'suburb', 'date', 'count_ratings', 'ave_ratings',)
+#
+# #Register the admin class with the associated model
+# admin.site.register(SingleLocationRecord, SingleLocationRecordAdmin)
 
-class SingleLocationRecordAdmin(admin.ModelAdmin):
-    list_display = ('name', 'perfect_for', 'city', 'category1', 'category2', 'category3', 'notes', 'postcode', 'suburb', 'date', 'count_ratings', 'ave_ratings',)
 
-    # def get_users(self, obj):
-    #     return "\n".join([p.username for p in obj.users.all()])
-#Register the admin class with the associated model
-admin.site.register(SingleLocationRecord, SingleLocationRecordAdmin)
-
+##### ADD REVIEW MODEL SET ####
 
 
 
