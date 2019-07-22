@@ -59,106 +59,106 @@ class MasterAddModel(models.Model):
 
 #### FULL ADD MODEL #####
 
-# class CleanReviewModel(models.Model):
-#     user = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE)
-#     name = models.CharField(max_length=60) # blank=True, null=True
-#     rating = models.CharField(max_length=30,blank=True, null=True)
-#     perfect_for = MultiSelectField(choices=PERFECT_FOR, blank=True, null=True)
-#     notes = models.TextField(blank=True, null=True)
-#     city = models.CharField(max_length=30,blank=True, null=True)
-#     country = models.CharField(max_length=30,blank=True, null=True)
-#     address = models.CharField(max_length=50,blank=True, null=True)
-#     category1 = models.CharField(max_length=30,blank=True, null=True)
-#     category2 = models.CharField(max_length=30,blank=True, null=True)
-#     category3 = models.CharField(max_length=30,blank=True, null=True)
-#     postcode = models.CharField(max_length=30,blank=True, null=True)
-#     suburb = models.CharField(max_length=30,blank=True, null=True)
-#     date = models.DateTimeField(auto_now=True, null=True)
-#     temperature = models.DecimalField(max_digits=10, decimal_places=8, blank=True, null=True)
-#     ave_ratings = models.DecimalField(max_digits=1, decimal_places=0, blank=True, null=True)
-#
-# @receiver(post_save, sender=MasterAddModel)
-# def build_clean(sender, instance, **kwargs):
-#
-#     count_ratings = MasterAddModel.objects.filter(name=instance.name, rating__isnull=False).count()
-#
-#     sum_alltime = MasterAddModel.objects.filter(name=instance.name, rating="5").count() * 5
-#     sum_love = MasterAddModel.objects.filter(name=instance.name, rating="4").count() * 4
-#     sum_like = MasterAddModel.objects.filter(name=instance.name, rating="4").count() * 3
-#     sum_meh = MasterAddModel.objects.filter(name=instance.name, rating="2").count() * 4
-#     count_wish = MasterAddModel.objects.filter(name=instance.name, rating="").count()
-#
-#     if (count_ratings - count_wish) > 0:
-#         sum_ratings = sum_alltime + sum_love + sum_like + sum_meh
-#     else:
-#         sum_ratings = None
-#
-#     try:
-#         ave_ratings = sum_ratings / count_ratings
-#     except:
-#         ave_ratings = None
-#
-#
-#     CleanReviewModel.objects.update_or_create(
-#     name=instance.name,
-#     user=instance.user,
-#     defaults = {
-#     'rating': instance.rating,
-#     'perfect_for': instance.perfect_for,
-#     'notes': instance.notes,
-#     'city': instance.city,
-#     'country': instance.country,
-#     'address': instance.address,
-#     'category1': instance.category1,
-#     'category2': instance.category2,
-#     'category3': instance.category3,
-#     'postcode': instance.postcode,
-#     'suburb': instance.suburb,
-#     'date': instance.date,
-#     'temperature': instance.temperature,
-#     'ave_ratings': ave_ratings,
-#     })
-#
-# class SingleLocationRecord(models.Model):
-#     name = models.CharField(max_length=60) # blank=True, null=True
-#     perfect_for = MultiSelectField(choices=PERFECT_FOR, blank=True, null=True)
-#     notes = models.TextField(blank=True, null=True)
-#     city = models.CharField(max_length=30,blank=True, null=True)
-#     country = models.CharField(max_length=30,blank=True, null=True)
-#     address = models.CharField(max_length=50,blank=True, null=True)
-#     category1 = models.CharField(max_length=30,blank=True, null=True)
-#     category2 = models.CharField(max_length=30,blank=True, null=True)
-#     category3 = models.CharField(max_length=30,blank=True, null=True)
-#     postcode = models.CharField(max_length=30,blank=True, null=True)
-#     suburb = models.CharField(max_length=30,blank=True, null=True)
-#     date = models.DateTimeField(auto_now=True, null=True)
-#     temperature = models.DecimalField(max_digits=10, decimal_places=8, blank=True, null=True)
-#     count_ratings = models.IntegerField(blank=True, null=True)
-#     ave_ratings = models.DecimalField(max_digits=1, decimal_places=0, blank=True, null=True)
-#
-# @receiver(post_save, sender=CleanReviewModel)
-# def build_single(sender, instance, **kwargs):
-#
-#     count_ratings = CleanReviewModel.objects.filter(name=instance.name, rating__isnull=False).count()
-#
-#     SingleLocationRecord.objects.update_or_create(
-#     name=instance.name,
-#     defaults = {
-#     'perfect_for': instance.perfect_for,
-#     'notes': instance.notes,
-#     'city': instance.city,
-#     'country': instance.country,
-#     'address': instance.address,
-#     'category1': instance.category1,
-#     'category2': instance.category2,
-#     'category3': instance.category3,
-#     'postcode': instance.postcode,
-#     'suburb': instance.suburb,
-#     'date': instance.date,
-#     'temperature': instance.temperature,
-#     'count_ratings': count_ratings,
-#     'ave_ratings': instance.ave_ratings,
-#     })
+class CleanReviewModel(models.Model):
+    user = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE)
+    name = models.CharField(max_length=60) # blank=True, null=True
+    rating = models.CharField(max_length=30,blank=True, null=True)
+    perfect_for = MultiSelectField(choices=PERFECT_FOR, blank=True, null=True)
+    notes = models.TextField(blank=True, null=True)
+    city = models.CharField(max_length=30,blank=True, null=True)
+    country = models.CharField(max_length=30,blank=True, null=True)
+    address = models.CharField(max_length=50,blank=True, null=True)
+    category1 = models.CharField(max_length=30,blank=True, null=True)
+    category2 = models.CharField(max_length=30,blank=True, null=True)
+    category3 = models.CharField(max_length=30,blank=True, null=True)
+    postcode = models.CharField(max_length=30,blank=True, null=True)
+    suburb = models.CharField(max_length=30,blank=True, null=True)
+    date = models.DateTimeField(auto_now=True, null=True)
+    temperature = models.DecimalField(max_digits=10, decimal_places=8, blank=True, null=True)
+    ave_ratings = models.DecimalField(max_digits=1, decimal_places=0, blank=True, null=True)
+
+@receiver(post_save, sender=MasterAddModel)
+def build_clean(sender, instance, **kwargs):
+
+    count_ratings = MasterAddModel.objects.filter(name=instance.name, rating__isnull=False).count()
+
+    sum_alltime = MasterAddModel.objects.filter(name=instance.name, rating="5").count() * 5
+    sum_love = MasterAddModel.objects.filter(name=instance.name, rating="4").count() * 4
+    sum_like = MasterAddModel.objects.filter(name=instance.name, rating="4").count() * 3
+    sum_meh = MasterAddModel.objects.filter(name=instance.name, rating="2").count() * 4
+    count_wish = MasterAddModel.objects.filter(name=instance.name, rating="").count()
+
+    if (count_ratings - count_wish) > 0:
+        sum_ratings = sum_alltime + sum_love + sum_like + sum_meh
+    else:
+        sum_ratings = None
+
+    try:
+        ave_ratings = sum_ratings / count_ratings
+    except:
+        ave_ratings = None
+
+
+    CleanReviewModel.objects.update_or_create(
+    name=instance.name,
+    user=instance.user,
+    defaults = {
+    'rating': instance.rating,
+    'perfect_for': instance.perfect_for,
+    'notes': instance.notes,
+    'city': instance.city,
+    'country': instance.country,
+    'address': instance.address,
+    'category1': instance.category1,
+    'category2': instance.category2,
+    'category3': instance.category3,
+    'postcode': instance.postcode,
+    'suburb': instance.suburb,
+    'date': instance.date,
+    'temperature': instance.temperature,
+    'ave_ratings': ave_ratings,
+    })
+
+class SingleLocationRecord(models.Model):
+    name = models.CharField(max_length=60) # blank=True, null=True
+    perfect_for = MultiSelectField(choices=PERFECT_FOR, blank=True, null=True)
+    notes = models.TextField(blank=True, null=True)
+    city = models.CharField(max_length=30,blank=True, null=True)
+    country = models.CharField(max_length=30,blank=True, null=True)
+    address = models.CharField(max_length=50,blank=True, null=True)
+    category1 = models.CharField(max_length=30,blank=True, null=True)
+    category2 = models.CharField(max_length=30,blank=True, null=True)
+    category3 = models.CharField(max_length=30,blank=True, null=True)
+    postcode = models.CharField(max_length=30,blank=True, null=True)
+    suburb = models.CharField(max_length=30,blank=True, null=True)
+    date = models.DateTimeField(auto_now=True, null=True)
+    temperature = models.DecimalField(max_digits=10, decimal_places=8, blank=True, null=True)
+    count_ratings = models.IntegerField(blank=True, null=True)
+    ave_ratings = models.DecimalField(max_digits=1, decimal_places=0, blank=True, null=True)
+
+@receiver(post_save, sender=CleanReviewModel)
+def build_single(sender, instance, **kwargs):
+
+    count_ratings = CleanReviewModel.objects.filter(name=instance.name, rating__isnull=False).count()
+
+    SingleLocationRecord.objects.update_or_create(
+    name=instance.name,
+    defaults = {
+    'perfect_for': instance.perfect_for,
+    'notes': instance.notes,
+    'city': instance.city,
+    'country': instance.country,
+    'address': instance.address,
+    'category1': instance.category1,
+    'category2': instance.category2,
+    'category3': instance.category3,
+    'postcode': instance.postcode,
+    'suburb': instance.suburb,
+    'date': instance.date,
+    'temperature': instance.temperature,
+    'count_ratings': count_ratings,
+    'ave_ratings': instance.ave_ratings,
+    })
 
 #### FULL ADD MODEL #####
 

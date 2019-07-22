@@ -16,7 +16,7 @@ from catalog.choices import *
 from django.contrib.auth.models import User
 
 #Import Custom models here
-from catalog.models import Profile, AddReview, SingleLocation, ReviewRecord, TestEntryModel, TestStoreModel, MasterAddModel#, CleanReviewModel, SingleLocationRecord,
+from catalog.models import Profile, AddReview, SingleLocation, ReviewRecord, TestEntryModel, TestStoreModel, MasterAddModel, CleanReviewModel, SingleLocationRecord
 
 #Import forms here
 from catalog.forms import ProfileForm, AddReviewForm, SpotFinderForm, TestEntryForm, MasterAddForm
