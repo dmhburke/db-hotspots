@@ -30,7 +30,7 @@
 
 <div id="homeHeader" class="brandBottomBorder">
   <div id="homeLogo">
-    <a href="{% url 'landingadd' %}">
+    <a href="{% url 'home' %}">
     <img id=homeLogoIcon src="{% static 'icons/logoBlue.svg' %}"></a>
   </div>
   <div id="homeTitle" class="brandFont brandFontColor titleFont">HotSpots</div>
@@ -42,9 +42,9 @@
 
 <div id="homeContent">
   <div id="navBox" class="shadow">
-    <a href="{% url 'userspotlist' %}"><div id="navCircle"><img id=navIcon src="{% static 'icons/yourSpotsBlue.svg'%}"></div><div id=textSeeYours class="brandFont brandFontColor">Your spots</div></a>
-    <a href="{% url 'activitystream' %}"><div id="navCircle"><img id=navIcon src="{% static 'icons/latestBlue.svg'%}"></div><div id=textCheckLatest class="brandFont brandFontColor">Latest activity</div></a>
-    <a href="{% url 'findspot' %}"><div id="navCircle"><img id=navIcon src="{% static 'icons/discoverBlue.svg'%}"></div><div id=textDiscoverNew class="brandFont brandFontColor">Discover new</div></a>
+    <a href="{% url 'home' %}"><div id="navCircle"><img id=navIcon src="{% static 'icons/latestBlue.svg'%}"></div><div id=textSeeYours class="brandFont brandFontColor">Add spots</div></a>
+    <a href="{% url 'findspot' %}"><div id="navCircle"><img id=navIcon src="{% static 'icons/discoverBlue.svg'%}"></div><div id=textCheckLatest class="brandFont brandFontColor">Find spots</div></a>
+    <a href="{% url 'browsespots' %}"><div id="navCircle"><img id=navIcon src="{% static 'icons/yourSpotsBlue.svg'%}"></div><div id=textDiscoverNew class="brandFont brandFontColor">Browse spots</div></a>
   </div>
 
 

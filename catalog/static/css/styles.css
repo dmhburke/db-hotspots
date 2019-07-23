@@ -528,15 +528,15 @@ li {
 }
 
 #textSeeYours {
-  left: 27px;
+  left: 31px;
 }
 
 #textCheckLatest {
-  left: 137px;
+  left: 145px;
 }
 
 #textDiscoverNew {
-  left: 258px;
+  left: 256px;
 }
 
 #homeContent {
@@ -2548,6 +2548,40 @@ label.add {
   vertical-align: middle;
   font-size: 10px;
   color: grey;
+}
+
+
+#browseCarousel {
+  display: flex;
+  height: 420px;
+  width: 350px;
+  margin: 0px auto;
+  margin-top: 5px;
+  background-color: white;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  padding-left: 10px;
+}
+
+#browseCarouselChildHitlist, #browseCarouselChildActivity, #browseCarouselChildWishlist {
+  flex: 0 0 auto;
+  height: 400px;
+  width: 300px;
+  background-color: white;
+  border-radius: 10px;
+  margin-top: 15px;
+  margin-right: 10px;
+  text-align: center;
+  padding: 5px;
+}
+
+#browseCarouselChildBuffer {
+  flex: 0 0 auto;
+  height: 370px;
+  width: 10px;
+  background-color: white;
+  border-radius: 10px;
+
 }
 
 

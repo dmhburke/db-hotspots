@@ -301,7 +301,7 @@ def findspot (request):
 
     if source_result == "MINE":
         name_output = logged_in_user
-        rating_output = "Anything"
+        rating_output = ""
     elif source_result == "WISHLIST":
         name_output = logged_in_user
         rating_output = ""
@@ -319,6 +319,7 @@ def findspot (request):
          spot_finder = CleanReviewModel.objects.filter(
             (Q(postcode__startswith=postcode_result1) | Q(postcode__startswith=postcode_result2) | Q(postcode__startswith=postcode_result3) | Q(postcode__startswith=postcode_result4)) &
             Q(perfect_for__contains=situation_result) &
+            ~Q(rating=rating_output) &
             (Q(category1__contains=optioncategory1_result) | Q(category1__contains=optioncategory2_result) | Q(category1__contains=optioncategory3_result)) &
             Q(user__username__contains=name_output)
             ).order_by('-rating')
@@ -346,7 +347,7 @@ def findspot (request):
         Q(ave_ratings__gte=rating_output)
         #).exclude(user__username=logged_in_user
         #).distinct('name'
-        ).order_by('-ave_ratings')
+        ).order_by('-ave_ratings', '-date')
 
         # user_been = CleanReviewModel.objects.filter(user=request.user)
 
@@ -368,6 +369,15 @@ def findspot (request):
     }
 
     return render(request, 'findspots.html', context=context)
+
+@login_required
+def browsespots(request):
+    """View to browse yours, wishlist and activity"""
+
+
+    context={}
+
+    return render(request,'browsespots.html', context=context)
 
 
 @login_required

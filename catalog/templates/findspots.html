@@ -3,6 +3,10 @@
 {% block contentName %}
 {% load static %}
 
+<div id=activeNavActivity>
+  <img id=activeNavImg src="{% static 'icons/discoverWhite.svg' %}">
+</div>
+
 <div id=spotFinderBox class="shadow">
   <form method="post">
     {% csrf_token %}
