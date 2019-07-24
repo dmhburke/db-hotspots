@@ -16,10 +16,10 @@ from catalog.choices import *
 from django.contrib.auth.models import User
 
 #Import Custom models here
-from catalog.models import Profile, AddReview, SingleLocation, ReviewRecord, TestEntryModel, TestStoreModel, MasterAddModel, CleanReviewModel, SingleLocationRecord
+from catalog.models import Profile, AddReview, SingleLocation, ReviewRecord, TestEntryModel, TestStoreModel, MasterAddModel, CleanReviewModel, SingleLocationRecord, DrinkCreateNewModel, DrinkCreateNewModelDetails, DrinkCreateNewModelFinal
 
 #Import forms here
-from catalog.forms import ProfileForm, AddReviewForm, SpotFinderForm, TestEntryForm, MasterAddForm
+from catalog.forms import ProfileForm, AddReviewForm, SpotFinderForm, TestEntryForm, MasterAddForm, DrinkCreateNewForm, DrinkCreateNewDetailsForm
 
 #DEFINE VIEWS HERE
 def createaccount (request):
@@ -705,3 +705,52 @@ def testpagedetail (request, name, lat, lng):
     }
 
     return render(request, 'testpagedetail.html', context=context)
+
+    ####### DRINKS ########
+
+def drinkoverview(request):
+    """Frontpage"""
+    if request.method == 'POST':
+        form = DrinkCreateNewForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.save()
+            return redirect('drinkoverview')
+    else:
+        form = DrinkCreateNewForm()
+
+    listDays = DrinkCreateNewModelFinal.objects.all().order_by('-date')
+
+    context = {
+    'form': form,
+    'listDays': listDays,
+    }
+
+    return render(request, 'XXdrinkoverview.html', context=context)
+
+def drinkentry(request, day):
+    """Enter details of drinks and save to DB"""
+
+    day = day
+    date_created = DrinkCreateNewModel.objects.get(day=day).date
+
+    if request.method == 'POST':
+        form = DrinkCreateNewDetailsForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.day = day
+            post.date = date_created
+            post.save()
+            return redirect('drinkoverview')
+    else:
+        try:
+            form = DrinkCreateNewDetailsForm(instance=get_object_or_404(DrinkCreateNewModelFinal,day=day))
+        except:
+            form = DrinkCreateNewDetailsForm()
+
+    context = {
+    'day': day,
+    'form': form,
+    }
+
+    return render(request, 'XXdrinkentry.html', context=context)

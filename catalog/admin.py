@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Add models
-from catalog.models import Profile, AddReview, SingleLocation, ReviewRecord, MasterAddModel, TestEntryModel, TestStoreModel, CleanReviewModel, SingleLocationRecord
+from catalog.models import Profile, AddReview, SingleLocation, ReviewRecord, MasterAddModel, TestEntryModel, TestStoreModel, CleanReviewModel, SingleLocationRecord, DrinkCreateNewModel, DrinkCreateNewModelDetails, DrinkCreateNewModelFinal
 
 # Register your models here.
 class ProfileAdmin(admin.ModelAdmin):
@@ -67,3 +67,23 @@ class TestStoreModelAdmin(admin.ModelAdmin):
 
 #Register the admin class with the associated model
 admin.site.register(TestStoreModel, TestStoreModelAdmin)
+
+
+#####DRINK PAGES######
+class DrinkCreateNewModelAdmin(admin.ModelAdmin):
+    list_display = ('day', 'drinks', 'waters', 'maxBAC', 'date',)
+
+#Register the admin class with the associated model
+admin.site.register(DrinkCreateNewModel, DrinkCreateNewModelAdmin)
+
+class DrinkCreateNewModelDetailsAdmin(admin.ModelAdmin):
+    list_display = ('day', 'drinks', 'waters', 'maxBAC', 'date',)
+
+#Register the admin class with the associated model
+admin.site.register(DrinkCreateNewModelDetails, DrinkCreateNewModelDetailsAdmin)
+
+class DrinkCreateNewModelFinalAdmin(admin.ModelAdmin):
+    list_display = ('day', 'drinks', 'waters', 'maxBAC','date','highBAC',)
+
+#Register the admin class with the associated model
+admin.site.register(DrinkCreateNewModelFinal, DrinkCreateNewModelFinalAdmin)

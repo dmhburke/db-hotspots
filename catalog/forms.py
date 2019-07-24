@@ -6,7 +6,7 @@ from catalog.choices import *
 import json, requests
 from django.contrib.gis.geoip2 import GeoIP2
 
-from catalog.models import Profile, AddReview, MasterAddModel, TestEntryModel
+from catalog.models import Profile, AddReview, MasterAddModel, TestEntryModel, DrinkCreateNewModel, DrinkCreateNewModelDetails
 
 class ProfileForm(UserCreationForm):
     userpic = forms.FileField(required=True)
@@ -98,3 +98,27 @@ class SpotFinderForm(forms.Form):
     def source_query(self,request):
         sourceQuery = self.cleaned_data['source']
         return sourceQuery
+
+
+
+
+
+
+#####DRINK ADDITION #####
+class DrinkCreateNewForm(ModelForm):
+    day = forms.CharField(
+    widget=forms.TextInput(attrs={'placeholder': 'Enter day name'})
+    )
+
+    class Meta:
+        model = DrinkCreateNewModel
+        fields = ('day',)
+
+class DrinkCreateNewDetailsForm(ModelForm):
+    drinks = forms.ChoiceField(choices=DRINKNUMBER, required=False)
+    waters = forms.ChoiceField(choices=DRINKNUMBER, required=False)
+    maxBAC = forms.ChoiceField(choices=BACREADING, required=False)
+
+    class Meta:
+        model = DrinkCreateNewModelDetails
+        fields = ('drinks', 'waters', 'maxBAC')

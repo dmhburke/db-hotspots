@@ -1,0 +1,24 @@
+{% extends "XXdrink_template.html" %}
+
+{% block contentName %}
+{% load static %}
+
+<div class="shadow" id="drinkDetailFormBox">
+<div id="drinkDetailName">{{ day }}</div>
+<form method="post">
+  {% csrf_token %}
+<img id=drinkDetailDrinkImg src="{% static 'icons/XbeerRed.svg'%}">
+{{ form.drinks }}
+<img id=drinkDetailWaterImg src="{% static 'icons/XwaterGreen.svg'%}">
+{{ form.waters }}
+<img id=drinkDetailSpeedoImg src="{% static 'icons/XspeedoGrey.svg'%}">
+{{ form.maxBAC }}
+
+<button id=addDetailsSubmitButton type="submit">Update details</button>
+</form>
+
+</div>
+
+<a href="{% url 'drinkoverview' %}"><div style="color:#48BF91; margin: -10px auto; width: 230px; font-size: 16px; text-align: center;">Return to overview?</div></a>
+
+{% endblock %}

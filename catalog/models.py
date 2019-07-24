@@ -294,3 +294,68 @@ class TestStoreModel(models.Model):
 @receiver(post_save, sender=TestEntryModel)
 def single_save(sender, instance, **kwargs):
     TestStoreModel.objects.update_or_create(name=instance.name)
+
+
+
+##### DRINK PAGES ######
+
+class DrinkCreateNewModel(models.Model):
+    day = models.CharField(max_length=30, blank=True, null=True) # blank=True, null=True
+    drinks = models.IntegerField(blank=True, null=True)
+    waters = models.IntegerField(blank=True, null=True)
+    maxBAC = models.DecimalField(max_digits=3, decimal_places=2, blank=True, null=True)
+    date = models.DateTimeField(auto_now=True, null=True)
+
+class DrinkCreateNewModelDetails(models.Model):
+    day = models.CharField(max_length=30, blank=True, null=True) # blank=True, null=True
+    drinks = models.IntegerField(blank=True, null=True)
+    waters = models.IntegerField(blank=True, null=True)
+    maxBAC = models.DecimalField(max_digits=3, decimal_places=2, blank=True, null=True)
+    date = models.DateTimeField(blank=True, null=True)
+
+class DrinkCreateNewModelFinal(models.Model):
+    day = models.CharField(max_length=30, blank=True, null=True)
+    drinks = models.IntegerField(blank=True, null=True)
+    waters = models.IntegerField(blank=True, null=True)
+    maxBAC = models.DecimalField(max_digits=3, decimal_places=2,blank=True, null=True)
+    date = models.DateTimeField(blank=True, null=True)
+    highBAC = models.CharField(max_length=30, blank=True, null=True)
+
+@receiver(post_save, sender=DrinkCreateNewModel)
+def drink_setup(sender, instance, **kwargs):
+    DrinkCreateNewModelFinal.objects.update_or_create(
+    day=instance.day, date=instance.date)
+
+@receiver(post_save, sender=DrinkCreateNewModelDetails)
+def drink_details(sender, instance, **kwargs):
+
+    try:
+        currentBAC = DrinkCreateNewModelFinal.objects.get(day=instance.day).maxBAC
+
+        if instance.maxBAC > currentBAC:
+            maxBAC = instance.maxBAC
+        else:
+            maxBAC = currentBAC
+    except:
+        maxBAC = 0
+
+
+    try:
+        create_date = DrinkCreateNewModel.objects.get(day=instance.day).date
+    except:
+        create_date = None
+
+    if maxBAC > 0.05:
+        highBAC = "Yes"
+    else:
+        highBAC = "No"
+
+    DrinkCreateNewModelFinal.objects.update_or_create(
+    day=instance.day,
+    defaults={
+    'drinks': instance.drinks,
+    'waters': instance.waters,
+    'maxBAC': maxBAC,
+    'date': create_date,
+    'highBAC': highBAC,
+    })

@@ -1,0 +1,69 @@
+{% extends "XXdrink_template.html" %}
+
+{% block contentName %}
+{% load static %}
+
+
+<div class="shadow" id="drinkEnterFormBox">
+
+  <form method="post">
+    {% csrf_token %}
+    {{ form.day }}
+    <button id=addDaySubmitButton type="submit">Create new day</button>
+    </form>
+</div>
+
+    {% if listDays %}
+    {% for item in listDays %}
+
+      {% if item.highBAC == "Yes" %}
+      <a href="{% url 'drinkentry' item.day %}">
+      <div class=shadow style="border: 3px solid red" id=drinkSingleDay>
+        <div id=drinkSingleDayName>{{item.day}}</div>
+        <div id=drinkSingleDayDrinks>{{item.drinks}}</div>
+        <img id=drinkBeerImg src="{% static 'icons/XbeerRed.svg' %}">
+        <div id=drinkSingleDayWaters>{{item.waters}}</div>
+        <img id=drinkWaterImg src="{% static 'icons/XwaterGreen.svg' %}">
+
+        {% if item.maxBAC|stringformat:".2f" == "0.03" %}
+          <div style="background-color: #FF8686" id=drinkSingleDayBAC>{{item.maxBAC}}</div>
+          {% elif item.maxBAC|stringformat:".2f" == "0.04" %}
+          <div style="background-color: #FB4444" id=drinkSingleDayBAC>{{item.maxBAC}}</div>
+          {% elif item.maxBAC|stringformat:".2f" == "0.05" %}
+          <div style="background-color: #FF0000" id=drinkSingleDayBAC>{{item.maxBAC}}</div>
+        {% else %}
+        <div id=drinkSingleDayBAC>{{item.maxBAC}}</div>
+        {% endif %}
+        <img id=drinkBACImg src="{% static 'icons/XspeedoGrey.svg' %}">
+      </div></a>
+
+      {% else %}
+
+      <a href="{% url 'drinkentry' item.day %}">
+      <div class=shadow id=drinkSingleDay>
+        <div id=drinkSingleDayName>{{item.day}}</div>
+        <div id=drinkSingleDayDrinks>{{item.drinks}}</div>
+        <img id=drinkBeerImg src="{% static 'icons/XbeerRed.svg' %}">
+        <div id=drinkSingleDayWaters>{{item.waters}}</div>
+        <img id=drinkWaterImg src="{% static 'icons/XwaterGreen.svg' %}"/>
+
+        {% if item.maxBAC|stringformat:".2f" == "0.03" %}
+          <div style="background-color: #FF8686" id=drinkSingleDayBAC>{{item.maxBAC}}</div>
+          {% elif item.maxBAC|stringformat:".2f" == "0.04" %}
+          <div style="background-color: #FB4444" id=drinkSingleDayBAC>{{item.maxBAC}}</div>
+          {% elif item.maxBAC|stringformat:".2f" == "0.05" %}
+          <div style="background-color: #FF0000" id=drinkSingleDayBAC>{{item.maxBAC}}</div>
+        {% else %}
+        <div id=drinkSingleDayBAC>{{item.maxBAC}}</div>
+        {% endif %}
+        <img id=drinkBACImg src="{% static 'icons/XspeedoGrey.svg' %}">
+      </div></a>
+
+      {% endif %}
+    {% endfor %}
+  {% else %}
+
+  {% endif %}
+  <div style="height: 60px; width: 100%;"></div>
+
+{% endblock %}
