@@ -2563,16 +2563,17 @@ label.add {
   padding-left: 10px;
 }
 
-#browseCarouselChildHitlist, #browseCarouselChildActivity, #browseCarouselChildWishlist {
+#browseCarouselChildActivity, #browseCarouselChildWishlist, #browseCarouselChildHitlist {
   flex: 0 0 auto;
-  height: 400px;
-  width: 300px;
+  height: 390px;
+  width: 320px;
   background-color: white;
   border-radius: 10px;
   margin-top: 15px;
   margin-right: 10px;
   text-align: center;
   padding: 5px;
+  overflow: scroll;
 }
 
 #browseCarouselChildBuffer {
@@ -2584,6 +2585,103 @@ label.add {
 
 }
 
+#browseCarouselTitle {
+  height: 30px;
+  width: 200px;
+  margin: 0px auto;
+  line-height: 40px;
+}
+
+#browseCarouselResultBox {
+  min-height: 95px;
+  background-color: white;
+  width: 275px;
+  margin: 10px auto;
+  border: 1px solid lightgrey;
+  border-radius: 10px;
+  position: relative;
+}
+
+#browseCarouselUserImg {
+  height: 40px;
+  width: 40px;
+  border-radius: 100%;
+  background-color: #f2f2f2;
+  position: absolute;
+  top: 30px;
+  left: 10px;
+}
+
+#browseCarouselUserName {
+  height: 16px;
+  width: 150px;
+  position: absolute;
+  top: 5px;
+  left: 10px;
+  color: grey;
+  text-align: left;
+  font-size: 10px;
+}
+
+#browseCarouselSpotName {
+  height: 45px;
+  width: 150px;
+  position: absolute;
+  top: 20px;
+  left: 60px;
+  text-align: left;
+  line-height: 45px;
+  text-overflow: ellipsis;
+  overflow-x: hidden;
+  white-space: nowrap;
+}
+
+#browseCarouselSpotCategory {
+  position: absolute;
+  width: 150px;
+  text-align: left;
+  top: 50px;
+  left: 60px;
+  color: grey;
+  font-size: 10px;
+  text-overflow: ellipsis;
+  overflow-x: hidden;
+  white-space: nowrap;
+}
+
+#browseCarouselUserRating {
+  height: 45px;
+  width: 45px;
+  border-radius: 10px;
+  position: absolute;
+  top: 28px;
+  right: 10px;
+}
+
+#browseCarouselUserRatingText {
+  height: 16px;
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  color: grey;
+  text-align: left;
+  font-size: 10px;
+}
+
+#browseCarouselUserNotes {
+  max-height: 50px;
+  width: 155px;
+  color: grey;
+  margin-left: 55px;
+  margin-top: 70px;
+  margin-bottom: 10px;
+  font-size: 10px;
+  font-style: italic;
+  padding-left: 10px;
+  padding-right: 2px;
+  text-align: left;
+  overflow: scroll;
+}
 
 
 /**/

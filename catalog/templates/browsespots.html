@@ -3,10 +3,82 @@
 {% block contentName %}
 {% load static %}
 
+
 <div id=browseCarousel>
-  <div class="shadow" id=browseCarouselChildHitlist>Your spots</div>
-  <div class="shadow" id=browseCarouselChildActivity>Activity stream</div>
+  <div class="shadow" id=browseCarouselChildActivity>
+    <div class="brandFont brandFontColor" id=browseCarouselTitle>Activity stream</div>
+
+    {% if activity_stream %}
+      {% for entry in activity_stream %}
+
+    <div id=browseCarouselResultBox>
+      <div id=browseCarouselUserImg style="background-image: url({{ user.profile.userpic.url }}); background-size: cover"></div>
+      <div id=browseCarouselUserName>{{entry.user}} added... </div>
+      <div id=browseCarouselSpotName class="brandFont brandFontColor">{{entry.name}}</div>
+      <div id=browseCarouselSpotCategory>{{entry.city}}, {{entry.category1}}</div>
+      <div id=browseCarouselUserRatingText>
+        {% if entry.rating == "" %}
+        ... to their wishlist<br>
+        {% else %}
+        ... and rated it
+        {% endif %}
+      </div>
+
+        {% if entry.rating == '5' %}
+        <div id=browseCarouselUserRating class="brandFont brandColor whiteFont" style="padding-top: 9px;">
+          All time
+        </div>
+        {% elif entry.rating == '4' %}
+        <div id=browseCarouselUserRating class="brandFont whiteFont" style="padding-top: 9px; background-color: #7ebffc;">
+          Love it
+        </div>
+        {% elif entry.rating == '3' %}
+        <div id=browseCarouselUserRating class="brandFont brandFontColor" style="padding-top: 9px; background-color: #f2f6f9;">
+          Like it
+        </div>
+        {% elif entry.rating == '2' %}
+        <div id=browseCarouselUserRating class="brandFont" style="padding-top: 16px; color: grey; background-color: #f2f2f2;">
+          Meh
+        </div>
+        {% elif entry.rating == "" %}
+        <div id=browseCarouselUserRating class="brandFont" style="padding-top: 16px; color: grey; background-color: #f2f2f2;">
+          WL
+        </div>
+        {% else %}
+        <div id=browseCarouselUserRating class="brandFont" style="padding-top: 9px; color: grey; background-color: #f2f2f2;">
+          Skip it!
+        </div>
+        {% endif %}
+
+      <div id=browseCarouselUserNotes>{{entry.notes}}</div>
+    </div>
+
+    {% endfor %}
+  {% endif %}
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+  <div class="shadow" id=browseCarouselChildHitlist>
+    Your spots:<br>
+    {% if your_spots %}
+      {% for spot in your_spots %}
+        <br>{{spot.name}}
+      {% endfor %}
+    {% endif %}
+
+  </div>
   <div class="shadow" id=browseCarouselChildWishlist>Your wishlist</div>
+
+
   <div id=browseCarouselChildBuffer></div>
 
 

@@ -374,8 +374,15 @@ def findspot (request):
 def browsespots(request):
     """View to browse yours, wishlist and activity"""
 
+    activity_stream = CleanReviewModel.objects.all().order_by('-date')
 
-    context={}
+    your_spots = CleanReviewModel.objects.filter(user = request.user, rating__isnull = False).order_by("-date")
+
+    context={
+    'activity_stream': activity_stream,
+    'your_spots': your_spots,
+
+    }
 
     return render(request,'browsespots.html', context=context)
 
