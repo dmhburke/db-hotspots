@@ -3,8 +3,44 @@
 {% block contentName %}
 {% load static %}
 
+<div id=browseLineSeparatorTop></div>
+<div id=browseButtonBar>
+  <div id=browseButton1 class="brandFont brandFontColor">All activity</div>
+  <div id=browseButton2 class="brandFont brandFontColor">My spots</div>
+  <div id=browseButton3 class="brandFont brandFontColor">My wishlist</div>
+</div>
+<div id=browseLineSeparatorBottom></div>
+<div id=browseSpotsScrollContainer class=touchScroll>
 
-<div id=browseCarousel>
+  {% if activity_stream %}
+    {% for entry in activity_stream %}
+
+<div id=browseCarouselResultBox class="shadow">
+
+  {% if entry.rating == "" %}
+  <div id=browseAllActivityRating class="brandFont ratingWL" style="padding-top: 27px;">WL</div>
+  {% elif entry.rating == '5' %}
+  <div id=browseAllActivityRating class="brandFont rating5" style="padding-top: 20px;">All<br>time</div>
+  {% elif entry.rating == '4' %}
+  <div id=browseAllActivityRating class="brandFont rating4" style="padding-top: 20px;">Love<br>it</div>
+  {% elif entry.rating == '3' %}
+  <div id=browseAllActivityRating class="brandFont rating3" style="padding-top: 20px;">Like<br>it</div>
+  {% elif entry.rating == '2' %}
+  <div id=browseAllActivityRating class="brandFont rating2" style="padding-top: 27px;">Meh</div>
+  {% elif entry.rating == '1' %}
+  <div id=browseAllActivityRating class="brandFont rating1" style="padding-top: 20px;">Skip<br>it!</div>
+  {% endif %}
+
+  <div id=browseAllActivitySpot class="brandFont brandFontColor">{{entry.name}}</div>
+</div>
+
+{% endfor %}
+{% endif %}
+
+</div>
+
+{% endblock %}
+<!-- <div id=browseCarousel>
   <div class="shadow" id=browseCarouselChildActivity>
     <div class="brandFont brandFontColor" id=browseCarouselTitle>Activity stream</div>
 
@@ -82,6 +118,4 @@
   <div id=browseCarouselChildBuffer></div>
 
 
-  </div>
-
-{% endblock %}
+  </div> -->

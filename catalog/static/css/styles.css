@@ -2551,56 +2551,117 @@ label.add {
 }
 
 
-#browseCarousel {
-  display: flex;
-  height: 420px;
-  width: 350px;
-  margin: 0px auto;
-  margin-top: 5px;
-  background-color: white;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  padding-left: 10px;
-}
-
-#browseCarouselChildActivity, #browseCarouselChildWishlist, #browseCarouselChildHitlist {
-  flex: 0 0 auto;
-  height: 390px;
+/** BROWSE SPOTS STYLE  SECTION **/
+#browseLineSeparatorTop {
+  height: 1px;
   width: 320px;
-  background-color: white;
-  border-radius: 10px;
-  margin-top: 15px;
-  margin-right: 10px;
-  text-align: center;
-  padding: 5px;
-  overflow: scroll;
+  border-top: 1px solid #1e8eff;
+  margin: 0 auto;
+  margin-top: 12px;
 }
 
-#browseCarouselChildBuffer {
-  flex: 0 0 auto;
-  height: 370px;
-  width: 10px;
+#browseLineSeparatorBottom {
+  height: 1px;
+  width: 320px;
+  border-top: 1px solid #1e8eff;
+  margin: 0 auto;
+  margin-bottom: 5px;
+}
+
+#browseButtonBar {
+  height: 40px;
+  width: 100%;
   background-color: white;
-  border-radius: 10px;
 
 }
 
-#browseCarouselTitle {
+#browseButton1, #browseButton2, #browseButton3  {
+  display: inline-block;
+  width: 105px;
   height: 30px;
-  width: 200px;
-  margin: 0px auto;
-  line-height: 40px;
+  margin-top: 5px;
+  margin-left: 13px;
+  border-radius: 10px;
+  background-color: white;
+  text-align: center;
+  padding-top: 10px;
+}
+
+#browseButton1 {
+  margin-left: 15px;
+  background-color: #1e8eff;
+  color: white;
+}
+
+#browseSpotsScrollContainer {
+  height: 380px;
+  width: 100%;
+  background-color: white;
+  overflow-y: scroll;
+}
+
+.touchScroll {
+  -webkit-overflow-scrolling: touch;
 }
 
 #browseCarouselResultBox {
-  min-height: 95px;
+  min-height: 90px;
   background-color: white;
-  width: 275px;
+  width: 350px;
   margin: 10px auto;
   border: 1px solid lightgrey;
   border-radius: 10px;
   position: relative;
 }
+
+#browseAllActivityRating {
+  position: absolute;
+  height: 70px;
+  width: 70px;
+  border-radius: 100%;
+  top: 10px;
+  left: 7px;
+  text-align: center;
+  font-size: 16px;
+}
+
+.rating5 {
+  background-color: #01FF9E;
+}
+
+.rating4 {
+  background-color: #AAFF70;
+}
+
+.rating3 {
+  background-color: #4AFFF7;
+}
+
+.rating2 {
+  background-color: #BDD7EE;
+}
+
+.rating1 {
+  background-color: #FFADC0;
+}
+
+.ratingWL {
+  background-color: #FFFF86;
+}
+
+#browseAllActivitySpot {
+  position: absolute;
+  font-size: 16px;
+  width: 200px;
+  top: 15px;
+  left: 85px;
+}
+
+
+
+
+
+
 
 #browseCarouselUserImg {
   height: 40px;
@@ -2684,8 +2745,63 @@ label.add {
 }
 
 
-/**/
 
+
+
+
+
+
+
+
+
+/* #browseCarousel {
+  display: flex;
+  height: 420px;
+  width: 350px;
+  margin: 0px auto;
+  margin-top: 5px;
+  background-color: white;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  padding-left: 10px;
+}
+
+#browseCarouselChildActivity, #browseCarouselChildWishlist, #browseCarouselChildHitlist {
+  flex: 0 0 auto;
+  height: 390px;
+  width: 320px;
+  background-color: white;
+  border-radius: 10px;
+  margin-top: 15px;
+  margin-right: 10px;
+  text-align: center;
+  padding: 5px;
+  overflow: scroll;
+}
+
+#browseCarouselChildBuffer {
+  flex: 0 0 auto;
+  height: 370px;
+  width: 10px;
+  background-color: white;
+  border-radius: 10px;
+
+}
+
+#browseCarouselTitle {
+  height: 30px;
+  width: 200px;
+  margin: 0px auto;
+  line-height: 40px;
+} */
+
+
+
+
+
+
+
+/** FOR DRINK TRACKER **/
 
 
 #drinkEnterFormBox {
