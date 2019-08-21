@@ -2626,15 +2626,15 @@ label.add {
 }
 
 .rating5 {
-  background-color: #01FF9E;
+  background-color: #39FF9E;
 }
 
 .rating4 {
-  background-color: #AAFF70;
+  background-color: #74FFA9;
 }
 
 .rating3 {
-  background-color: #4AFFF7;
+  background-color: #88FFD5;
 }
 
 .rating2 {
@@ -2657,21 +2657,63 @@ label.add {
   left: 85px;
 }
 
+#browseAllActivitySpotCategory {
+  position: absolute;
+  width: 160px;
+  text-align: left;
+  top: 30px;
+  left: 85px;
+  color: grey;
+  font-size: 10px;
+  text-overflow: ellipsis;
+  overflow-x: hidden;
+  white-space: nowrap;
+}
 
-
-
-
-
-
-#browseCarouselUserImg {
-  height: 40px;
-  width: 40px;
+#browseAllActivityUserImg {
+  height: 45px;
+  width: 45px;
   border-radius: 100%;
   background-color: #f2f2f2;
   position: absolute;
-  top: 30px;
-  left: 10px;
+  top: 20px;
+  right: 10px;
 }
+
+#browseAllActivityUserNotes {
+  position: absolute;
+  top: 45px;
+  left: 85px;
+  height: 35px;
+  width: 180px;
+  font-size: 10px;
+  text-align: left;
+  overflow: hidden;
+}
+
+#browseAllActivitySpotDate {
+  position: absolute;
+  right: 17px;
+  top: 5px;
+  font-size: 10px;
+  color: grey;
+}
+
+#browseAllActivitySpotUsername {
+  position: absolute;
+  width: 60px;
+  text-align: left;
+  right: 0px;
+  bottom: 5px;
+  font-size: 10px;
+  color: grey;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+
 
 #browseCarouselUserName {
   height: 16px;
@@ -2697,18 +2739,7 @@ label.add {
   white-space: nowrap;
 }
 
-#browseCarouselSpotCategory {
-  position: absolute;
-  width: 150px;
-  text-align: left;
-  top: 50px;
-  left: 60px;
-  color: grey;
-  font-size: 10px;
-  text-overflow: ellipsis;
-  overflow-x: hidden;
-  white-space: nowrap;
-}
+
 
 #browseCarouselUserRating {
   height: 45px;
@@ -2729,20 +2760,7 @@ label.add {
   font-size: 10px;
 }
 
-#browseCarouselUserNotes {
-  max-height: 50px;
-  width: 155px;
-  color: grey;
-  margin-left: 55px;
-  margin-top: 70px;
-  margin-bottom: 10px;
-  font-size: 10px;
-  font-style: italic;
-  padding-left: 10px;
-  padding-right: 2px;
-  text-align: left;
-  overflow: scroll;
-}
+
 
 
 

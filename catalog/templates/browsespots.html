@@ -32,6 +32,11 @@
   {% endif %}
 
   <div id=browseAllActivitySpot class="brandFont brandFontColor">{{entry.name}}</div>
+  <div id=browseAllActivitySpotCategory>{{entry.city}}, {{entry.category1}}</div>
+  <div id=browseAllActivitySpotDate>{{entry.date|date:'j M'}}</div>
+  <div id=browseAllActivityUserImg style="background-image: url({{ user.profile.userpic.url }}); background-size: cover"></div>
+  <div id=browseAllActivitySpotUsername>{{entry.user}}</div>
+  <div id=browseAllActivityUserNotes>{{entry.notes}}</div>
 </div>
 
 {% endfor %}
