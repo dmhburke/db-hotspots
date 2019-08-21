@@ -2655,6 +2655,8 @@ label.add {
   width: 200px;
   top: 15px;
   left: 85px;
+  text-overflow: ellipsis;
+  white-space: normal;
 }
 
 #browseAllActivitySpotCategory {
