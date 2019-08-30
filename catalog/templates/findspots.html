@@ -19,13 +19,83 @@
 
     <button id=spotFinderButton class="brandColor brandFont whiteFont" type=submit>Find spots</button>
   </form>
-
 </div>
 
+<div id=findSpotsScrollContainer class=touchScroll>
+
+<!-- SPOT RESULTS-->
 {% if spot_finder %}
 {% for spot in spot_finder %}
 
 <div id=spotFinderResult class="shadow">
+
+  {% if spot.rating == "" %}
+  <div id=spotFinderActivityRating class="brandFont ratingWL" style="padding-top: 27px;">WL</div>
+  {% elif spot.rating == '5' %}
+  <div id=spotFinderActivityRating class="brandFont rating5" style="padding-top: 20px;">All<br>time</div>
+  {% elif spot.rating == '4' %}
+  <div id=spotFinderActivityRating class="brandFont rating4" style="padding-top: 20px;">Love<br>it</div>
+  {% elif spot.rating == '3' %}
+  <div id=spotFinderActivityRating class="brandFont rating3" style="padding-top: 20px;">Like<br>it</div>
+  {% elif spot.rating == '2' %}
+  <div id=spotFinderActivityRating class="brandFont rating2" style="padding-top: 27px;">Meh</div>
+  {% elif spot.rating == '1' %}
+  <div id=spotFinderActivityRating class="brandFont rating1" style="padding-top: 20px;">Skip<br>it!</div>
+  {% else %}
+  <div id=spotFinderActivityRating class="brandFont brandFontColor" style="padding-top: 20px; border: 1px solid #1e8eff;">Hot<br>Spot</div>
+  {% endif %}
+
+
+  <div id=spotFinderActivitySpotName class="brandFont brandFontColor">{{spot.name}}</div>
+  <div id=spotFinderSpotCategory>{{spot.category1}}, {{spot.city}}</div>
+  <div id=spotFinderUserBox>
+
+    <!-- 4plus -->
+    <div id=spotFinderUserImg1></div>
+    <div id=spotFinderUserImg2></div>
+    <div id=spotFinderUserImg3></div>
+    <div id=spotFinderUserImg4></div>
+    <div id=spotFinderUserText4plus>+10 have<br>been here</div>
+
+
+
+  </div>
+  <div id=spotFinderPerfectForBox>
+
+    {% if spot.perfect_for %}
+    {% for entry in spot.perfect_for %}
+    <div id=spotFinderPerfectForResult class="brandFont brandFontColor">
+      {% if entry == "Something quick"%}
+      Quick
+      {% elif entry == "Impressing guests" %}
+      Impress ppl
+      {% elif entry == "Last-min plans" %}
+      Last-min
+      {% elif entry == "Last-min plans" %}
+      {% else %}
+      {{entry}}
+      {% endif %}
+    </div>
+    {% endfor %}
+    {% else %}
+    <div id=spotFinderPerfectNoResult class="brandFont">No descriptive data</div>
+    {% endif %}
+
+  </div>
+
+</div>
+
+{% endfor %}
+{% endif %}
+
+</div>
+
+<!--
+
+{% if spot_finder %}
+{% for spot in spot_finder %}
+
+
   <div class="brandFont brandFontColor" id=spotFinderResultName>{{ spot.name }}</div>
     <div id =spotFinderResultAddress>{{spot.category1}}, {{spot.suburb}}</div>
     <div id =spotFinderResultIndivScore>
@@ -92,19 +162,11 @@
       </div>
 
 
-  <!-- {{ spot.name }}
-  <span style="color: lightgrey;">({{ spot.category1 }})</span>-->
+
 </div>
 
 {% endfor %}
-{% else %}
-
 {% endif %}
+ -->
 
-{% for spot in spot_finder %}
-{% if spot.name == "Bar Jamon" %}
-{{ spot.name }}
-{% else %}
-{% endif %}
-{% endfor %}
 {% endblock %}

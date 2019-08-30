@@ -2431,15 +2431,137 @@ label.add {
   line-height: 35px;
 }
 
+#findSpotsScrollContainer {
+  height: 380px;
+  width: 100%;
+  background-color: white;
+  overflow-y: scroll;
+  margin-top: -10px;
+}
+
 
 #spotFinderResult {
-  height: 70px;
-  width: 340px;
+  min-height: 90px;
+  background-color: white;
+  width: 350px;
   margin: 10px auto;
-  padding: 5px 10px;
+  border: 1px solid lightgrey;
+  border-radius: 10px;
   position: relative;
 }
 
+#spotFinderActivityRating {
+  position: absolute;
+  height: 70px;
+  width: 70px;
+  border-radius: 100%;
+  top: 10px;
+  left: 7px;
+  text-align: center;
+  font-size: 16px;
+}
+
+#spotFinderActivitySpotName {
+  position: absolute;
+  font-size: 16px;
+  width: 180px;
+  top: 15px;
+  left: 85px;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#spotFinderSpotCategory {
+  position: absolute;
+  width: 160px;
+  text-align: left;
+  top: 30px;
+  left: 85px;
+  color: grey;
+  font-size: 10px;
+  text-overflow: ellipsis;
+  overflow-x: hidden;
+  white-space: nowrap;
+}
+
+#spotFinderUserBox {
+  height: 30px;
+  width: 160px;
+  background-color: white;
+  position: absolute;
+  bottom: 12px;
+  left: 85px;
+}
+
+#spotFinderUserImg1, #spotFinderUserImg2, #spotFinderUserImg3, #spotFinderUserImg4 {
+  height: 31px;
+  width: 31px;
+  border: 1px solid white;
+  border-radius: 100%;
+  background-color: lightgrey;
+  position: absolute;
+}
+
+#spotFinderUserImg2 {
+  left: 20px;
+}
+
+#spotFinderUserImg3 {
+  left: 40px;
+}
+
+#spotFinderUserImg4 {
+  left: 60px;
+}
+
+#spotFinderUserText4plus {
+  height: 90%;
+  width: 62px;
+  position: absolute;
+  right: 0px;
+  top: 2px;
+  color: grey;
+  font-size: 10px;
+  line-height: 10px;
+  padding-top: 4px;
+}
+
+#spotFinderPerfectForBox {
+  height: 67px;
+  width: 75px;
+  position: absolute;
+  bottom: 10px;
+  right: 5px;
+}
+
+#spotFinderPerfectForResult {
+  height: 20px;
+  width: 75px;
+  border-radius: 10px;
+  background-color: #f2f2f2;
+  margin: 0 auto;
+  margin-bottom: 5px;
+  font-size: 10px;
+  text-align: center;
+  padding-top: 6px;
+}
+
+#spotFinderPerfectNoResult {
+  height: 67px;
+  width: 75px;
+  position: absolute;
+  bottom: 0px;
+  right: 5px;
+  background-color: #f2f2f2;
+  border-radius: 10px;
+  font-size: 10px;
+  text-align: center;
+  color: lightgrey;
+  padding-top: 20px;
+}
+
+/*
 #spotFinderResultTopBox {
   height: 30px;
   width: 100%;
@@ -2523,7 +2645,7 @@ label.add {
 #spotFinderResultBeenHereImageBox {
   display: inline-block;
   height: 100%;
-  width: 105px; /*changetomaxWidth*/
+  width: 105px;
   vertical-align: middle;
   padding-top: 2px;
   padding-left: 12px;
@@ -2548,7 +2670,7 @@ label.add {
   vertical-align: middle;
   font-size: 10px;
   color: grey;
-}
+} */
 
 
 /** BROWSE SPOTS STYLE  SECTION **/
