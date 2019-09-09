@@ -14,7 +14,7 @@ from catalog.choices import *
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     userpic = models.FileField(upload_to='profilepictures', blank=True, null=True)
-    home_city = models.CharField(max_length=30, blank=True, null=True)
+    homecity = models.CharField(max_length=30, blank=True, null=True)
     number_rating = models.IntegerField(blank=True, null=True)
     high_rating = models.CharField(max_length=45, blank=True, null=True)
     last_rating = models.CharField(max_length=45, blank=True, null=True)

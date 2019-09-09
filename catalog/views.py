@@ -31,7 +31,7 @@ def createaccount (request):
             user = form.save()
             user.refresh_from_db()  # load the profile instance created by the signal
             user.profile.userpic = form.cleaned_data.get('userpic')
-            user.profile.home_city = form.cleaned_data.get('home_city')
+            user.profile.homecity = form.cleaned_data.get('homecity')
             user.profile.save()
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=user.username, password=raw_password)
@@ -65,7 +65,7 @@ def home (request):
 def landingadd(request):
 
     logged_in_user = request.user
-    user_city = logged_in_user.profile.home_city
+    user_city = logged_in_user.profile.homecity
 
     search_result = {}
     if 'name' in request.POST:
@@ -214,7 +214,7 @@ def adddetail(request, name, lat, lng):
 def findspot (request):
 
     logged_in_user = request.user
-    user_city = logged_in_user.profile.home_city
+    user_city = logged_in_user.profile.homecity
 
     situation_result = {}
     category_result = {}
