@@ -31,12 +31,12 @@ def createaccount (request):
             user = form.save()
             user.refresh_from_db()  # load the profile instance created by the signal
             user.profile.userpic = form.cleaned_data.get('userpic')
-            user.profile.location = form.cleaned_data.get('location')
+            user.profile.home_city = form.cleaned_data.get('home_city')
             user.profile.save()
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=user.username, password=raw_password)
             login(request, user)
-            return redirect('landingadd')
+            return redirect('home')
     else:
         form = ProfileForm()
 
@@ -65,7 +65,7 @@ def home (request):
 def landingadd(request):
 
     logged_in_user = request.user
-    user_city = logged_in_user.profile.location
+    user_city = logged_in_user.profile.home_city
 
     search_result = {}
     if 'name' in request.POST:
@@ -185,7 +185,7 @@ def adddetail(request, name, lat, lng):
             post.postcode = resultPostcode
             post.suburb = resultSuburb
             post.save()
-            return redirect('findspot') #or whatever the url
+            return redirect('browsespots') #or whatever the url
     else:
         form = MasterAddForm()
 
@@ -214,7 +214,7 @@ def adddetail(request, name, lat, lng):
 def findspot (request):
 
     logged_in_user = request.user
-    user_city = logged_in_user.profile.location
+    user_city = logged_in_user.profile.home_city
 
     situation_result = {}
     category_result = {}
