@@ -14,7 +14,7 @@ from catalog.choices import *
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     userpic = models.FileField(upload_to='profilepictures', blank=True, null=True)
-    location = models.CharField(max_length=30, blank=True, null=True)
+    home_city = models.CharField(max_length=30, blank=True, null=True)
     number_rating = models.IntegerField(blank=True, null=True)
     high_rating = models.CharField(max_length=45, blank=True, null=True)
     last_rating = models.CharField(max_length=45, blank=True, null=True)
@@ -284,6 +284,16 @@ def add_user_overview(sender, instance, **kwargs):
     'number_rating': count_rating,
     })
 
+
+
+
+
+
+
+
+
+
+
 ##### TEST PAGES #####
 class TestEntryModel(models.Model):
     name = models.CharField(max_length=30, default="New", blank=True, null=True)
@@ -294,6 +304,14 @@ class TestStoreModel(models.Model):
 @receiver(post_save, sender=TestEntryModel)
 def single_save(sender, instance, **kwargs):
     TestStoreModel.objects.update_or_create(name=instance.name)
+
+
+
+
+
+
+
+
 
 
 

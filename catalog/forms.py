@@ -9,8 +9,8 @@ from django.contrib.gis.geoip2 import GeoIP2
 from catalog.models import Profile, AddReview, MasterAddModel, TestEntryModel, DrinkCreateNewModel, DrinkCreateNewModelDetails
 
 class ProfileForm(UserCreationForm):
-    userpic = forms.FileField(required=True)
-    home_city = forms.ChoiceField(choices=CITIES, required=True)
+    userpic = forms.FileField(required=False)
+    home_city = forms.ChoiceField(choices=CITIES, required=False)
 
     class Meta:
         model = User

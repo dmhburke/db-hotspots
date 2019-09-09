@@ -5,7 +5,7 @@ from catalog.models import Profile, AddReview, SingleLocation, ReviewRecord, Mas
 
 # Register your models here.
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ('user', 'userpic', 'location', 'number_rating', 'high_rating', 'last_rating',)
+    list_display = ('user', 'userpic', 'home_city', 'number_rating', 'high_rating', 'last_rating',)
 
 # Register the admin class with the associated model
 admin.site.register(Profile, ProfileAdmin)
