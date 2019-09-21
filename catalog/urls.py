@@ -16,6 +16,7 @@ urlpatterns = [
     path('discovernew', views.discovernew, name='discovernew'),
     path('user/<str:pk>', views.userdetail, name='userdetail'),
     path('testpage', views.testpage, name='testpage'),
+    path('spotfulldetail/<name>/<city>', views.spotfulldetail, name='spotfulldetail'),
     path('testpage/<name>/<lat>/<lng>', views.testpagedetail, name='testpagedetail'),
     path('drinking', views.drinkoverview, name='drinkoverview'),
     path('drinkentry/<day>', views.drinkentry, name='drinkentry')

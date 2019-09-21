@@ -713,6 +713,62 @@ def testpagedetail (request, name, lat, lng):
 
     return render(request, 'testpagedetail.html', context=context)
 
+def spotfulldetail(request, name, city):
+
+    # IMAGE CAROUSEL
+    imageQuery = name + " " + city
+
+
+    searchURL = 'https://www.googleapis.com/customsearch/v1'
+    searchParams = dict(
+        cx=google_project_cx,
+        key=google_dev_api_key,
+        q=imageQuery,
+        searchType='image',
+        fileType='.jpg',
+        num=6,
+    )
+
+    searchResponse = requests.get(url=searchURL, params=searchParams)
+    searchStatus = searchResponse.status_code
+    searchData = searchResponse.json()
+    searchInfo = json.loads(searchResponse.text)
+
+    imageResult = searchInfo['items']
+
+    #REVIEW DETAILS
+    numberVisits = CleanReviewModel.objects.filter(name=name).exclude(user=request.user).count()
+    numberReviews = MasterAddModel.objects.filter(name=name)
+    countRatings = CleanReviewModel.objects.filter(name=name).exclude(rating="").count()
+
+    #SUMDETAILS
+    sum5Ratings = CleanReviewModel.objects.filter(name=name, rating='5').count()*5
+    sum4Ratings = CleanReviewModel.objects.filter(name=name, rating='4').count()*4
+    sum3Ratings = CleanReviewModel.objects.filter(name=name, rating='3').count()*3
+    sum2Ratings = CleanReviewModel.objects.filter(name=name, rating='2').count()*2
+    sum1Ratings = CleanReviewModel.objects.filter(name=name, rating='1').count()*1
+
+    sumRatings = sum5Ratings + sum4Ratings + sum3Ratings + sum2Ratings + sum1Ratings
+    try:
+        aveRating = sumRatings/countRatings
+    except:
+        aveRating = "None"
+
+    context = {
+    'name': name,
+    'city': city,
+    'imageResult': imageResult,
+    'numberReviews': numberReviews,
+    'numberVisits': numberVisits,
+    'countRatings': countRatings,
+    'aveRating': aveRating,
+
+    }
+
+    return render(request, 'spotfulldetail.html',context=context)
+
+
+
     ####### DRINKS ########
 
 def drinkoverview(request):

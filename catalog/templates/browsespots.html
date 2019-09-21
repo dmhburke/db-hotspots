@@ -15,6 +15,7 @@
   {% if activity_stream %}
     {% for entry in activity_stream %}
 
+<a href="{% url 'spotfulldetail' entry.name entry.city %}">
 <div id=browseCarouselResultBox class="shadow">
 
   {% if entry.rating == "" %}
@@ -38,6 +39,7 @@
   <div id=browseAllActivitySpotUsername>{{entry.user}}</div>
   <div id=browseAllActivityUserNotes>{{entry.notes}}</div>
 </div>
+</a>
 
 {% endfor %}
 {% endif %}

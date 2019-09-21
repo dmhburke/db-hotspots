@@ -253,6 +253,22 @@ li {
   line-height: 95px;
 }
 
+#createAcctErrorBox {
+  position: absolute;
+  top: 10px;
+  left: 27px;
+  min-height: 80px;
+  max-height: 100px;
+  width: 250px;
+  border-radius: 10px;
+  background-color: white;
+  text-align: center;
+  padding: 10px;
+  z-index: 100;
+  overflow: scroll;
+
+}
+
 #loginContentRow {
   padding-top: 10px;
 }
@@ -370,9 +386,11 @@ li {
 
 #id_home_city {
   position: absolute;
-  top: 0px;
-  left: 0px;
-  padding: 10px 21px;
+  top: 2px;
+  left: 25px;
+  padding: 0px 0px;
+
+
 }
 
 #createAcct {
@@ -2802,7 +2820,7 @@ label.add {
   border-radius: 100%;
   background-color: #f2f2f2;
   position: absolute;
-  top: 20px;
+  top: 22px;
   right: 10px;
 }
 
@@ -2828,8 +2846,8 @@ label.add {
 #browseAllActivitySpotUsername {
   position: absolute;
   width: 60px;
-  text-align: left;
-  right: 0px;
+  text-align: center;
+  right: 2px;
   bottom: 5px;
   font-size: 10px;
   color: grey;
@@ -2886,9 +2904,45 @@ label.add {
   font-size: 10px;
 }
 
+#spotFullDetailResult {
+  height: 370px;
+  width: 350px;
+  padding: 5px;
+  margin: 20px auto;
+  border-radius: 20px;
+  position: relative;
+}
 
+#reviewCircle {
+  height: 95px;
+  width: 95px;
+  border-radius: 100%;
+  position: absolute;
+  top: 250px;
+  right: 10px;
+  text-align: center;
+  font-size: 24px;
+}
 
+#reviewCountText {
+  height: 20px;
+  width: 85px;
+  text-align: center;
+  position: absolute;
+  top: 347px;
+  right: 15px;
+  color: grey;
+  
+}
 
+#spotDetailsContainer {
+  height: 100px;
+  width: 220px;
+  border: 1px solid grey;
+  position: absolute;
+  top: 250px;
+  left: 10px;
+}
 
 
 

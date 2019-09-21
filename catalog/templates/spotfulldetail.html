@@ -1,0 +1,88 @@
+{% extends "home_template.html" %}
+
+{% block contentName %}
+{% load static %}
+
+<div id="spotFullDetailResult" class=shadow>
+  <div id="detailTitleBox" class="brandFont brandFontColor">
+    <div id="detailTitleSpan" class="brandFont brandFontColor">{{name}}</div>
+    </div>
+  <div id="detailAddressBox" class="brandFont">Address, {{city}}</div>
+  <div id="detailImageCarousel">
+    {% if imageResult %}
+      {% for image in imageResult %}
+      <div id=detailImage style="background-image: url({{image.image.thumbnailLink}}); background-size: cover; background-position: 50% 80%"></div>
+      {% endfor %}
+      {% else %}
+      <img id=detailImageError src= "{% static 'icons/noPictureGrey.svg' %}">
+      {% endif %}
+  </div>
+  <div id=detailResultSummary class="brandFont">
+    <div id=detailResultSummaryText class="brandFont brandFontColor">
+      {% if numberVisits == 0 %}
+      First of your friends here!
+      {% else %}
+      {{ numberVisits }} of your friends have been here
+      {% endif %}
+    </div>
+    </div>
+
+    {% if aveRating == "None" %}
+    <div id=reviewCircle class="ratingWL shadow">
+    <div class="brandFont" style="font-size: 24px; margin-top: 25px;">WL <br>only</div></div>
+    {% elif aveRating == 5 %}
+    <div id=reviewCircle class="rating5 shadow">
+    <div class="brandFont" style="font-size: 24px; margin-top: 25px;">All<br>time</div></div>
+    {% elif aveRating == 4 %}
+    <div id=reviewCircle class="rating4 shadow">
+    <div class="brandFont" style="font-size: 24px; margin-top: 25px;">Love<br>it</div></div>
+    {% elif aveRating == 3 %}
+    <div id=reviewCircle class="rating3 shadow">
+    <div class="brandFont" style="font-size: 24px; margin-top: 25px;">Like<br>it</div></div>
+    {% elif aveRating == 2 %}
+    <div id=reviewCircle class="rating2 shadow">
+    <div class="brandFont" style="font-size: 24px; margin-top: 35px;">Meh</div></div>
+    {% elif aveRating == 1 %}
+    <div id=reviewCircle class="rating1 shadow">
+    <div class="brandFont" style="font-size: 24px; margin-top: 25px;">Skip<br>it!</div></div>
+    {% endif %}
+
+  <div id=reviewCountText>
+    {% if countRatings == 1 %}
+    {{countRatings}} review
+    {% else %}
+    {{countRatings}} reviews
+    {% endif %}
+  </div>
+
+  </div>
+  <div id=browseCarouselResultBox class="shadow" style="margin-top:0px">
+
+    <!-- {% if entry.rating == "" %}
+    <div id=browseAllActivityRating class="brandFont ratingWL" style="padding-top: 27px;">WL</div>
+    {% elif entry.rating == '5' %}
+    <div id=browseAllActivityRating class="brandFont rating5" style="padding-top: 20px;">All<br>time</div>
+    {% elif entry.rating == '4' %}
+    <div id=browseAllActivityRating class="brandFont rating4" style="padding-top: 20px;">Love<br>it</div>
+    {% elif entry.rating == '3' %}
+    <div id=browseAllActivityRating class="brandFont rating3" style="padding-top: 20px;">Like<br>it</div>
+    {% elif entry.rating == '2' %}
+    <div id=browseAllActivityRating class="brandFont rating2" style="padding-top: 27px;">Meh</div>
+    {% elif entry.rating == '1' %}
+    <div id=browseAllActivityRating class="brandFont rating1" style="padding-top: 20px;">Skip<br>it!</div>
+    {% endif %}
+
+    <div id=browseAllActivitySpot class="brandFont brandFontColor">{{entry.name}}</div>
+    <div id=browseAllActivitySpotCategory>{{entry.city}}, {{entry.category1}}</div>
+    <div id=browseAllActivitySpotDate>{{entry.date|date:'j M'}}</div>
+    <div id=browseAllActivityUserImg style="background-image: url({{ entry.user.profile.userpic.url }}); background-size: cover"></div>
+    <div id=browseAllActivitySpotUsername>{{entry.user}}</div>
+    <div id=browseAllActivityUserNotes>{{entry.notes}}</div> -->
+  </div>
+
+
+
+
+
+
+{% endblock %}

@@ -8,6 +8,18 @@
     <img id=logoStandard src="{% static 'icons/logoBlue.svg' %}"></div>
     <div id=loginTitleBox class="brandFont brandFontColor titleFont">HotSpots</div></div>
 
+    {% if form.errors %}
+    <div id=createAcctErrorBox class="shadow">
+    <b class="brandFontColor brandFont">A couple quick adjustments...</b>
+    {% for key,value in form.errors.items %}
+    {% for error in value %}
+    <div style="text-align: left; padding-top: 5px; color: darkgrey;">{{ error }}</div>
+    {% endfor %}
+    {% endfor %}
+    </div>
+    {% endif %}
+
+
   <form method="post" enctype="multipart/form-data">
       {% csrf_token %}
   <div id=loginContentRow>
@@ -28,7 +40,7 @@
         <div id=createAcctEntry class="brandFont brandFontColor">{{ form.password2 }}</div></div>
         <div id=createAcctInputRow><div id=createAcctInputLabel class="brandFont brandFontColor">Home city</div>
           <div id=createAcctEntry class="brandFont brandFontColor">
-            <div id="id_home_city">{{ form.home_city }}</div></div></div>
+            <div id="id_home_city">{{ form.homecity }}</div></div></div>
   </div>
 
   <div id=createAcctFooterRow class="brandTopBorder">
