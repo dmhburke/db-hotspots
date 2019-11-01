@@ -21,7 +21,7 @@ idna==2.8
 jmespath==0.9.4
 maxminddb==1.4.1
 opencage==1.2
-Pillow==6.0.0
+Pillow==6.2.0
 psycopg2-binary==2.8.3
 pyasn1==0.4.5
 pyasn1-modules==0.2.5
