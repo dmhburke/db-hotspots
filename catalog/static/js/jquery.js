@@ -6,6 +6,14 @@ $(document).ready(function() {
       $("#detailHitlistButton").toggleClass("detailButtonActive");
     });
 
+    // ENTER REVIEW 'active' vibe entries
+    $("label").click(function() {
+      $(this).css({
+        "background-color": "#1e8eff",
+        "color": "white"
+      });
+    });
+
   // BROWSE Function to display all activity vs my activity
   $('#browseButton1').click(function() {
     $(this).addClass('activeBrowseButton');
@@ -35,12 +43,7 @@ $(document).ready(function() {
 
 
 //   //
-//   // $("label").click(function() {
-//   //   $(this).css({
-//   //     "background-color": "#1e8eff",
-//   //     "color": "white"
-//   //   });
-//   // });
+
 //
 //   $("#testfunction").click(function() {
 //   if /* if we're on iOS, open in Apple Maps */
