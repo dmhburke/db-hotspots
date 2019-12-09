@@ -1,5 +1,11 @@
 $(document).ready(function() {
 
+  // ENTER REVIEW on ADDDETAIL page
+    $("#detailHitlistButton").click(function() {
+      $("#detailsFormContainer").toggleClass("detailsFormContainerOpen");
+      $("#detailHitlistButton").toggleClass("detailButtonActive");
+    });
+
   // BROWSE Function to display all activity vs my activity
   $('#browseButton1').click(function() {
     $(this).addClass('activeBrowseButton');
@@ -24,17 +30,10 @@ $(document).ready(function() {
     });
 
 
-  // $("#browseButton2").click(function() {
-  //   $("#browseAllSpotsScrollContainer").toggleClass("removeBrowse");
-  //   $("#browseWishlistScrollContainer").toggleClass("removeBrowse");
-  // });
 
   });
 
-//   // $("#detailHitlistButton").click(function() {
-//   //   $("#detailsFormContainer").toggleClass("detailsFormContainerOpen");
-//   //   $("#detailHitlistButton").toggleClass("detailButtonActive");
-//   // });
+
 //   //
 //   // $("label").click(function() {
 //   //   $(this).css({
