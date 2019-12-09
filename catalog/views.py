@@ -376,11 +376,14 @@ def browsespots(request):
 
     activity_stream = CleanReviewModel.objects.all().order_by('-date')
 
-    your_spots = CleanReviewModel.objects.filter(user = request.user, rating__isnull = False).order_by("-date")
+    your_spots = CleanReviewModel.objects.filter(user=request.user, rating__gte=0).order_by("-rating", "-date")
+
+    your_wishlist = CleanReviewModel.objects.filter(user=request.user, rating="").order_by("-date")
 
     context={
     'activity_stream': activity_stream,
     'your_spots': your_spots,
+    'your_wishlist': your_wishlist,
 
     }
 
@@ -540,178 +543,178 @@ def discovernew (request):
 def testpage (request):
     """use for any testing needed"""
 
-    logged_in_user = request.user
-    user_city = logged_in_user.profile.location
-
-    search_result = {}
-    if 'name' in request.POST:
-          form = TestEntryForm(request.POST)
-          if form.is_valid():
-              search_result = form.search(request)
-    else:
-          form = TestEntryForm(initial={'city': user_city})
-
-    #CODE TO SHOW FULL JSON (not linked to search)
-    completeURL = 'https://api.foursquare.com/v2/venues/suggestcompletion'
-    completeParams = dict(
-        client_id='0PR1PTLMSLBM0ORYW5U2YGL43IOZXFVKWFIC2DHHXOP30Z35',
-         client_secret='SJDG5K1D5NARSRZYAAYPJMTJBPIGW4ONUTQBT4HTDNUGSLQQ',
-         v='20180323',
-         ll='40.734581,-74.003860',
-         query=search_result,
-         limit=1,)
-    completeResponse = requests.get(url=completeURL, params=completeParams)
-    completeStatus = completeResponse.status_code
-    completeDetails = completeResponse.content
-    completeData = completeResponse.json()
-    #NONE OF ABOVE REFRENCES SEARCH
-
+    # logged_in_user = request.user
+    # user_city = logged_in_user.profile.location
+    #
+    # search_result = {}
+    # if 'name' in request.POST:
+    #       form = TestEntryForm(request.POST)
+    #       if form.is_valid():
+    #           search_result = form.search(request)
+    # else:
+    #       form = TestEntryForm(initial={'city': user_city})
+    #
+    # #CODE TO SHOW FULL JSON (not linked to search)
+    # completeURL = 'https://api.foursquare.com/v2/venues/suggestcompletion'
+    # completeParams = dict(
+    #     client_id='0PR1PTLMSLBM0ORYW5U2YGL43IOZXFVKWFIC2DHHXOP30Z35',
+    #      client_secret='SJDG5K1D5NARSRZYAAYPJMTJBPIGW4ONUTQBT4HTDNUGSLQQ',
+    #      v='20180323',
+    #      ll='40.734581,-74.003860',
+    #      query=search_result,
+    #      limit=1,)
+    # completeResponse = requests.get(url=completeURL, params=completeParams)
+    # completeStatus = completeResponse.status_code
+    # completeDetails = completeResponse.content
+    # completeData = completeResponse.json()
+    # #NONE OF ABOVE REFRENCES SEARCH
+    #
     context={
-    'form': form,
-    'search_result': search_result,
-    'completeData': completeData,
-    # 'searchQuery': searchQuery,
-    # 'searchStatus': searchStatus,
-    # 'searchDetails': searchDetails,
-    # 'searchData': searchData,
-    # 'completeStatus': completeStatus,
-    # 'completeQuery': completeQuery,
+    # 'form': form,
+    # 'search_result': search_result,
     # 'completeData': completeData,
-
-    }
+    # # 'searchQuery': searchQuery,
+    # # 'searchStatus': searchStatus,
+    # # 'searchDetails': searchDetails,
+    # # 'searchData': searchData,
+    # # 'completeStatus': completeStatus,
+    # # 'completeQuery': completeQuery,
+    # # 'completeData': completeData,
+    #
+        }
 
     return render(request, 'testpage.html', context=context)
 
-def testpagedetail (request, name, lat, lng):
-    """use for any testing links needed"""
-
-    name=name
-    lat = lat
-    long = lng
-    targetLocation = str(lat) + ', ' + str(long)
-
-    detailsURL = 'https://api.foursquare.com/v2/venues/suggestcompletion'
-    detailsParams = dict(
-        client_id='0PR1PTLMSLBM0ORYW5U2YGL43IOZXFVKWFIC2DHHXOP30Z35',
-        client_secret='SJDG5K1D5NARSRZYAAYPJMTJBPIGW4ONUTQBT4HTDNUGSLQQ',
-         v='20180323',
-         ll=targetLocation,
-         query=name,
-         limit=10,
-         )
-    detailsResponse = requests.get(url=detailsURL, params=detailsParams)
-    detailsData = detailsResponse.json()
-    detailsStatus = detailsResponse.status_code
-    detailsInfo = json.loads(detailsResponse.text)
-
-    detailsResult = detailsInfo['response']['minivenues'][0]
-    resultName = detailsResult['name']
-    resultAddress = detailsResult['location']['address']
-    resultCity = detailsResult['location']['city']
-    resultCountry = detailsResult['location']['country']
-    try:
-        resultCategory1 = detailsResult['categories'][0]['name']
-    except:
-        resultCategory1 = ""
-    try:
-        resultCategory2 = detailsResult['categories'][1]['name']
-    except:
-        resultCategory2 = ""
-    try:
-        resultCategory3 = detailsResult['categories'][2]['name']
-    except:
-        resultCategory3 = ""
-    try:
-        resultPostcode = detailsResult['location']['postalCode']
-    except:
-        resultPostcode = ""
-
-    #ADD GOOGLE IMAGES SEARCH
-    #googleDevAPIKey = 'AIzaSyArd-i81wSGtCnJxDCFdBD0jrvX8AXOsCc'
-    #googleProjectCX = '000959550691752782256:tckrhqdefn8'
-
-    imageQuery = resultName + " " + resultAddress
-
-    searchURL = 'https://www.googleapis.com/customsearch/v1'
-    searchParams = dict(
-        cx=google_project_cx,
-        key=google_dev_api_key,
-        q=imageQuery,
-        searchType='image',
-        fileType='.jpg',
-        num=6,
-    )
-
-    searchResponse = requests.get(url=searchURL, params=searchParams)
-    searchStatus = searchResponse.status_code
-    searchData = searchResponse.json()
-    searchInfo = json.loads(searchResponse.text)
-
-    # try:
-    #     imageResult1 = searchInfo['items'][0]['link']
-    # except:
-    #     imageResult1 = "None"
-
-    imageResult = searchInfo['items']
-
-    jsonExplore = "None"
-
-    ###OpenCageLatLong2SmartLocation###
-
-    # locationURL =
-    # locationParams = dict (
-    #
-    # )
-
-    key = 'a98d10680c0c41d082d9de1c23dcec22'
-    geocoder = OpenCageGeocode(key)
-
-    locationResponse = geocoder.reverse_geocode(lat, long)
-    resultSuburb = locationResponse[0]['components']['suburb']
-
-
-
-    ####FORM FOR USERS INPUTS ####
-    if request.method == 'POST':
-        form = MasterAddForm(request.POST, request.FILES)
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.user = request.user
-            post.name = resultName
-            post.city = resultCity
-            post.category1 = resultCategory1
-            post.category2 = resultCategory2
-            post.category3 = resultCategory3
-            post.postcode = resultPostcode
-            post.suburb = resultSuburb
-            post.save()
-            return redirect('testpage') #or whatever the url
-    else:
-        form = MasterAddForm()
-
-
-
-    context = {
-    'form': form,
-    'name': name,
-    'targetLocation': targetLocation,
-    'detailsData': detailsData,
-    'resultName': resultName,
-    'resultCity': resultCity,
-    'resultCountry': resultCountry,
-    'resultAddress': resultAddress,
-    'resultCategory1': resultCategory1,
-    'resultCategory2': resultCategory2,
-    'resultCategory3': resultCategory3,
-    'resultPostcode': resultPostcode,
-    'searchStatus': searchStatus,
-    'imageResult': imageResult,
-    'searchData': searchData,
-    'jsonExplore': jsonExplore,
-    'resultSuburb': resultSuburb,
-    }
-
-    return render(request, 'testpagedetail.html', context=context)
+# def testpagedetail (request, name, lat, lng):
+#     """use for any testing links needed"""
+#
+#     name=name
+#     lat = lat
+#     long = lng
+#     targetLocation = str(lat) + ', ' + str(long)
+#
+#     detailsURL = 'https://api.foursquare.com/v2/venues/suggestcompletion'
+#     detailsParams = dict(
+#         client_id='0PR1PTLMSLBM0ORYW5U2YGL43IOZXFVKWFIC2DHHXOP30Z35',
+#         client_secret='SJDG5K1D5NARSRZYAAYPJMTJBPIGW4ONUTQBT4HTDNUGSLQQ',
+#          v='20180323',
+#          ll=targetLocation,
+#          query=name,
+#          limit=10,
+#          )
+#     detailsResponse = requests.get(url=detailsURL, params=detailsParams)
+#     detailsData = detailsResponse.json()
+#     detailsStatus = detailsResponse.status_code
+#     detailsInfo = json.loads(detailsResponse.text)
+#
+#     detailsResult = detailsInfo['response']['minivenues'][0]
+#     resultName = detailsResult['name']
+#     resultAddress = detailsResult['location']['address']
+#     resultCity = detailsResult['location']['city']
+#     resultCountry = detailsResult['location']['country']
+#     try:
+#         resultCategory1 = detailsResult['categories'][0]['name']
+#     except:
+#         resultCategory1 = ""
+#     try:
+#         resultCategory2 = detailsResult['categories'][1]['name']
+#     except:
+#         resultCategory2 = ""
+#     try:
+#         resultCategory3 = detailsResult['categories'][2]['name']
+#     except:
+#         resultCategory3 = ""
+#     try:
+#         resultPostcode = detailsResult['location']['postalCode']
+#     except:
+#         resultPostcode = ""
+#
+#     #ADD GOOGLE IMAGES SEARCH
+#     #googleDevAPIKey = 'AIzaSyArd-i81wSGtCnJxDCFdBD0jrvX8AXOsCc'
+#     #googleProjectCX = '000959550691752782256:tckrhqdefn8'
+#
+#     imageQuery = resultName + " " + resultAddress
+#
+#     searchURL = 'https://www.googleapis.com/customsearch/v1'
+#     searchParams = dict(
+#         cx=google_project_cx,
+#         key=google_dev_api_key,
+#         q=imageQuery,
+#         searchType='image',
+#         fileType='.jpg',
+#         num=6,
+#     )
+#
+#     searchResponse = requests.get(url=searchURL, params=searchParams)
+#     searchStatus = searchResponse.status_code
+#     searchData = searchResponse.json()
+#     searchInfo = json.loads(searchResponse.text)
+#
+#     # try:
+#     #     imageResult1 = searchInfo['items'][0]['link']
+#     # except:
+#     #     imageResult1 = "None"
+#
+#     imageResult = searchInfo['items']
+#
+#     jsonExplore = "None"
+#
+#     ###OpenCageLatLong2SmartLocation###
+#
+#     # locationURL =
+#     # locationParams = dict (
+#     #
+#     # )
+#
+#     key = 'a98d10680c0c41d082d9de1c23dcec22'
+#     geocoder = OpenCageGeocode(key)
+#
+#     locationResponse = geocoder.reverse_geocode(lat, long)
+#     resultSuburb = locationResponse[0]['components']['suburb']
+#
+#
+#
+#     ####FORM FOR USERS INPUTS ####
+#     if request.method == 'POST':
+#         form = MasterAddForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             post = form.save(commit=False)
+#             post.user = request.user
+#             post.name = resultName
+#             post.city = resultCity
+#             post.category1 = resultCategory1
+#             post.category2 = resultCategory2
+#             post.category3 = resultCategory3
+#             post.postcode = resultPostcode
+#             post.suburb = resultSuburb
+#             post.save()
+#             return redirect('testpage') #or whatever the url
+#     else:
+#         form = MasterAddForm()
+#
+#
+#
+#     context = {
+#     'form': form,
+#     'name': name,
+#     'targetLocation': targetLocation,
+#     'detailsData': detailsData,
+#     'resultName': resultName,
+#     'resultCity': resultCity,
+#     'resultCountry': resultCountry,
+#     'resultAddress': resultAddress,
+#     'resultCategory1': resultCategory1,
+#     'resultCategory2': resultCategory2,
+#     'resultCategory3': resultCategory3,
+#     'resultPostcode': resultPostcode,
+#     'searchStatus': searchStatus,
+#     'imageResult': imageResult,
+#     'searchData': searchData,
+#     'jsonExplore': jsonExplore,
+#     'resultSuburb': resultSuburb,
+#     }
+#
+#     return render(request, 'testpagedetail.html', context=context)
 
 def spotfulldetail(request, name, city):
 

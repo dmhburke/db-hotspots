@@ -15,6 +15,10 @@ a {
   color: black;
 
 }
+
+:root {
+  --mainBrandColor: #1e8eff;
+}
 /* standard form cleanup */
 
 input[type="text"], input[type="password"], input[type="number"] {
@@ -82,6 +86,10 @@ textarea {
   background-color: #F2F2F2;
   font-size: 1.25rem;
   font-family: 'Special Elite', verdana
+}
+
+.touchScroll {
+  -webkit-overflow-scrolling: touch;
 }
 
 #id_notes {
@@ -2713,7 +2721,11 @@ label.add {
   height: 40px;
   width: 100%;
   background-color: white;
+}
 
+.activeBrowseButton {
+  background-color: var(--mainBrandColor);
+  color: white;
 }
 
 #browseButton1, #browseButton2, #browseButton3  {
@@ -2723,27 +2735,38 @@ label.add {
   margin-top: 5px;
   margin-left: 13px;
   border-radius: 10px;
-  background-color: white;
   text-align: center;
   padding-top: 10px;
 }
 
-#browseButton1 {
-  margin-left: 15px;
-  background-color: #1e8eff;
-  color: white;
+.removeBrowse {
+  display: none;
 }
 
-#browseSpotsScrollContainer {
+.showBrowse {
+  display: block;
+}
+
+#browseAllSpotsScrollContainer {
   height: 380px;
   width: 100%;
   background-color: white;
   overflow-y: scroll;
 }
 
-.touchScroll {
-  -webkit-overflow-scrolling: touch;
+#browseMySpotsScrollContainer {
+  height: 380px;
+  width: 100%;
+  overflow-y: scroll;
 }
+
+#browseWishlistScrollContainer {
+  height: 380px;
+  width: 100%;
+  overflow-y: scroll;
+}
+
+
 
 #browseCarouselResultBox {
   min-height: 90px;
@@ -2932,7 +2955,7 @@ label.add {
   top: 347px;
   right: 15px;
   color: grey;
-  
+
 }
 
 #spotDetailsContainer {
@@ -3227,4 +3250,11 @@ label.add {
   position: absolute;
   bottom: 10px;
   left: 15px;
+}
+
+
+#testjquery {
+  height: 200px;
+  width: 100px;
+  background-color: green;
 }
