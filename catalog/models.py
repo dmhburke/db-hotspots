@@ -9,6 +9,9 @@ from multiselectfield import MultiSelectField
 from django.core.validators import MaxValueValidator, MinValueValidator
 from catalog.choices import *
 from PIL import Image, ExifTags
+from imagekit.models import ImageSpecField
+from imagekit.processors import ResizeToFill, Transpose, SmartResize
+
 
 # Create your models here.
 
@@ -16,6 +19,7 @@ from PIL import Image, ExifTags
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     userpic = models.FileField(upload_to='profilepictures', blank=True, null=True)
+    userpic_thumbnail = ImageSpecField(source='userpic',processors = [Transpose(),SmartResize(200, 200)],format = 'JPEG',options = {'quality': 75})
     homecity = models.CharField(max_length=30, blank=True, null=True)
     number_rating = models.IntegerField(blank=True, null=True)
     high_rating = models.CharField(max_length=45, blank=True, null=True)
@@ -28,27 +32,27 @@ class Profile(models.Model):
     def __str__(self):
         return '%s' % self.user
 
-    def rotate_image(self, *args, **kwargs):
-        if self.userpic:
-            pilImage = Img.open(BytesIO(self.userpic.read()))
-            for orientation in ExifTags.TAGS.keys():
-                if ExifTags.TAGS[orientation] == 'Orientation':
-                    break
-            exif = dict(pilImage._getexif().items())
-
-            if exif[orientation] == 3:
-                pilImage = pilImage.rotate(180, expand=True)
-            elif exif[orientation] == 6:
-                pilImage = pilImage.rotate(270, expand=True)
-            elif exif[orientation] == 8:
-                pilImage = pilImage.rotate(90, expand=True)
-
-            output = BytesIO()
-            pilImage.save(output, format='JPEG', quality=75)
-            output.seek(0)
-            self.userpic = File(output, self.userpic.name)
-
-        return super(Profile, self).rotate_image(*args, **kwargs)
+    # def rotate_image(self, *args, **kwargs):
+    #     if self.userpic:
+    #         pilImage = Img.open(BytesIO(self.userpic.read()))
+    #         for orientation in ExifTags.TAGS.keys():
+    #             if ExifTags.TAGS[orientation] == 'Orientation':
+    #                 break
+    #         exif = dict(pilImage._getexif().items())
+    #
+    #         if exif[orientation] == 3:
+    #             pilImage = pilImage.rotate(180, expand=True)
+    #         elif exif[orientation] == 6:
+    #             pilImage = pilImage.rotate(270, expand=True)
+    #         elif exif[orientation] == 8:
+    #             pilImage = pilImage.rotate(90, expand=True)
+    #
+    #         output = BytesIO()
+    #         pilImage.save(output, format='JPEG', quality=75)
+    #         output.seek(0)
+    #         self.userpic = File(output, self.userpic.name)
+    #
+    #     return super(Profile, self).rotate_image(*args, **kwargs)
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
