@@ -258,6 +258,11 @@ def findspot (request):
         postcode_result2 = 98
         postcode_result3 = 98
         postcode_result4 = 98
+    elif location_result == "Sydney, Australia":
+        postcode_result1 = 20
+        postcode_result2 = 21
+        postcode_result3 = 22
+        postcode_result4 = 25
     else:
         postcode_result1 = ""
         postcode_result2 = ""
