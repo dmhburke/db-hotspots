@@ -48,7 +48,7 @@ class Profile(models.Model):
             output.seek(0)
             self.userpic = File(output, self.userpic.name)
 
-        return super(Profile, self).save(*args, **kwargs)
+        return super(Profile, self).rotate_image(*args, **kwargs)
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
