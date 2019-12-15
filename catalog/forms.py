@@ -6,7 +6,7 @@ from catalog.choices import *
 import json, requests
 from django.contrib.gis.geoip2 import GeoIP2
 
-from catalog.models import Profile, AddReview, MasterAddModel, TestEntryModel, DrinkCreateNewModel, DrinkCreateNewModelDetails
+from catalog.models import Profile, MasterAddModel, TestEntryModel, DrinkCreateNewModel, DrinkCreateNewModelDetails #AddReview,
 
 class ProfileForm(UserCreationForm):
     userpic = forms.FileField(required=False)
@@ -22,19 +22,19 @@ class ProfileForm(UserCreationForm):
         for fieldname in ['username', 'password1', 'password2']:
             self.fields[fieldname].help_text = None
 
-class AddReviewForm(ModelForm):
-    user = forms.CharField(required=False)
-    name = forms.CharField()
-    location = forms.ChoiceField(choices=LOCATION, required=True)
-    category = forms.ChoiceField(choices=CATEGORY, required=True)
-    spotpic = forms.FileField(required=False)
-    perfect_for = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(attrs={'onclick': 'myFunction();'}),choices=PERFECT_FOR, label='', required=False)
-    notes = forms.CharField(widget=forms.Textarea(attrs={"rows":2, "cols":30}), required=False)
-    rating = forms.DecimalField(max_digits=3,decimal_places=1,required=False)
-
-    class Meta:
-        model = AddReview
-        fields = ('name', 'location', 'category', 'spotpic', 'perfect_for', 'notes', 'rating',)
+# class AddReviewForm(ModelForm):
+#     user = forms.CharField(required=False)
+#     name = forms.CharField()
+#     location = forms.ChoiceField(choices=LOCATION, required=True)
+#     category = forms.ChoiceField(choices=CATEGORY, required=True)
+#     spotpic = forms.FileField(required=False)
+#     perfect_for = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(),choices=PERFECT_FOR, label='', required=False) #attrs={'onclick': 'myFunction();'}
+#     notes = forms.CharField(widget=forms.Textarea(attrs={"rows":2, "cols":30}), required=False)
+#     rating = forms.DecimalField(max_digits=3,decimal_places=1,required=False)
+#
+#     class Meta:
+#         model = AddReview
+#         fields = ('name', 'location', 'category', 'spotpic', 'perfect_for', 'notes', 'rating',)
 
 
 #TESTPAGE@catalog/testpage
@@ -70,7 +70,7 @@ class TestEntryForm(forms.Form):
 
 class MasterAddForm(ModelForm):
     rating = forms.ChoiceField(choices=RATING, required=False)
-    perfect_for = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(attrs={'onclick': 'myFunction();'}),choices=PERFECT_FOR, label='', required=False)
+    perfect_for = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(),choices=PERFECT_FOR, label='', required=False) #NOTE: removed bracket section from widget -- widget=forms.CheckboxSelectMultiple(attrs={'onclick': 'myFunction();'})
     notes = forms.CharField(widget=forms.Textarea(attrs={"rows":3, "cols":30}), required=False)
 
     class Meta:
@@ -81,7 +81,7 @@ class SpotFinderForm(forms.Form):
     category = forms.ChoiceField(choices=CATEGORY, required=False)
     situation = forms.ChoiceField(choices=SITUATION, required=False)
     location = forms.ChoiceField(choices=CITY, required=False)
-    source = forms.ChoiceField(choices=SOURCE, required=False)
+    # source = forms.ChoiceField(choices=SOURCE, required=False)
 
     def category_query(self,request):
         categoryQuery = self.cleaned_data['category']
@@ -95,9 +95,9 @@ class SpotFinderForm(forms.Form):
         locationQuery = self.cleaned_data['location']
         return locationQuery
 
-    def source_query(self,request):
-        sourceQuery = self.cleaned_data['source']
-        return sourceQuery
+    # def source_query(self,request):
+    #     sourceQuery = self.cleaned_data['source']
+    #     return sourceQuery
 
 
 

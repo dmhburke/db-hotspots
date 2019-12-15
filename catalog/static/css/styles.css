@@ -18,6 +18,7 @@ a {
 
 :root {
   --mainBrandColor: #1e8eff;
+  --brandFont: 'Special Elite', cursive;
 }
 /* standard form cleanup */
 
@@ -2296,27 +2297,33 @@ li {
   margin: auto;
 }
 
-.perfectInactive {
+/* .perfectInactive {
   background-color: white;
   color: #1e8eff;
 
-}
+} */
 
 
 label {
   font-family: 'Special Elite', verdana;
-  background-color: white;
-  color: #1e8eff;
   padding: 5px 7px;
   border-radius: 5px;
 }
 
-label.add {
-  /*background-color: #1e8eff;
-  color: white;*/
+.labelPassive {
+  background-color: white;
+  color: var(--mainBrandColor);
 }
 
+.labelActive {
+  background-color: var(--mainBrandColor);
+  color: white;
+}
 
+.labelActive2 {
+  background-color: var(--mainBrandColor);
+  color: green;
+}
 
 #detailRatingBox {
   height: 60px;
@@ -2393,7 +2400,7 @@ label.add {
   display: block;
   width: 150px;
   top: 17px;
-  left: 100px;
+  left: 10px;
   padding: 5px;
   font-family: 'Special Elite', cursive;
   border-radius: 10px;
@@ -2408,7 +2415,7 @@ label.add {
   height: 25px;
   font-size: 16px;
   top: 17px;
-  left: 10px;
+  left: 257px;
   padding: 5px;
   font-family: 'Special Elite', cursive;
   border-radius: 10px;
@@ -2422,7 +2429,7 @@ label.add {
   height: 25px;
   font-size: 16px;
   top: 17px;
-  left: 257px;
+  left: 167px;
   padding: 5px;
   font-family: 'Special Elite', cursive;
   border-radius: 10px;
@@ -2446,12 +2453,12 @@ label.add {
 #spotFinderButton {
   display: block;
   height: 35px;
-  width: 160px;
+  width: 300px;
   border-radius: 10px;
   border: none;
   box-shadow: none;
   position: absolute;
-  left: 180px;
+  left: 28px;
   bottom: 10px;
   font-size: 16px;
   line-height: 35px;
@@ -2467,32 +2474,72 @@ label.add {
 
 
 #spotFinderResult {
-  min-height: 90px;
+  height: 110px;
   background-color: white;
   width: 350px;
   margin: 10px auto;
+  margin-bottom: 15px;
   border: 1px solid lightgrey;
   border-radius: 10px;
   position: relative;
 }
 
-#spotFinderActivityRating {
+.spotFinderText {
+  color: grey;
+  font-family: verdana;
+  font-size: 8px;
+  position: absolute;
+
+}
+
+#spotFinderAveText {
+  top: 7px;
+  left: 35px;
+}
+
+#spotFinderCountText {
+  bottom: 7px;
+  left: 25px;
+}
+
+#spotFinderYouText {
+  top: 7px;
+  right: 35px;
+}
+
+#spotFinderDateText {
+  bottom: 7px;
+  right: 22px;
+}
+
+#spotFinderAveRating {
   position: absolute;
   height: 70px;
   width: 70px;
   border-radius: 100%;
-  top: 10px;
+  top: 20px;
   left: 7px;
+  text-align: center;
+  font-size: 16px;
+}
+
+#spotFinderYourRating {
+  position: absolute;
+  height: 70px;
+  width: 70px;
+  border-radius: 100%;
+  top: 20px;
+  right: 7px;
   text-align: center;
   font-size: 16px;
 }
 
 #spotFinderActivitySpotName {
   position: absolute;
-  font-size: 16px;
+  font-size: 18px;
   width: 180px;
-  top: 15px;
-  left: 85px;
+  top: 25px;
+  left: 87px;
   overflow-x: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -2502,8 +2549,8 @@ label.add {
   position: absolute;
   width: 160px;
   text-align: left;
-  top: 30px;
-  left: 85px;
+  top: 42px;
+  left: 90px;
   color: grey;
   font-size: 10px;
   text-overflow: ellipsis;
@@ -2516,7 +2563,7 @@ label.add {
   width: 160px;
   background-color: white;
   position: absolute;
-  bottom: 12px;
+  bottom: 22px;
   left: 85px;
 }
 
@@ -2879,6 +2926,23 @@ label.add {
   white-space: nowrap;
 }
 
+.browseNoResultsText {
+  height: 20px;
+  line-height: 18px;
+  width: 100%;
+  margin-top: 30px;
+  text-align: center;
+  color: var(--mainBrandColor);
+  font-family: var(--brandFont);
+  font-size: 20px;
+
+}
+
+#browseNoResultsHomeLink {
+  font-size: 12px;
+  margin-top: 0px;
+  color: grey;
+}
 
 
 

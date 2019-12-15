@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.db.models import Sum, Count
+from PIL import Image, ExifTags
 from django.views import generic
 
 CITIES = (
@@ -24,9 +25,9 @@ RATING = (
 )
 
 PERFECT_FOR = (
-    ("Something quick", "Something quick"),
-    ("Last-min plans", "Last-min plans"),
-    ("Breakfast", "Breakfast"),
+    ("Great breakfast", "Great breakfast"),
+    ("On-the-run", "On-the-run"),
+    ("Last-min dinner", "Last-min dinner"),
     ("Impressing guests", "Impressing guests"),
     ("Date night", "Date night"),
     ("Big group", "Big group"),
@@ -37,9 +38,9 @@ PERFECT_FOR = (
 
 SITUATION = (
     ("", "Situation"),
-    ("Something quick", "Something quick"),
-    ("Last-min plans", "Last-min plans"),
-    ("Breakfast", "Breakfast"),
+    ("Great breakfast", "Great breakfast"),
+    ("On-the-run", "On-the-run"),
+    ("Last-min dinner", "Last-min dinner"),
     ("Impressing guests", "Impressing guests"),
     ("Date night", "Date night"),
     ("Big group", "Big group"),
@@ -109,6 +110,27 @@ SOURCE = (
     ("WISHLIST", "My wishlist"),
     ("SUGGESTED", "Suggested (beta)"),
 )
+
+
+def rotate_image(filepath):
+  try:
+    image = Image.open(filepath)
+    for orientation in ExifTags.TAGS.keys():
+      if ExifTags.TAGS[orientation] == 'Orientation':
+            break
+    exif = dict(image._getexif().items())
+
+    if exif[orientation] == 3:
+        image = image.rotate(180, expand=True)
+    elif exif[orientation] == 6:
+        image = image.rotate(270, expand=True)
+    elif exif[orientation] == 8:
+        image = image.rotate(90, expand=True)
+    image.save(filepath)
+    image.close()
+  except (AttributeError, KeyError, IndexError):
+    # cases: image don't have getexif
+    pass
 
 
 ####DRINK CHOICES#####

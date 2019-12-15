@@ -47,6 +47,12 @@
 </a>
 
 {% endfor %}
+{% else %}
+<!-- ADD TEXT AND LINK HERE FOR NO RESULTS -->
+<div class=browseNoResultsText>No activity yet</div>
+<a href="{% url 'home' %}">
+  <div class=browseNoResultsText id=browseNoResultsHomeLink>Click here to add spots</div>
+</a>
 {% endif %}
 
 </div>
@@ -84,6 +90,11 @@
   </a>
 
   {% endfor %}
+  {% else %}
+  <div class=browseNoResultsText>No spots added yet</div>
+  <a href="{% url 'home' %}">
+    <div class=browseNoResultsText id=browseNoResultsHomeLink>Click here to add spots</div>
+  </a>
   {% endif %}
 
   </div>
@@ -121,6 +132,11 @@
   </a>
 
   {% endfor %}
+  {% else %}
+  <div class=browseNoResultsText>No spots on your wishlist</div>
+  <a href="{% url 'home' %}">
+    <div class=browseNoResultsText id=browseNoResultsHomeLink>Click here to add spots</div>
+  </a>
   {% endif %}
 
 
