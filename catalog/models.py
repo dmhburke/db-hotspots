@@ -28,6 +28,28 @@ class Profile(models.Model):
     def __str__(self):
         return '%s' % self.user
 
+    def rotate_image(self, *args, **kwargs):
+        if self.userpic:
+            pilImage = Img.open(BytesIO(self.userpic.read()))
+            for orientation in ExifTags.TAGS.keys():
+                if ExifTags.TAGS[orientation] == 'Orientation':
+                    break
+            exif = dict(pilImage._getexif().items())
+
+            if exif[orientation] == 3:
+                pilImage = pilImage.rotate(180, expand=True)
+            elif exif[orientation] == 6:
+                pilImage = pilImage.rotate(270, expand=True)
+            elif exif[orientation] == 8:
+                pilImage = pilImage.rotate(90, expand=True)
+
+            output = BytesIO()
+            pilImage.save(output, format='JPEG', quality=75)
+            output.seek(0)
+            self.userpic = File(output, self.userpic.name)
+
+        return super(Profile, self).save(*args, **kwargs)
+
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
@@ -36,17 +58,6 @@ def create_user_profile(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
-
-@receiver(post_save, sender=Profile, dispatch_uid="update_image_profile")
-def update_image(sender, instance, **kwargs):
-    if instance.userpic:
-        try:
-            BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-            FILE_PATH = os.path.join(BASE_DIR, 'catalog/static/')
-            fullpath = FILE_PATH + instance.userpic.url
-            rotate_image(fullpath)
-        except:
-            pass
 
 class MasterAddModel(models.Model):
     user = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE)
