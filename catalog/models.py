@@ -33,30 +33,6 @@ class Profile(models.Model):
     def __str__(self):
         return '%s' % self.user
 
-    # def save(self, *args, **kwargs):
-    #     if self.userpic:
-    #         pilImage = Img.open(BytesIO(self.userpic.read()))
-    #         for orientation in ExifTags.TAGS.keys():
-    #             if ExifTags.TAGS[orientation] == 'orientation':
-    #                 break
-    #         exif = dict(pilImage._getexif().items())
-    #
-    #         if exif[orientation] == 3:
-    #             pilImage = pilImage.rotate(180, expand=True)
-    #         elif exif[orientation] == 6:
-    #             pilImage = pilImage.rotate(270, expand=True)
-    #         elif exif[orientation] == 8:
-    #             pilImage = pilImage.rotate(90, expand=True)
-    #         else:
-    #             pilImage = pilImage.rotate(90, expand=True)
-    #
-    #         output = BytesIO()
-    #         pilImage.save(output, format='JPEG', quality=75)
-    #         output.seek(0)
-    #         self.userpic = File(output, self.userpic.name)
-    #
-    #     return super(Profile, self).save(*args, **kwargs)
-
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
@@ -65,53 +41,6 @@ def create_user_profile(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
-
-## MEDIUM POST APPROACH
-# def rotate_image(filepath):
-#     try:
-#         image = Image.open(filepath)
-#         for orientation in ExifTags.TAGS.keys():
-#             if ExifTags.TAGS[orientation] == 'Orientation':
-#                 break
-#         exif = dict(image._getexif().items())
-#
-#         if exif[orientation] == 3:
-#             image = image.rotate(180, expand=True)
-#         elif exif[orientation] == 6:
-#             image = image.rotate(270, expand=True)
-#         elif exif[orientation] == 8:
-#             image = image.rotate(90, expand=True)
-#         image.save(filepath)
-#         image.close()
-#     except (AttributeError, KeyError, IndexError):
-#         # cases: image don't have getexif
-#         pass
-#
-#
-#
-# @receiver(post_save, sender=Profile, dispatch_uid="update_image_profile")
-# def update_image(sender, instance, **kwargs):
-#
-#     if instance.userpic:
-#       # BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-#
-#       fullpath = os.path.join(os.path.dirname(BASE_DIR)) + instance.userpic.url
-#       rotate_image(fullpath)
-
-class Thumbnail(models.Model):
-    user = models.OneToOneField(User, blank=True, null=True, on_delete=models.CASCADE)
-    thumbnail = models.FileField(upload_to='thumbnailimages', blank=True, null=True)
-
-@receiver(post_save, sender=Profile)
-def rotate_image(sender, instance, **kwargs):
-
-    newpic = instance.userpic
-
-    Thumbnail.objects.update_or_create(
-        user = instance.user,
-        defaults = {
-        'thumbnail': newpic,
-        })
 
 
 class MasterAddModel(models.Model):
