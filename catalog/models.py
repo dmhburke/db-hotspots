@@ -29,36 +29,37 @@ class Profile(models.Model):
     def __str__(self):
         return '%s' % self.user
 
-@receiver(post_save, sender=Profile, dispatch_uid="update_image_profile")
-def update_image(sender, instance, **kwargs):
+## MEDIUM POST APPROACH
+# @receiver(post_save, sender=Profile, dispatch_uid="update_image_profile")
+# def update_image(sender, instance, **kwargs):
 
-    def rotate_image(filepath):
-        try:
-            image = Image.open(filepath)
-            for orientation in ExifTags.TAGS.keys():
-                if ExifTags.TAGS[orientation] == 'Orientation':
-                    break
-            exif = dict(image._getexif().items())
-
-            if exif[orientation] == 3:
-                image = image.rotate(180, expand=True)
-            elif exif[orientation] == 6:
-                image = image.rotate(270, expand=True)
-            elif exif[orientation] == 8:
-                image = image.rotate(90, expand=True)
-            image.save(filepath)
-            image.close()
-        except (AttributeError, KeyError, IndexError):
-            # cases: image don't have getexif
-            pass
-
-    if instance.userpic:
-      BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-      # try:
-      #     fullpath = BASE_DIR + '/catalog/static' + instance.userpic.url
-      # except:
-      fullpath = instance.userpic.url
-      rotate_image(fullpath)
+    # def rotate_image(filepath):
+    #     try:
+    #         image = Image.open(filepath)
+    #         for orientation in ExifTags.TAGS.keys():
+    #             if ExifTags.TAGS[orientation] == 'Orientation':
+    #                 break
+    #         exif = dict(image._getexif().items())
+    #
+    #         if exif[orientation] == 3:
+    #             image = image.rotate(180, expand=True)
+    #         elif exif[orientation] == 6:
+    #             image = image.rotate(270, expand=True)
+    #         elif exif[orientation] == 8:
+    #             image = image.rotate(90, expand=True)
+    #         image.save(filepath)
+    #         image.close()
+    #     except (AttributeError, KeyError, IndexError):
+    #         # cases: image don't have getexif
+    #         pass
+    #
+    # if instance.userpic:
+    #   BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    #   # try:
+    #   #     fullpath = BASE_DIR + '/catalog/static' + instance.userpic.url
+    #   # except:
+    #   fullpath = instance.userpic.url
+    #   rotate_image(fullpath)
 
     # def rotate_image(self, *args, **kwargs):
     #     if self.userpic:
