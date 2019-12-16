@@ -12,9 +12,10 @@ urlpatterns = [
     path('adddetail/<name>/<lat>/<lng>', views.adddetail, name='adddetail'),
     # Browse spots
     path('browsespots', views.browsespots, name='browsespots'),
+    # Find spots
+    path('findspots', views.findspot, name='findspot'),
 
     # Other
-    path('findspots', views.findspot, name='findspot'),
     path('landingadd', views.home, name='landingadd'),
     path('userpage', views.userspotlist, name='userspotlist'),
     path('detail/<str:pk>', views.userspotdetail, name='userspotdetail'),

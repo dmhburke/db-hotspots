@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Add models
-from catalog.models import Profile, MasterAddModel, TestEntryModel, TestStoreModel, CleanReviewModel, SingleLocationRecord, DrinkCreateNewModel, DrinkCreateNewModelDetails, DrinkCreateNewModelFinal #AddReview, SingleLocation, ReviewRecord,
+from catalog.models import Profile, Thumbnail, MasterAddModel, TestEntryModel, TestStoreModel, CleanReviewModel, SingleLocationRecord, DrinkCreateNewModel, DrinkCreateNewModelDetails, DrinkCreateNewModelFinal #AddReview, SingleLocation, ReviewRecord,
 
 # Register your models here.
 class ProfileAdmin(admin.ModelAdmin):
@@ -9,6 +9,13 @@ class ProfileAdmin(admin.ModelAdmin):
 
 # Register the admin class with the associated model
 admin.site.register(Profile, ProfileAdmin)
+
+# Register your models here.
+class ThumbnailAdmin(admin.ModelAdmin):
+    list_display = ('user', 'thumbnail',)
+
+# Register the admin class with the associated model
+admin.site.register(Thumbnail, ThumbnailAdmin)
 
 # # Register your models here.
 # class AddReviewAdmin(admin.ModelAdmin):
