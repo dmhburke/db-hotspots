@@ -54,7 +54,10 @@ def update_image(sender, instance, **kwargs):
 
     if instance.userpic:
       BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-      fullpath = BASE_DIR + '/catalog/static' + instance.userpic.url
+      try:
+          fullpath = BASE_DIR + '/catalog/static' + instance.userpic.url
+      except:
+          fullpath = BASE_DIR + instance.userpic.url
       rotate_image(fullpath)
 
     # def rotate_image(self, *args, **kwargs):
