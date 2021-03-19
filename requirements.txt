@@ -24,7 +24,7 @@ jmespath==0.9.4
 maxminddb==1.5.1
 opencage==1.2
 pilkit==2.0
-Pillow==6.2.1
+Pillow==8.1.1
 psycopg2-binary==2.8.4
 pyasn1==0.4.8
 pyasn1-modules==0.2.7
