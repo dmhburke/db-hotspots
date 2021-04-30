@@ -33,7 +33,7 @@ python-dateutil==2.8.1
 python-resize-image==1.1.19
 pytz==2019.3
 requests==2.22.0
-rsa==4.0
+rsa==4.7
 s3transfer==0.2.1
 six==1.13.0
 sqlparse==0.3.0
